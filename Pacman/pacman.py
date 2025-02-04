@@ -24,6 +24,7 @@ pacman_y = 522
 direction = 0
 counter = 0
 flicker = False
+turns_allowed = [False, False, False, False]
 
 def draw_board():
     num1 = ((height - 50) // 32)
@@ -67,6 +68,57 @@ def draw_pacman():
     elif direction == 3:
         screen.blit(pygame.transform.rotate(pacman_images[counter // 5], 270), (pacman_x, pacman_y))
 
+def check_position(centerx, centery):
+    turns = [False, False, False, False]
+    num1 = ((height - 50) // 32)
+    num2 = (width // 30)
+    num3 = 12
+
+    if centerx // 30 < 29:
+        if direction == 0:
+            if level[centery // num1][(centerx - num3) // num2] < 1:
+                turns[1] = True
+        if direction == 1:
+            if level[centery // num1][(centerx - num3) // num2] < 1:
+                turns[0] = True
+        if direction == 2:
+            if level[(centery + num3) // num1][centerx // num2] < 1:
+                turns[3] = True
+        if direction == 3:
+            if level[(centery - num3) // num1][centerx // num2] < 1:
+                turns[2] = True
+
+        if direction == 2 or direction == 3:
+            if 9 <= centerx % num2 <= 15:
+                if level[(centery + num3) // num1][centerx // num2] < 3:
+                    turns[3] = True
+                if level[(centery - num3) // num1][centerx // num2] < 3:
+                    turns[2] = True
+            if 9 <= centery % num1 <= 15:
+                if level[centery // num1][(centerx - num2) // num2] < 3:
+                    turns[1] = True
+                if level[centery // num1][(centerx + num2) // num2] < 3:
+                    turns[0] = True
+
+        if direction == 0 or direction == 1:
+            if 12 <= centerx % num2 <= 18:
+                if level[(centery + num1) // num1][centerx // num2] < 3:
+                    turns[3] = True
+                if level[(centery - num1) // num1][centerx // num2] < 3:
+                    turns[2] = True
+            if 12 <= centery % num1 <= 18:
+                if level[centery // num1][(centerx - num3) // num2] < 3:
+                    turns[1] = True
+                if level[centery // num1][(centerx + num3) // num2] < 3:
+                    turns[0] = True
+
+
+    else:
+        turns[0] = True
+        turns[1] = True
+    return turns
+
+
 run = True
 while run:
     timer.tick(fps)
@@ -81,6 +133,9 @@ while run:
     screen.fill('black')
     draw_board()
     draw_pacman()
+    center_x = pacman_x + 16
+    center_y = pacman_y + 17
+    turns_allowed = check_position(center_x, center_y)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
