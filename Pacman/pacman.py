@@ -7,12 +7,25 @@ pygame.init()
 height = 780
 width = 720
 screen = pygame.display.set_mode([width, height])
+
 timer = pygame.time.Clock()
 fps = 60
+
+#States
+MENU = "menu"
+GAME = "game"
+state = MENU
+
 font = pygame.font.Font('freesansbold.ttf', 20)
 level = boards
 color = 'blue'
 PI = math.pi
+
+def draw_menu():
+    screen.fill(color="black")
+    text = font.render("Press ENTER to Start", True, "white")
+    screen.blit(text, (width // 2 - text.get_width() // 2, height // 2))
+    pygame.display.flip()
 
 def draw_board():
     num1 = ((height - 50) // 32)
@@ -46,15 +59,20 @@ def draw_board():
                                  (j * num2 + num2, i * num1 + (0.5 * num1)), 3)
 
 
-run = True
-while run:
+running = True
+while running:
     timer.tick(fps)
-    screen.fill('black')
-    draw_board()
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            run = False
-    pygame.display.flip()
+            running = False
+        if state == MENU and event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
+            state = GAME
+
+    if state == MENU:
+        draw_menu()
+    elif state == GAME:
+        screen.fill('black')
+        draw_board()
 
 pygame.quit()
