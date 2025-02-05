@@ -4,10 +4,24 @@ import math
 
 pygame.init()
 
+#window settings
 height = 780
 width = 720
 screen = pygame.display.set_mode([width, height])
+pygame.display.set_caption("PACMAN")
 
+#images
+start_button = pygame.image.load("Sprites/UI/Button_Start.png")
+start_button = pygame.transform.scale(start_button, (228, 87))
+start_button_rect = start_button.get_rect(center=(width //  2, height // 2 + 100))
+info_button = pygame.image.load("Sprites/UI/Button_Info.png")
+info_button = pygame.transform.scale(info_button, (228, 87))
+info_button_rect = info_button.get_rect(center=(width //  2, height // 2 + 200))
+title_image = pygame.image.load("Sprites/UI/Title_1.png")
+title_image = pygame.transform.scale(title_image, (570, 150))
+title_image_rect = title_image.get_rect(center=(width // 2, height // 2 - 200))
+
+#game settings
 timer = pygame.time.Clock()
 fps = 60
 
@@ -16,6 +30,7 @@ MENU = "menu"
 GAME = "game"
 state = MENU
 
+#other variables
 font = pygame.font.Font('freesansbold.ttf', 20)
 level = boards
 color = 'blue'
@@ -23,11 +38,13 @@ PI = math.pi
 
 def draw_menu():
     screen.fill(color="black")
-    text = font.render("Press ENTER to Start", True, "white")
-    screen.blit(text, (width // 2 - text.get_width() // 2, height // 2))
+    screen.blit(start_button, start_button_rect.topleft)
+    screen.blit(info_button, info_button_rect.topleft)
+    screen.blit(title_image, title_image_rect.topleft)
     pygame.display.flip()
 
 def draw_board():
+    pygame.display.flip()
     num1 = ((height - 50) // 32)
     num2 = (width // 30)
     for i in range(len(level)):
@@ -72,7 +89,6 @@ while running:
     if state == MENU:
         draw_menu()
     elif state == GAME:
-        screen.fill('black')
         draw_board()
 
 pygame.quit()
