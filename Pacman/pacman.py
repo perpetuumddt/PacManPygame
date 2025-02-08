@@ -27,7 +27,23 @@ flicker = False
 turns_allowed = [False, False, False, False]
 direction_command = 0
 pacman_speed = 2
+score = 0
 
+def draw_misc():
+    score_text = font.render(f'Score: {score}', True, 'white')
+    screen.blit(score_text, (10, 740))
+
+def check_collisions(scor):
+    num1 = (height - 50) // 32
+    num2 = width // 30
+    if 0 < pacman_x < 691:
+        if level[center_y // num1][center_x // num2] == 1:
+            level[center_y // num1][center_x // num2] = 0
+            scor += 10
+        if level[center_y // num1][center_x // num2] == 2:
+            level[center_y // num1][center_x // num2] = 0
+            scor += 50
+    return scor
 
 def draw_board():
     num1 = ((height - 50) // 32)
@@ -37,7 +53,7 @@ def draw_board():
             if level[i][j] == 1:
                 pygame.draw.circle(screen, 'white', (j * num2 + (0.5 * num2), i * num1 + (0.5 * num1)), 3)
             if level[i][j] == 2 and not flicker:
-                pygame.draw.circle(screen, (255,255,155), (j * num2 + (0.5 * num2), i * num1 + (0.5 * num1)), 7)
+                pygame.draw.circle(screen, (255,255,155), (j * num2 + (0.5 * num2), i * num1 + (0.5 * num1)), 6)
             if level[i][j] == 3:
                 pygame.draw.line(screen, color, (j * num2 + (0.5 * num2), i * num1),
                                  (j * num2 + (0.5 * num2), i * num1 + num1), 3)
@@ -79,16 +95,16 @@ def check_position(centerx, centery):
 
     if centerx // 30 < 29:
         if direction == 0:
-            if level[centery // num1][(centerx - num3) // num2] < 1:
+            if level[centery // num1][(centerx - num3) // num2] < 3:
                 turns[1] = True
         if direction == 1:
-            if level[centery // num1][(centerx - num3) // num2] < 1:
+            if level[centery // num1][(centerx - num3) // num2] < 3:
                 turns[0] = True
         if direction == 2:
-            if level[(centery + num3) // num1][centerx // num2] < 1:
+            if level[(centery + num3) // num1][centerx // num2] < 3:
                 turns[3] = True
         if direction == 3:
-            if level[(centery - num3) // num1][centerx // num2] < 1:
+            if level[(centery - num3) // num1][centerx // num2] < 3:
                 turns[2] = True
 
         if direction == 2 or direction == 3:
@@ -134,6 +150,7 @@ def move_pacman(pac_x, pac_y):
     return pac_x, pac_y
 
 
+
 run = True
 while run:
     timer.tick(fps)
@@ -148,10 +165,12 @@ while run:
     screen.fill('black')
     draw_board()
     draw_pacman()
+    draw_misc()
     center_x = pacman_x + 16
     center_y = pacman_y + 17
     turns_allowed = check_position(center_x, center_y)
     pacman_x, pacman_y = move_pacman(pacman_x, pacman_y)
+    score = check_collisions(score)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -180,10 +199,10 @@ while run:
         if direction_command == i and turns_allowed[i]:
             direction = i
 
-    if pacman_x > 720:
+    if pacman_x > 691:
         pacman_x = -35
     elif pacman_x < -38:
-        pacman_x = 717
+        pacman_x = 691
 
 
     pygame.display.flip()
