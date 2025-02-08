@@ -169,3 +169,13 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+.idea/.gitignore
+.idea/CI_CD.iml
+.idea/discord.xml
+.idea/material_theme_project_new.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/inspectionProfiles/profiles_settings.xml
+Pacman/.idea/discord.xml
+Pacman/.idea/material_theme_project_new.xml
