@@ -229,10 +229,10 @@ while run:
         if direction_command == i and turns_allowed[i]:
             direction = i
 
-    if pacman_x > 720:
+    if pacman_x > 691:
         pacman_x = -35
     elif pacman_x < -38:
-        pacman_x = 717
+        pacman_x = 691
 
 
     pygame.display.flip()
