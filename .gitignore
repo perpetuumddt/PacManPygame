@@ -170,3 +170,8 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 .idea/workspace.xml
+.idea/CI_CD.iml
+.idea/discord.xml
+.idea/material_theme_project_new.xml
+Pacman/.idea/discord.xml
+Pacman/.idea/material_theme_project_new.xml
