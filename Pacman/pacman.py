@@ -1,240 +1,262 @@
-from json.encoder import encode_basestring
-
-from board import boards
 import pygame
 import math
+from board import boards
 
-pygame.init()
+class Game:
+    def __init__(self):
+        pygame.init()
+        self.height = 780
+        self.width = 720
+        self.screen = pygame.display.set_mode([self.width, self.height])
+        self.timer = pygame.time.Clock()
+        self.fps = 60
+        self.font = pygame.font.Font('freesansbold.ttf', 20)
+        self.level = boards
+        self.color = 'blue'
+        self.PI = math.pi
+        self.pacman = Pacman(self)
+        self.board = Board(self)
+        self.misc = Misc(self)
+        self.score = 0
+        self.powerup = False
+        self.power_counter = 0
+        self.eaten_ghost = [False, False, False, False]
+        self.moving = False
+        self.startup_counter = 0
+        self.lives = 3
+        self.run = True
 
-height = 780
-width = 720
-screen = pygame.display.set_mode([width, height])
-timer = pygame.time.Clock()
-fps = 60
-font = pygame.font.Font('freesansbold.ttf', 20)
-level = boards
-color = 'blue'
-PI = math.pi
-pacman_images = []
-for i in range(1, 5):
-    pacman_images.append(pygame.transform.scale(pygame.image.load(f'Sprites/Entities/Character/Pacman{i}.png'), (33, 33)))
+    def run_game(self):
+        while self.run:
+            self.timer.tick(self.fps)
+            self.handle_events()
+            self.update()
+            self.draw()
+            pygame.display.flip()
+        pygame.quit()
 
-pacman_x = 360
-pacman_y = 522
-direction = 0
-counter = 0
-flicker = False
-turns_allowed = [False, False, False, False]
-direction_command = 0
-pacman_speed = 2
-score = 0
-powerup = False
-power_counter = 0
-eaten_ghost = [False, False, False, False]
-moving = False
-startup_counter = 0
-lives = 3
+    def handle_events(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.run = False
+            if event.type == pygame.KEYDOWN:
+                self.moving = True
+                if event.key == pygame.K_RIGHT:
+                    self.pacman.direction_command = 0
+                if event.key == pygame.K_LEFT:
+                    self.pacman.direction_command = 1
+                if event.key == pygame.K_UP:
+                    self.pacman.direction_command = 2
+                if event.key == pygame.K_DOWN:
+                    self.pacman.direction_command = 3
 
+            if event.type == pygame.KEYUP:
+                self.moving = False
+                if event.key == pygame.K_RIGHT and self.pacman.direction_command == 0:
+                    self.pacman.direction_command = self.pacman.direction
+                if event.key == pygame.K_LEFT and self.pacman.direction_command == 1:
+                    self.pacman.direction_command = self.pacman.direction
+                if event.key == pygame.K_UP and self.pacman.direction_command == 2:
+                    self.pacman.direction_command = self.pacman.direction
+                if event.key == pygame.K_DOWN and self.pacman.direction_command == 3:
+                    self.pacman.direction_command = self.pacman.direction
 
-def draw_misc():
-    score_text = font.render(f'Score: {score}', True, 'white')
-    screen.blit(score_text, (10, 740))
-    if powerup:
-        pygame.draw.circle(screen, 'blue', (140, 750), 12)
-    for i in range(lives):
-        screen.blit(pygame.transform.scale(pacman_images[1], (30, 30)), (500 + i * 40, 735))
+    def update(self):
+        if self.startup_counter < 180:
+            self.moving = False
+            self.startup_counter += 1
+        else:
+            self.moving = True
 
+        if self.moving:
+            self.pacman.move()
 
-def check_collisions(scor, power, power_count, eaten_ghosts):
-    num1 = (height - 50) // 32
-    num2 = width // 30
-    if 0 < pacman_x < 691:
-        if level[center_y // num1][center_x // num2] == 1:
-            level[center_y // num1][center_x // num2] = 0
-            scor += 10
-        if level[center_y // num1][center_x // num2] == 2:
-            level[center_y // num1][center_x // num2] = 0
-            scor += 50
-            power = True
-            power_count = 0
-            eaten_ghosts = [False, False, False, False]
+        self.pacman.update()
+        self.board.update()
+        self.misc.update()
 
-    return scor, power, power_count, eaten_ghosts
+    def draw(self):
+        self.screen.fill('black')
+        self.board.draw()
+        self.pacman.draw()
+        self.misc.draw()
 
-def draw_board():
-    num1 = ((height - 50) // 32)
-    num2 = (width // 30)
-    for i in range(len(level)):
-        for j in range(len(level[i])):
-            if level[i][j] == 1:
-                pygame.draw.circle(screen, 'white', (j * num2 + (0.5 * num2), i * num1 + (0.5 * num1)), 3)
-            if level[i][j] == 2 and not flicker:
-                pygame.draw.circle(screen, (255,255,155), (j * num2 + (0.5 * num2), i * num1 + (0.5 * num1)), 6)
-            if level[i][j] == 3:
-                pygame.draw.line(screen, color, (j * num2 + (0.5 * num2), i * num1),
-                                 (j * num2 + (0.5 * num2), i * num1 + num1), 3)
-            if level[i][j] == 4:
-                pygame.draw.line(screen, color, (j * num2, i * num1 + (0.5 * num1)),
-                                 (j * num2 + num2, i * num1 + (0.5 * num1)), 3)
-            if level[i][j] == 5:
-                pygame.draw.arc(screen, color, [(j * num2 - (num2 * 0.4)) - 2, (i * num1 + (0.5 * num1)), num2, num1],
-                                0, PI / 2, 2)
-            if level[i][j] == 6:
-                pygame.draw.arc(screen, color,[(j * num2 + (num2 * 0.5)), (i * num1 + (0.5 * num1)), num2, num1],
-                                 PI / 2, PI, 2)
-            if level[i][j] == 7:
-                pygame.draw.arc(screen, color, [(j * num2 + (num2 * 0.5)), (i * num1 - (0.4 * num1)), num2, num1],
-                                PI, 3 * PI / 2, 2)
-            if level[i][j] == 8:
-                pygame.draw.arc(screen, color,[(j * num2 - (num2 * 0.35)) - 2, (i * num1 - (0.4 * num1)), num2, num1],
-                                 3 * PI / 2, 2 * PI, 2)
-            if level[i][j] == 9:
-                pygame.draw.line(screen, 'white', (j * num2, i * num1 + (0.5 * num1)),
-                                 (j * num2 + num2, i * num1 + (0.5 * num1)), 3)
+class Pacman:
+    def __init__(self, game):
+        self.game = game
+        self.images = [pygame.transform.scale(pygame.image.load(f'Sprites/Entities/Character/Pacman{i}.png'), (33, 33)) for i in range(1, 5)]
+        self.x = 360
+        self.y = 522
+        self.direction = 0
+        self.direction_command = 0
+        self.counter = 0
+        self.speed = 2
+        self.turns_allowed = [False, False, False, False]
+        self.flicker = False  # Add the flicker attribute
 
-def draw_pacman():
-    # 0-right, 1-left, 2-up, 3-down,
-    if direction == 0:
-        screen.blit(pacman_images[counter // 5], (pacman_x, pacman_y))
-    elif direction == 1:
-        screen.blit(pygame.transform.flip(pacman_images[counter // 5], True, False), (pacman_x, pacman_y))
-    elif direction == 2:
-        screen.blit(pygame.transform.rotate(pacman_images[counter // 5], 90), (pacman_x, pacman_y))
-    elif direction == 3:
-        screen.blit(pygame.transform.rotate(pacman_images[counter // 5], 270), (pacman_x, pacman_y))
+    def update(self):
+        if self.counter < 19:
+            self.counter += 1
+        else:
+            self.counter = 0
 
-def check_position(centerx, centery):
-    turns = [False, False, False, False]
-    num1 = ((height - 50) // 32)
-    num2 = (width // 30)
-    num3 = 12
+        center_x = self.x + 16
+        center_y = self.y + 17
+        self.turns_allowed = self.game.board.check_position(center_x, center_y)
 
-    if centerx // 30 < 29:
-        if direction == 0:
-            if level[centery // num1][(centerx - num3) // num2] < 3:
-                turns[1] = True
-        if direction == 1:
-            if level[centery // num1][(centerx - num3) // num2] < 3:
-                turns[0] = True
-        if direction == 2:
-            if level[(centery + num3) // num1][centerx // num2] < 3:
-                turns[3] = True
-        if direction == 3:
-            if level[(centery - num3) // num1][centerx // num2] < 3:
-                turns[2] = True
+        # Update direction based on direction_command
+        if self.turns_allowed[self.direction_command]:
+            self.direction = self.direction_command
 
-        if direction == 2 or direction == 3:
-            if 9 <= centerx % num2 <= 15:
-                if level[(centery + num3) // num1][centerx // num2] < 3:
-                    turns[3] = True
-                if level[(centery - num3) // num1][centerx // num2] < 3:
-                    turns[2] = True
-            if 9 <= centery % num1 <= 15:
-                if level[centery // num1][(centerx - num2) // num2] < 3:
+    def move(self):
+        if self.direction == 0 and self.turns_allowed[0]:
+            self.x += self.speed
+        elif self.direction == 1 and self.turns_allowed[1]:
+            self.x -= self.speed
+        elif self.direction == 2 and self.turns_allowed[2]:
+            self.y -= self.speed
+        elif self.direction == 3 and self.turns_allowed[3]:
+            self.y += self.speed
+
+        if self.x > 691:
+            self.x = -35
+        elif self.x < -38:
+            self.x = 691
+
+    def draw(self):
+        if self.direction == 0:
+            self.game.screen.blit(self.images[self.counter // 5], (self.x, self.y))
+        elif self.direction == 1:
+            self.game.screen.blit(pygame.transform.flip(self.images[self.counter // 5], True, False), (self.x, self.y))
+        elif self.direction == 2:
+            self.game.screen.blit(pygame.transform.rotate(self.images[self.counter // 5], 90), (self.x, self.y))
+        elif self.direction == 3:
+            self.game.screen.blit(pygame.transform.rotate(self.images[self.counter // 5], 270), (self.x, self.y))
+
+class Board:
+    def __init__(self, game):
+        self.game = game
+
+    def update(self):
+        self.game.score, self.game.powerup, self.game.power_counter, self.game.eaten_ghost = self.check_collisions()
+
+    def draw(self):
+        num1 = (self.game.height - 50) // 32
+        num2 = self.game.width // 30
+        for i in range(len(self.game.level)):
+            for j in range(len(self.game.level[i])):
+                if self.game.level[i][j] == 1:
+                    pygame.draw.circle(self.game.screen, 'white', (j * num2 + (0.5 * num2), i * num1 + (0.5 * num1)), 3)
+                if self.game.level[i][j] == 2 and not self.game.pacman.flicker:
+                    pygame.draw.circle(self.game.screen, (255, 255, 155), (j * num2 + (0.5 * num2), i * num1 + (0.5 * num1)), 6)
+                if self.game.level[i][j] == 3:
+                    pygame.draw.line(self.game.screen, self.game.color, (j * num2 + (0.5 * num2), i * num1),
+                                     (j * num2 + (0.5 * num2), i * num1 + num1), 3)
+                if self.game.level[i][j] == 4:
+                    pygame.draw.line(self.game.screen, self.game.color, (j * num2, i * num1 + (0.5 * num1)),
+                                     (j * num2 + num2, i * num1 + (0.5 * num1)), 3)
+                if self.game.level[i][j] == 5:
+                    pygame.draw.arc(self.game.screen, self.game.color, [(j * num2 - (num2 * 0.4)) - 2, (i * num1 + (0.5 * num1)), num2, num1],
+                                    0, self.game.PI / 2, 2)
+                if self.game.level[i][j] == 6:
+                    pygame.draw.arc(self.game.screen, self.game.color, [(j * num2 + (num2 * 0.5)), (i * num1 + (0.5 * num1)), num2, num1],
+                                     self.game.PI / 2, self.game.PI, 2)
+                if self.game.level[i][j] == 7:
+                    pygame.draw.arc(self.game.screen, self.game.color, [(j * num2 + (num2 * 0.5)), (i * num1 - (0.4 * num1)), num2, num1],
+                                    self.game.PI, 3 * self.game.PI / 2, 2)
+                if self.game.level[i][j] == 8:
+                    pygame.draw.arc(self.game.screen, self.game.color, [(j * num2 - (num2 * 0.35)) - 2, (i * num1 - (0.4 * num1)), num2, num1],
+                                     3 * self.game.PI / 2, 2 * self.game.PI, 2)
+                if self.game.level[i][j] == 9:
+                    pygame.draw.line(self.game.screen, 'white', (j * num2, i * num1 + (0.5 * num1)),
+                                     (j * num2 + num2, i * num1 + (0.5 * num1)), 3)
+
+    def check_collisions(self):
+        num1 = (self.game.height - 50) // 32
+        num2 = self.game.width // 30
+        center_x = self.game.pacman.x + 16
+        center_y = self.game.pacman.y + 17
+        if 0 < self.game.pacman.x < 691:
+            if self.game.level[center_y // num1][center_x // num2] == 1:
+                self.game.level[center_y // num1][center_x // num2] = 0
+                self.game.score += 10
+            if self.game.level[center_y // num1][center_x // num2] == 2:
+                self.game.level[center_y // num1][center_x // num2] = 0
+                self.game.score += 50
+                self.game.powerup = True
+                self.game.power_counter = 0
+                self.game.eaten_ghost = [False, False, False, False]
+
+        return self.game.score, self.game.powerup, self.game.power_counter, self.game.eaten_ghost
+
+    def check_position(self, centerx, centery):
+        turns = [False, False, False, False]
+        num1 = (self.game.height - 50) // 32
+        num2 = self.game.width // 30
+        num3 = 12
+
+        if centerx // 30 < 29:
+            if self.game.pacman.direction == 0:
+                if self.game.level[centery // num1][(centerx - num3) // num2] < 3:
                     turns[1] = True
-                if level[centery // num1][(centerx + num2) // num2] < 3:
+            if self.game.pacman.direction == 1:
+                if self.game.level[centery // num1][(centerx - num3) // num2] < 3:
                     turns[0] = True
-
-        if direction == 0 or direction == 1:
-            if 9 <= centerx % num2 <= 15:
-                if level[(centery + num1) // num1][centerx // num2] < 3:
+            if self.game.pacman.direction == 2:
+                if self.game.level[(centery + num3) // num1][centerx // num2] < 3:
                     turns[3] = True
-                if level[(centery - num1) // num1][centerx // num2] < 3:
+            if self.game.pacman.direction == 3:
+                if self.game.level[(centery - num3) // num1][centerx // num2] < 3:
                     turns[2] = True
-            if 9 <= centery % num1 <= 15:
-                if level[centery // num1][(centerx - num3) // num2] < 3:
-                    turns[1] = True
-                if level[centery // num1][(centerx + num3) // num2] < 3:
-                    turns[0] = True
 
+            if self.game.pacman.direction == 2 or self.game.pacman.direction == 3:
+                if 9 <= centerx % num2 <= 15:
+                    if self.game.level[(centery + num3) // num1][centerx // num2] < 3:
+                        turns[3] = True
+                    if self.game.level[(centery - num3) // num1][centerx // num2] < 3:
+                        turns[2] = True
+                if 9 <= centery % num1 <= 15:
+                    if self.game.level[centery // num1][(centerx - num2) // num2] < 3:
+                        turns[1] = True
+                    if self.game.level[centery // num1][(centerx + num2) // num2] < 3:
+                        turns[0] = True
 
-    else:
-        turns[0] = True
-        turns[1] = True
-    return turns
+            if self.game.pacman.direction == 0 or self.game.pacman.direction == 1:
+                if 9 <= centerx % num2 <= 15:
+                    if self.game.level[(centery + num1) // num1][centerx // num2] < 3:
+                        turns[3] = True
+                    if self.game.level[(centery - num1) // num1][centerx // num2] < 3:
+                        turns[2] = True
+                if 9 <= centery % num1 <= 15:
+                    if self.game.level[centery // num1][(centerx - num3) // num2] < 3:
+                        turns[1] = True
+                    if self.game.level[centery // num1][(centerx + num3) // num2] < 3:
+                        turns[0] = True
+        else:
+            turns[0] = True
+            turns[1] = True
+        return turns
 
-def move_pacman(pac_x, pac_y):
-    # 0-r, 1-l, 2-u, 3-down
-    if direction == 0 and turns_allowed[0]:
-        pac_x += pacman_speed
-    elif direction == 1 and turns_allowed[1]:
-        pac_x -= pacman_speed
-    elif direction == 2 and turns_allowed[2]:
-        pac_y -= pacman_speed
-    elif direction == 3 and turns_allowed[3]:
-        pac_y += pacman_speed
-    return pac_x, pac_y
+class Misc:
+    def __init__(self, game):
+        self.game = game
 
+    def update(self):
+        if self.game.powerup and self.game.power_counter < 600:
+            self.game.power_counter += 1
+        elif self.game.powerup and self.game.power_counter >= 600:
+            self.game.power_counter = 0
+            self.game.powerup = False
+            self.game.eaten_ghost = [False, False, False, False]
 
+    def draw(self):
+        score_text = self.game.font.render(f'Score: {self.game.score}', True, 'white')
+        self.game.screen.blit(score_text, (10, 740))
+        if self.game.powerup:
+            pygame.draw.circle(self.game.screen, 'blue', (140, 750), 12)
+        for i in range(self.game.lives):
+            self.game.screen.blit(pygame.transform.scale(self.game.pacman.images[1], (30, 30)), (500 + i * 40, 735))
 
-run = True
-while run:
-    timer.tick(fps)
-    if counter < 19:
-        counter += 1
-        if counter > 9:
-            flicker = False
-    else:
-        counter = 0
-        flicker = True
-
-    if powerup and power_counter < 600:
-        power_counter += 1
-    elif powerup and power_counter >= 600:
-        power_counter = 0
-        powerup = False
-        eaten_ghost = [False, False, False, False]
-
-    if startup_counter < 180:
-        moving = False
-        startup_counter += 1
-    else:
-        moving = True
-
-    screen.fill('black')
-    draw_board()
-    draw_pacman()
-    draw_misc()
-    center_x = pacman_x + 16
-    center_y = pacman_y + 17
-    turns_allowed = check_position(center_x, center_y)
-    if moving:
-        pacman_x, pacman_y = move_pacman(pacman_x, pacman_y)
-    score, powerup, power_counter, eaten_ghost = check_collisions(score, powerup, power_counter, eaten_ghost)
-
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            run = False
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_RIGHT:
-                direction_command = 0
-            if event.key == pygame.K_LEFT:
-                direction_command = 1
-            if event.key == pygame.K_UP:
-                direction_command = 2
-            if event.key == pygame.K_DOWN:
-                direction_command = 3
-
-        if event.type == pygame.KEYUP:
-            if event.key == pygame.K_RIGHT and direction_command == 0:
-                direction_command = direction
-            if event.key == pygame.K_LEFT and direction_command == 1:
-                direction_command = direction
-            if event.key == pygame.K_UP and direction_command == 2:
-                direction_command = direction
-            if event.key == pygame.K_DOWN and direction_command == 3:
-                direction_command = direction
-
-    for i in range(4):
-        if direction_command == i and turns_allowed[i]:
-            direction = i
-
-    if pacman_x > 691:
-        pacman_x = -35
-    elif pacman_x < -38:
-        pacman_x = 691
-
-
-    pygame.display.flip()
-
-pygame.quit()
+if __name__ == "__main__":
+    game = Game()
+    game.run_game()
