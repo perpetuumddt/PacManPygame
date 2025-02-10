@@ -1,6 +1,7 @@
 import pygame
 import math
 from board import boards
+from menu import main_menu
 
 class Game:
     def __init__(self):
@@ -258,5 +259,6 @@ class Misc:
             self.game.screen.blit(pygame.transform.scale(self.game.pacman.images[1], (30, 30)), (500 + i * 40, 735))
 
 if __name__ == "__main__":
+    selected_level = main_menu()
     game = Game()
     game.run_game()
