@@ -6,15 +6,21 @@ pygame.init()
 screen = pygame.display.set_mode((720, 780))
 pygame.display.set_caption("Pac-Man")
 
-# Game state
-MENU = "menu"
-GAME = "game"
-state = MENU
+def main():
+    state = "menu"
 
-while True:
-    if state == MENU:
-        menu = Menu(screen, lambda: setattr(globals(), "state", GAME))
-        menu.run()
-    elif state == GAME:
-        game = Game(screen)
-        game.run()
+    menu = Menu(screen, lambda: change_state("game"))
+    game = Game(screen, lambda: change_state("menu"))
+
+    def change_state(new_state):
+        nonlocal state
+        state = new_state
+
+    running = True
+    while running:
+        if state == "menu":
+            menu.run()  # Start menu
+        elif state == "game":
+            game.run_game()  # Start game
+
+main()

@@ -41,5 +41,5 @@ class Menu:
                     exit()
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if self.start_button_rect.collidepoint(event.pos):
-                        running = False  # Exit menu
                         self.start_game_callback()  # Start game
+                        running = False

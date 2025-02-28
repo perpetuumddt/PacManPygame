@@ -4,14 +4,15 @@ from board import boards
 from menu import Menu
 
 class Game:
-    def __init__(self):
+    def __init__(self, screen, exit_callback):
         pygame.init()
         self.height = 780
         self.width = 720
-        self.screen = pygame.display.set_mode([self.width, self.height])
-        self.running = True
+        self.screen = screen
+        self.exit_callback = exit_callback
         self.clock = pygame.time.Clock()
         self.timer = pygame.time.Clock()
+        self.running = False
         self.fps = 60
         self.font = pygame.font.Font('freesansbold.ttf', 20)
         self.level = boards
@@ -27,21 +28,30 @@ class Game:
         self.moving = False
         self.startup_counter = 0
         self.lives = 3
-        self.run = True
 
     def run_game(self):
-        while self.run:
+        self.running = True
+        while self.running:
             self.timer.tick(self.fps)
             self.handle_events()
             self.update()
             self.draw()
             pygame.display.flip()
-        pygame.quit()
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    exit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        self.running = False
+                        self.exit_callback()
 
     def handle_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                self.run = False
+                pygame.quit()
+                exit()
             if event.type == pygame.KEYDOWN:
                 self.moving = True
                 if event.key == pygame.K_RIGHT:
