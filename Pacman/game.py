@@ -9,6 +9,8 @@ class Game:
         self.height = 780
         self.width = 720
         self.screen = pygame.display.set_mode([self.width, self.height])
+        self.running = True
+        self.clock = pygame.time.Clock()
         self.timer = pygame.time.Clock()
         self.fps = 60
         self.font = pygame.font.Font('freesansbold.ttf', 20)
@@ -257,7 +259,3 @@ class Misc:
             pygame.draw.circle(self.game.screen, 'blue', (140, 750), 12)
         for i in range(self.game.lives):
             self.game.screen.blit(pygame.transform.scale(self.game.pacman.images[1], (30, 30)), (500 + i * 40, 735))
-
-if __name__ == "__main__":
-    game = Game()
-    game.run_game()
