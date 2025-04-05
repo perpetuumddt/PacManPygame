@@ -1,60 +1,43 @@
-from board import boards
 import pygame
-import math
+import pygame.mixer
+from menu import Menu
+from game import Game
 
 pygame.init()
+pygame.mixer.init()  # Инициализация аудиосистемы
 
-height = 780
-width = 720
-screen = pygame.display.set_mode([width, height])
-timer = pygame.time.Clock()
-fps = 60
-font = pygame.font.Font('freesansbold.ttf', 20)
-level = boards
-color = 'blue'
-PI = math.pi
+# Создание экрана
+screen = pygame.display.set_mode((720, 780))
+pygame.display.set_caption("Pac-Man")
 
-def draw_board():
-    num1 = ((height - 50) // 32)
-    num2 = (width // 30)
-    for i in range(len(level)):
-        for j in range(len(level[i])):
-            if level[i][j] == 1:
-                pygame.draw.circle(screen, 'white', (j * num2 + (0.5 * num2), i * num1 + (0.5 * num1)), 4)
-            if level[i][j] == 2:
-                pygame.draw.circle(screen, (255,255,155), (j * num2 + (0.5 * num2), i * num1 + (0.5 * num1)), 10)
-            if level[i][j] == 3:
-                pygame.draw.line(screen, color, (j * num2 + (0.5 * num2), i * num1),
-                                 (j * num2 + (0.5 * num2), i * num1 + num1), 3)
-            if level[i][j] == 4:
-                pygame.draw.line(screen, color, (j * num2, i * num1 + (0.5 * num1)),
-                                 (j * num2 + num2, i * num1 + (0.5 * num1)), 3)
-            if level[i][j] == 5:
-                pygame.draw.arc(screen, color, [(j * num2 - (num2 * 0.4)) - 2, (i * num1 + (0.5 * num1)), num2, num1],
-                                0, PI / 2, 2)
-            if level[i][j] == 6:
-                pygame.draw.arc(screen, color,[(j * num2 + (num2 * 0.5)), (i * num1 + (0.5 * num1)), num2, num1],
-                                 PI / 2, PI, 2)
-            if level[i][j] == 7:
-                pygame.draw.arc(screen, color, [(j * num2 + (num2 * 0.5)), (i * num1 - (0.4 * num1)), num2, num1],
-                                PI, 3 * PI / 2, 2)
-            if level[i][j] == 8:
-                pygame.draw.arc(screen, color,[(j * num2 - (num2 * 0.35)) - 2, (i * num1 - (0.4 * num1)), num2, num1],
-                                 3 * PI / 2, 2 * PI, 2)
-            if level[i][j] == 9:
-                pygame.draw.line(screen, 'white', (j * num2, i * num1 + (0.5 * num1)),
-                                 (j * num2 + num2, i * num1 + (0.5 * num1)), 3)
+# Функция для смены музыки
+def play_music(track):
+    pygame.mixer.music.load(track)
+    pygame.mixer.music.set_volume(0.5)
+    pygame.mixer.music.play(-1)  # Бесконечное воспроизведение
 
+def main():
+    state = "menu"
 
-run = True
-while run:
-    timer.tick(fps)
-    screen.fill('black')
-    draw_board()
+    menu = Menu(screen, lambda: change_state("game"))
+    game = Game(screen, lambda: change_state("menu"))
 
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            run = False
-    pygame.display.flip()
+    # Включаем музыку для запуска игры и меню
+    play_music("Sounds/persevere.mp3")
 
-pygame.quit()
+    def change_state(new_state):
+        nonlocal state
+        state = new_state
+        if state == "game":
+            play_music("Sounds/ni_idea.wav")  # Музыка для самой игры
+        elif state == "menu":
+            play_music("Sounds/persevere.mp3")  # Музыка при запуске и в меню
+
+    running = True
+    while running:
+        if state == "menu":
+            menu.run()  # Запуск меню
+        elif state == "game":
+            game.run_game()  # Запуск игры
+
+main()
