@@ -18,9 +18,6 @@ class Game:
         self.level = boards
         self.color = 'blue'
         self.PI = math.pi
-        self.pacman = Pacman(self)
-        self.board = Board(self)
-        self.misc = Misc(self)
         self.score = 0
         self.powerup = False
         self.power_counter = 0
@@ -28,6 +25,24 @@ class Game:
         self.moving = False
         self.startup_counter = 0
         self.lives = 3
+        self.pacman = Pacman(self)
+        self.board = Board(self)
+        self.misc = Misc(self)
+
+        self.ghost = Ghost(self, 0, 0, (0, 0), 0, 0, 0, False, False, 0)
+
+
+        self.blinky = Ghost(self, self.ghost.blinky_x, self.ghost.blinky_y, self.ghost.targets[0], self.ghost.ghost_speed, self.ghost.blinky_image, self.ghost.blinky_direction, self.ghost.blinky_dead,
+                       self.ghost.blinky_box, 0)
+        self.inky = Ghost(self, self.ghost.inky_x, self.ghost.inky_y, self.ghost.targets[1], self.ghost.ghost_speed, self.ghost.inky_image, self.ghost.inky_direction, self.ghost.inky_dead,
+                     self.ghost.inky_box, 1)
+        self.pinky = Ghost(self, self.ghost.pinky_x, self.ghost.pinky_y, self.ghost.targets[2], self.ghost.ghost_speed, self.ghost.pinky_image, self.ghost.pinky_direction, self.ghost.pinky_dead,
+                      self.ghost.pinky_box, 2)
+        self.clyde = Ghost(self, self.ghost.clyde_x, self.ghost.clyde_y, self.ghost.targets[3], self.ghost.ghost_speed, self.ghost.clyde_image, self.ghost.clyde_direction, self.ghost.clyde_dead,
+                      self.ghost.clyde_box, 3)
+
+
+
 
     def run_game(self):
         self.running = True
@@ -85,6 +100,12 @@ class Game:
             self.pacman.move()
 
         self.pacman.update()
+
+        self.blinky.update()
+        self.inky.update()
+        self.pinky.update()
+        self.clyde.update()
+
         self.board.update()
         self.misc.update()
 
@@ -92,6 +113,12 @@ class Game:
         self.screen.fill('black')
         self.board.draw()
         self.pacman.draw()
+
+        self.blinky.draw()
+        self.inky.draw()
+        self.pinky.draw()
+        self.clyde.draw()
+
         self.misc.draw()
 
 class Pacman:
@@ -145,6 +172,90 @@ class Pacman:
             self.game.screen.blit(pygame.transform.rotate(self.images[self.counter // 5], 90), (self.x, self.y))
         elif self.direction == 3:
             self.game.screen.blit(pygame.transform.rotate(self.images[self.counter // 5], 270), (self.x, self.y))
+
+class Ghost:
+    def __init__(self, game, x_coord, y_coord, target, speed, img, direct, dead, box, id):
+        self.game = game
+        self.blinky_image = [pygame.transform.scale(pygame.image.load(f'Sprites/Entities/Enemies/Red/GhostRed{i}.png'), (33, 33))  for i in range(1, 5)]
+        self.pinky_image = [pygame.transform.scale(pygame.image.load(f'Sprites/Entities/Enemies/Pink/GhostPink{i}.png'), (33, 33))  for i in range(1, 5)]
+        self.inky_image = [pygame.transform.scale(pygame.image.load(f'Sprites/Entities/Enemies/Blue/GhostBlue{i}.png'), (33, 33))  for i in range(1, 5)]
+        self.clyde_image = [pygame.transform.scale(pygame.image.load(f'Sprites/Entities/Enemies/Orange/GhostOrange{i}.png'), (33, 33))  for i in range(1, 5)]
+        self.spooked_image = [pygame.transform.scale(pygame.image.load(f'Sprites/Entities/Enemies/Scared/GhostScared{i}.png'), (33, 33))  for i in range(1, 5)]
+        self.dead_image = [pygame.transform.scale(pygame.image.load(f'Sprites/Entities/Enemies/Dead/GhostDead{i}.png'), (33, 33))  for i in range(1, 5)]
+        self.blinky_x = 45
+        self.blinky_y = 46
+        self.blinky_direction = 0
+        self.pinky_x = 352
+        self.pinky_y = 345
+        self.pinky_direction = 2
+        self.inky_x = 352
+        self.inky_y = 305
+        self.inky_direction = 2
+        self.clyde_x = 352
+        self.clyde_y = 345
+        self.clyde_direction = 2
+        self.targets = [(self.game.pacman.x, self.game.pacman.y), (self.game.pacman.x, self.game.pacman.y), (self.game.pacman.x, self.game.pacman.y), (self.game.pacman.x, self.game.pacman.y)]
+        self.blinky_dead = False
+        self.pinky_dead = False
+        self.inky_dead = False
+        self.clyde_dead = False
+        self.blinky_box = False
+        self.pinky_box = False
+        self.inky_box = False
+        self.clyde_box = False
+        self.ghost_speed = 2
+        self.counter = 0
+        self.x_pos = x_coord
+        self.y_pos = y_coord
+        self.center_x = self.x_pos + 16
+        self.center_y = self.y_pos + 17
+        self.target = target
+        self.speed = speed
+        self.img = img
+        self.direction = direct
+        self.dead = dead
+        self.in_box = box
+        self.id = id
+        self.turns, self.in_box = self.check_collisions()
+        self.rect = pygame.Rect((self.center_x - 13, self.center_y - 13), (26, 26))
+
+
+    def update(self):
+        if self.counter < 19:
+            self.counter += 1
+        else:
+            self.counter = 0
+
+
+    def draw(self):
+        # Перевірка на наявність атрибутів
+        if not hasattr(self.game, 'powerup'):
+            self.game.powerup = False
+        if not hasattr(self.game, 'eaten_ghost'):
+            self.game.eaten_ghost = [False, False, False, False]
+
+        if (not self.game.powerup and not self.dead) or (self.game.eaten_ghost[self.id] and self.game.powerup and not self.dead):
+            if self.img:  # Перевірка на наявність зображення
+                if self.id == 0:
+                    self.game.screen.blit(self.blinky_image[self.counter // 5], (self.x_pos, self.y_pos))
+                elif self.id == 1:
+                    self.game.screen.blit(self.inky_image[self.counter // 5], (self.x_pos, self.y_pos))
+                elif self.id == 2:
+                    self.game.screen.blit(self.pinky_image[self.counter // 5], (self.x_pos, self.y_pos))
+                elif self.id == 3:
+                    self.game.screen.blit(self.clyde_image[self.counter // 5], (self.x_pos, self.y_pos))
+        elif self.game.powerup and not self.dead and not self.game.eaten_ghost[self.id]:
+            if hasattr(self, 'spooked_image') and self.spooked_image:
+                self.game.screen.blit(self.spooked_image[self.counter // 5], (self.x_pos, self.y_pos))
+        else:
+            if hasattr(self, 'dead_image') and self.dead_image:
+                self.game.screen.blit(self.dead_image[self.counter // 5], (self.x_pos, self.y_pos))
+
+
+    def check_collisions(self):
+        self.turns = [False, False, False, False]
+        self.in_box = True
+        return self.turns, self.in_box
 
 class Board:
     def __init__(self, game):
