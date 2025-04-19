@@ -121,6 +121,32 @@ class Game:
             if self.clyde.in_box and self.clyde.dead:
                 self.clyde.dead = False
 
+            if self.powerup:
+                ghost_speeds = [1, 1, 1, 1]
+            else:
+                ghost_speeds = [2, 2, 2, 2]
+            if self.eaten_ghost[0]:
+                ghost_speeds[0] = 2
+            if self.eaten_ghost[1]:
+                ghost_speeds[1] = 2
+            if self.eaten_ghost[2]:
+                ghost_speeds[2] = 2
+            if self.eaten_ghost[3]:
+                ghost_speeds[3] = 2
+            if self.blinky.dead:
+                ghost_speeds[0] = 4
+            if self.inky.dead:
+                ghost_speeds[1] = 4
+            if self.pinky.dead:
+                ghost_speeds[2] = 4
+            if self.clyde.dead:
+                ghost_speeds[3] = 4
+
+            self.blinky.speed = ghost_speeds[0]
+            self.inky.speed = ghost_speeds[1]
+            self.pinky.speed = ghost_speeds[2]
+            self.clyde.speed = ghost_speeds[3]
+
             if not self.blinky.dead and not self.blinky.in_box:
                 self.blinky.move_blinky()
             else:
