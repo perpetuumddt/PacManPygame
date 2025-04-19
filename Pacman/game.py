@@ -28,7 +28,6 @@ class Game:
         self.pacman = Pacman(self)
         self.board = Board(self)
         self.misc = Misc(self)
-
         self.ghost = Ghost(self, 0, 0, (0, 0), 0, 0, 0, False, False, 0)
 
 
@@ -100,12 +99,10 @@ class Game:
             self.pacman.move()
 
         self.pacman.update()
-
         self.blinky.update()
         self.inky.update()
         self.pinky.update()
         self.clyde.update()
-
         self.board.update()
         self.misc.update()
 
@@ -226,6 +223,8 @@ class Ghost:
         else:
             self.counter = 0
 
+        self.center_x = int(self.x_pos) + 16
+        self.center_y = int(self.y_pos) + 17
 
     def draw(self):
         # Перевірка на наявність атрибутів
@@ -253,8 +252,76 @@ class Ghost:
 
 
     def check_collisions(self):
+        num1 = ((self.game.height - 50) // 32)
+        num2 = (self.game.width // 30)
+        num3 = 12
         self.turns = [False, False, False, False]
-        self.in_box = True
+        if 0 < self.center_x // 30 < 29:
+            if self.game.level[(self.center_y - num3) // num1][self.center_x // num2] == 9:
+                self.turns[2] = True
+            if self.game.level[self.center_y // num1][(self.center_x - num3) // num2] < 3 \
+                    or (self.game.level[self.center_y // num1][(self.center_x - num3) // num2] == 9 and (
+                    self.in_box or self.dead)):
+                self.turns[1] = True
+            if self.game.level[self.center_y // num1][(self.center_x + num3) // num2] < 3 \
+                    or (self.game.level[self.center_y // num1][(self.center_x + num3) // num2] == 9 and (
+                    self.in_box or self.dead)):
+                self.turns[0] = True
+            if self.game.level[(self.center_y + num3) // num1][self.center_x // num2] < 3 \
+                    or (self.game.level[(self.center_y + num3) // num1][self.center_x // num2] == 9 and (
+                    self.in_box or self.dead)):
+                self.turns[3] = True
+            if self.game.level[(self.center_y - num3) // num1][self.center_x // num2] < 3 \
+                    or (self.game.level[(self.center_y - num3) // num1][self.center_x // num2] == 9 and (
+                    self.in_box or self.dead)):
+                self.turns[2] = True
+
+            if self.direction == 2 or self.direction == 3:
+                if 9 <= self.center_x % num2 <= 15:
+                    if self.game.level[(self.center_y + num3) // num1][self.center_x // num2] < 3 \
+                            or (self.game.level[(self.center_y + num3) // num1][self.center_x // num2] == 9 and (
+                            self.in_box or self.dead)):
+                        self.turns[3] = True
+                    if self.game.level[(self.center_y - num3) // num1][self.center_x // num2] < 3 \
+                            or (self.game.level[(self.center_y - num3) // num1][self.center_x // num2] == 9 and (
+                            self.in_box or self.dead)):
+                        self.turns[2] = True
+                if 9 <= self.center_y % num1 <= 15:
+                    if self.game.level[self.center_y // num1][(self.center_x - num2) // num2] < 3 \
+                            or (self.game.level[self.center_y // num1][(self.center_x - num2) // num2] == 9 and (
+                            self.in_box or self.dead)):
+                        self.turns[1] = True
+                    if self.game.level[self.center_y // num1][(self.center_x + num2) // num2] < 3 \
+                            or (self.game.level[self.center_y // num1][(self.center_x + num2) // num2] == 9 and (
+                            self.in_box or self.dead)):
+                        self.turns[0] = True
+
+            if self.direction == 0 or self.direction == 1:
+                if 9 <= self.center_x % num2 <= 15:
+                    if self.game.level[(self.center_y + num3) // num1][self.center_x // num2] < 3 \
+                            or (self.game.level[(self.center_y + num3) // num1][self.center_x // num2] == 9 and (
+                            self.in_box or self.dead)):
+                        self.turns[3] = True
+                    if self.game.level[(self.center_y - num3) // num1][self.center_x // num2] < 3 \
+                            or (self.game.level[(self.center_y - num3) // num1][self.center_x // num2] == 9 and (
+                            self.in_box or self.dead)):
+                        self.turns[2] = True
+                if 9 <= self.center_y % num1 <= 15:
+                    if self.game.level[self.center_y // num1][(self.center_x - num3) // num2] < 3 \
+                            or (self.game.level[self.center_y // num1][(self.center_x - num3) // num2] == 9 and (
+                            self.in_box or self.dead)):
+                        self.turns[1] = True
+                    if self.game.level[self.center_y // num1][(self.center_x + num3) // num2] < 3 \
+                            or (self.game.level[self.center_y // num1][(self.center_x + num3) // num2] == 9 and (
+                            self.in_box or self.dead)):
+                        self.turns[0] = True
+        else:
+            self.turns[0] = True
+            self.turns[1] = True
+        if 280 < self.x_pos < 440 and 300 < self.y_pos < 360:
+            self.in_box = True
+        else:
+            self.in_box = False
         return self.turns, self.in_box
 
 class Board:
