@@ -1,3 +1,4 @@
+import copy
 import pygame
 import math
 from board import boards
@@ -15,7 +16,7 @@ class Game:
         self.running = False
         self.fps = 60
         self.font = pygame.font.Font('freesansbold.ttf', 20)
-        self.level = boards
+        self.level = copy.deepcopy(boards)
         self.color = 'blue'
         self.PI = math.pi
         self.score = 0
@@ -25,6 +26,10 @@ class Game:
         self.moving = False
         self.startup_counter = 0
         self.lives = 3
+
+        self.game_over = False
+        self.game_won = False
+
         self.pacman = Pacman(self)
         self.board = Board(self)
         self.misc = Misc(self)
@@ -76,6 +81,37 @@ class Game:
                     self.pacman.direction_command = 2
                 if event.key == pygame.K_DOWN:
                     self.pacman.direction_command = 3
+                if event.key == pygame.K_SPACE and (self.game_over or self.game_won):
+                    self.powerup = False
+                    self.power_counter = 0
+                    self.lives -= 1
+                    self.startup_counter = 0
+                    self.pacman.x = 360
+                    self.pacman.y = 522
+                    self.pacman.direction = 0
+                    self.pacman.direction_command = 0
+                    self.blinky.x_pos = 45
+                    self.blinky.y_pos = 46
+                    self.blinky.direction = 0
+                    self.inky.x_pos = 352
+                    self.inky.y_pos = 305
+                    self.inky.direction = 2
+                    self.pinky.x_pos = 352
+                    self.pinky.y_pos = 345
+                    self.pinky.direction = 2
+                    self.clyde.x_pos = 352
+                    self.clyde.y_pos = 345
+                    self.clyde.direction = 2
+                    self.eaten_ghost = [False, False, False, False]
+                    self.blinky.dead = False
+                    self.inky.dead = False
+                    self.clyde.dead = False
+                    self.pinky.dead = False
+                    self.score = 0
+                    self.lives = 3
+                    self.level = copy.deepcopy(boards)
+                    self.game_over = False
+                    self.game_won = False
 
             if event.type == pygame.KEYUP:
                 self.moving = False
@@ -89,7 +125,7 @@ class Game:
                     self.pacman.direction_command = self.pacman.direction
 
     def update(self):
-        if self.startup_counter < 180:
+        if self.startup_counter < 180 and not self.game_over and not self.game_won:
             self.moving = False
             self.startup_counter += 1
         else:
@@ -141,6 +177,11 @@ class Game:
                 ghost_speeds[2] = 4
             if self.clyde.dead:
                 ghost_speeds[3] = 4
+
+            self.game_won = True
+            for i in range(len(self.level)):
+                if 1 in self.level[i] or 2 in self.level[i]:
+                    self.game_won = False
 
             self.blinky.speed = ghost_speeds[0]
             self.inky.speed = ghost_speeds[1]
@@ -293,6 +334,10 @@ class Game:
                     self.inky.dead = False
                     self.clyde.dead = False
                     self.pinky.dead = False
+                else:
+                    self.game_over = True
+                    self.moving = False
+                    self.startup_counter = 0
         if self.powerup and player_rect.colliderect(self.blinky.rect) and self.eaten_ghost[0] and not self.blinky.dead:
             if self.lives > 0:
                 self.powerup = False
@@ -320,6 +365,10 @@ class Game:
                 self.inky.dead = False
                 self.clyde.dead = False
                 self.pinky.dead = False
+            else:
+                self.game_over = True
+                self.moving = False
+                self.startup_counter = 0
         if self.powerup and player_rect.colliderect(self.inky.rect) and self.eaten_ghost[1] and not self.inky.dead:
             if self.lives > 0:
                 self.lives -= 1
@@ -347,6 +396,10 @@ class Game:
                 self.inky.dead = False
                 self.clyde.dead = False
                 self.pinky.dead = False
+            else:
+                self.game_over = True
+                self.moving = False
+                self.startup_counter = 0
         if self.powerup and player_rect.colliderect(self.pinky.rect) and self.eaten_ghost[2] and not self.pinky.dead:
             if self.lives > 0:
                 self.lives -= 1
@@ -374,6 +427,10 @@ class Game:
                 self.inky.dead = False
                 self.clyde.dead = False
                 self.pinky.dead = False
+            else:
+                self.game_over = True
+                self.moving = False
+                self.startup_counter = 0
         if self.powerup and player_rect.colliderect(self.clyde.rect) and self.eaten_ghost[3] and not self.clyde.dead:
             if self.lives > 0:
                 self.lives -= 1
@@ -401,6 +458,10 @@ class Game:
                 self.inky.dead = False
                 self.clyde.dead = False
                 self.pinky.dead = False
+            else:
+                self.game_over = True
+                self.moving = False
+                self.startup_counter = 0
         if self.powerup and player_rect.colliderect(self.blinky.rect) and not self.blinky.dead and not self.eaten_ghost[0]:
             self.blinky.dead = True
             self.eaten_ghost[0] = True
@@ -1250,3 +1311,13 @@ class Misc:
             pygame.draw.circle(self.game.screen, 'blue', (140, 750), 12)
         for i in range(self.game.lives):
             self.game.screen.blit(pygame.transform.scale(self.game.pacman.images[1], (30, 30)), (500 + i * 40, 735))
+        if self.game.game_over:
+            pygame.draw.rect(self.game.screen, 'white', [50, 200, 600, 300], 0, 10)
+            pygame.draw.rect(self.game.screen, 'dark gray', [70, 220, 560, 260], 0, 10)
+            gameover_text = self.game.font.render('Game over! Space bar to restart!', True, 'red')
+            self.game.screen.blit(gameover_text, (120, 300))
+        if self.game.game_won:
+            pygame.draw.rect(self.game.screen, 'white', [50, 200, 600, 300], 0, 10)
+            pygame.draw.rect(self.game.screen, 'dark gray', [70, 220, 560, 260], 0, 10)
+            gameover_text = self.game.font.render('Victory! Space bar to restart!', True, 'green')
+            self.game.screen.blit(gameover_text, (120, 300))
