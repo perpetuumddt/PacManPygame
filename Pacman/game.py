@@ -112,6 +112,15 @@ class Game:
 
             self.check_pacman_ghosts_collision()
 
+            if self.blinky.in_box and self.blinky.dead:
+                self.blinky.dead = False
+            if self.inky.in_box and self.inky.dead:
+                self.inky.dead = False
+            if self.pinky.in_box and self.pinky.dead:
+                self.pinky.dead = False
+            if self.clyde.in_box and self.clyde.dead:
+                self.clyde.dead = False
+
             if not self.blinky.dead and not self.blinky.in_box:
                 self.blinky.move_blinky()
             else:
