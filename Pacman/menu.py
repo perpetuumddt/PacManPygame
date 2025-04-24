@@ -1,5 +1,6 @@
 import pygame
 from save_data import load_progress
+import numpy
 
 class Menu:
     def __init__(self, screen, start_game_callback):
@@ -36,6 +37,12 @@ class Menu:
         text_rect = text_obj.get_rect(center=(x, y))
         self.screen.blit(text_obj, text_rect)
 
+    def make_grayscale(self, surface):
+        arr = pygame.surfarray.array3d(surface)
+        grayscale = arr.mean(axis=2, keepdims=True).astype("uint8")
+        arr = numpy.repeat(grayscale, 3, axis=2)
+        return pygame.surfarray.make_surface(arr)
+
     def run(self):
         running = True
         self.selected_level = 1
@@ -46,9 +53,17 @@ class Menu:
             self.screen.fill("black")
             self.screen.blit(self.title_img, self.title_rect.topleft)
             self.screen.blit(self.start_button_img, self.start_button_rect.topleft)  # Start button
+            #Level select buttons.
+            #Checks unlocked levels
             self.screen.blit(self.level_select_1_img, self.level_select_1_rect.topleft)
-            self.screen.blit(self.level_select_2_img, self.level_select_2_rect.topleft)
-            self.screen.blit(self.level_select_3_img, self.level_select_3_rect.topleft)
+            if unlocked >= 2:
+                self.screen.blit(self.level_select_2_img, self.level_select_2_rect.topleft)
+            else:
+                self.screen.blit(self.level_select_2_img_disabled, self.level_select_2_rect.topleft)
+            if unlocked >= 3:
+                self.screen.blit(self.level_select_3_img, self.level_select_3_rect.topleft)
+            else:
+                self.screen.blit(self.level_select_3_img_disabled, self.level_select_3_rect.topleft)
 
             pygame.display.flip()
             self.clock.tick(30)
