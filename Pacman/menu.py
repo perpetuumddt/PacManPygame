@@ -1,4 +1,5 @@
 import pygame
+from save_data import load_progress
 
 class Menu:
     def __init__(self, screen, start_game_callback):
@@ -6,7 +7,7 @@ class Menu:
         self.start_game_callback = start_game_callback
         self.font = pygame.font.SysFont('Arial', 50)
         self.clock = pygame.time.Clock()
-
+        self.selected_level = 1
         # Loading images
         self.title_img = pygame.image.load("Sprites/UI/Title_1.png")
         self.start_button_img = pygame.image.load("Sprites/UI/Button_Start.png")
@@ -37,6 +38,10 @@ class Menu:
 
     def run(self):
         running = True
+        self.selected_level = 1
+        progress = load_progress()
+        unlocked = progress['unlocked_level']
+
         while running:
             self.screen.fill("black")
             self.screen.blit(self.title_img, self.title_rect.topleft)
@@ -53,6 +58,15 @@ class Menu:
                     pygame.quit()
                     exit()
                 if event.type == pygame.MOUSEBUTTONDOWN:
+                    if self.level_select_1_rect.collidepoint(event.pos):
+                        self.selected_level = 1
+                        continue
+                    if unlocked >= 2 and self.level_select_2_rect.collidepoint(event.pos):
+                        self.selected_level = 2
+                        continue
+                    if unlocked >= 3 and self.level_select_3_rect.collidepoint(event.pos):
+                        self.selected_level = 3
+                        continue
                     if self.start_button_rect.collidepoint(event.pos):
-                        self.start_game_callback()  # Start game
+                        self.start_game_callback(self.selected_level)  # Start game
                         running = False

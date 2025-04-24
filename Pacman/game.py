@@ -4,7 +4,7 @@ import math
 from menu import Menu
 
 class Game:
-    def __init__(self, screen, exit_callback):
+    def __init__(self, screen, exit_callback, current_level=1):
         pygame.init()
         self.height = 780
         self.width = 720
@@ -17,9 +17,8 @@ class Game:
         self.font = pygame.font.Font('freesansbold.ttf', 20)
 
         #loading levels
-        self.current_level = 1
         from boards import board1, board2, board3
-        if self.current_level == 1:
+        if current_level == 1:
             self.level = copy.deepcopy(board1)
         elif current_level == 2:
             self.level = copy.deepcopy(board2)
@@ -53,9 +52,6 @@ class Game:
                       self.ghost.pinky_box, 2)
         self.clyde = Ghost(self, self.ghost.clyde_x, self.ghost.clyde_y, self.ghost.targets[3], self.ghost.ghost_speed, self.ghost.clyde_image, self.ghost.clyde_direction, self.ghost.clyde_dead,
                       self.ghost.clyde_box, 3)
-
-
-
 
     def run_game(self):
         self.running = True
@@ -218,6 +214,13 @@ class Game:
         self.clyde.update()
         self.board.update()
         self.misc.update()
+
+        #saving progress
+        from save_data import save_progress
+
+        if self.game_won:
+            if self.current_level < 3:
+                save_progress(self.current_level + 1)
 
     def draw(self):
         self.screen.fill('black')
