@@ -1,7 +1,6 @@
 import copy
 import pygame
 import math
-from board import boards
 from menu import Menu
 
 class Game:
@@ -16,7 +15,17 @@ class Game:
         self.running = False
         self.fps = 60
         self.font = pygame.font.Font('freesansbold.ttf', 20)
-        self.level = copy.deepcopy(boards)
+
+        #loading levels
+        self.current_level = 1
+        from boards import board1, board2, board3
+        if self.current_level == 1:
+            self.level = copy.deepcopy(board1)
+        elif current_level == 2:
+            self.level = copy.deepcopy(board2)
+        elif current_level == 3:
+            self.level = copy.deepcopy(board3)
+
         self.color = 'blue'
         self.PI = math.pi
         self.score = 0
@@ -109,7 +118,6 @@ class Game:
                     self.pinky.dead = False
                     self.score = 0
                     self.lives = 3
-                    self.level = copy.deepcopy(boards)
                     self.game_over = False
                     self.game_won = False
 
