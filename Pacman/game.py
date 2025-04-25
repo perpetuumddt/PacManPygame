@@ -6,6 +6,7 @@ from menu import Menu
 class Game:
     def __init__(self, screen, exit_callback, current_level=1):
         self.current_level = current_level
+        self.force_win = False
         pygame.init()
         self.height = 780
         self.width = 720
@@ -87,7 +88,8 @@ class Game:
                     self.pacman.direction_command = 2
                 if event.key == pygame.K_DOWN:
                     self.pacman.direction_command = 3
-                if event.key == pygame.K_SPACE and (self.game_over or self.game_won):
+                # IF GAME LOST: RESTART
+                if event.key == pygame.K_SPACE and self.game_over:
                     self.powerup = False
                     self.power_counter = 0
                     self.lives -= 1
@@ -116,18 +118,15 @@ class Game:
                     self.score = 0
                     self.lives = 3
                     self.game_over = False
-                    self.game_won = False
 
-            if event.type == pygame.KEYUP:
-                self.moving = False
-                if event.key == pygame.K_RIGHT and self.pacman.direction_command == 0:
-                    self.pacman.direction_command = self.pacman.direction
-                if event.key == pygame.K_LEFT and self.pacman.direction_command == 1:
-                    self.pacman.direction_command = self.pacman.direction
-                if event.key == pygame.K_UP and self.pacman.direction_command == 2:
-                    self.pacman.direction_command = self.pacman.direction
-                if event.key == pygame.K_DOWN and self.pacman.direction_command == 3:
-                    self.pacman.direction_command = self.pacman.direction
+                #IF GAME WON: MAIN MENU
+                if event.key == pygame.K_SPACE and self.game_won:
+                    self.running = False
+                    self.exit_callback()
+
+                #SECRET BUTTON: "W" FOR AUTO WIN
+                if event.key == pygame.K_w:
+                    self.force_win = True
 
     def update(self):
         if self.startup_counter < 180 and not self.game_over and not self.game_won:
@@ -219,9 +218,13 @@ class Game:
         #saving progress
         from save_data import save_progress
 
-        if self.game_won:
-            if self.current_level < 3:
-                save_progress(self.current_level + 1)
+        if self.force_win:
+            self.game_won = True
+        else:
+            self.game_won = True
+            for i in range(len(self.level)):
+                if 1 in self.level[i] or 2 in self.level[i]:
+                    self.game_won = False
 
     def draw(self):
         self.screen.fill('black')
@@ -1331,5 +1334,5 @@ class Misc:
         if self.game.game_won:
             pygame.draw.rect(self.game.screen, 'white', [50, 200, 600, 300], 0, 10)
             pygame.draw.rect(self.game.screen, 'dark gray', [70, 220, 560, 260], 0, 10)
-            gameover_text = self.game.font.render('Victory! Space bar to restart!', True, 'green')
+            gameover_text = self.game.font.render('Victory! Space bar to main menu!', True, 'green')
             self.game.screen.blit(gameover_text, (120, 300))
