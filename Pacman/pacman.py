@@ -43,4 +43,5 @@ def main():
         elif state == "game" and game is not None:
             game.run_game()
 
-main()
+if __name__ == "__main__":
+    main()

@@ -17,8 +17,6 @@ class Menu:
         self.level_select_2_img = pygame.image.load("Sprites/UI/Lvl_2.png")
         self.level_select_3_img = pygame.image.load("Sprites/UI/Lvl_3.png")
 
-
-
         #transforming images scale
         #multiplying img scale by 3
         self.title_img = pygame.transform.scale(self.title_img, (570, 150))
