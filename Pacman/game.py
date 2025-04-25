@@ -78,55 +78,76 @@ class Game:
             if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
+
             if event.type == pygame.KEYDOWN:
                 self.moving = True
-                if event.key == pygame.K_RIGHT:
+                key = event.key
+
+                if key == pygame.K_RIGHT:
                     self.pacman.direction_command = 0
-                if event.key == pygame.K_LEFT:
+                elif key == pygame.K_LEFT:
                     self.pacman.direction_command = 1
-                if event.key == pygame.K_UP:
+                elif key == pygame.K_UP:
                     self.pacman.direction_command = 2
-                if event.key == pygame.K_DOWN:
+                elif key == pygame.K_DOWN:
                     self.pacman.direction_command = 3
-                # IF GAME LOST: RESTART
-                if event.key == pygame.K_SPACE and self.game_over:
-                    self.powerup = False
-                    self.power_counter = 0
-                    self.lives -= 1
-                    self.startup_counter = 0
-                    self.pacman.x = 360
-                    self.pacman.y = 522
-                    self.pacman.direction = 0
-                    self.pacman.direction_command = 0
-                    self.blinky.x_pos = 45
-                    self.blinky.y_pos = 46
-                    self.blinky.direction = 0
-                    self.inky.x_pos = 352
-                    self.inky.y_pos = 305
-                    self.inky.direction = 2
-                    self.pinky.x_pos = 352
-                    self.pinky.y_pos = 345
-                    self.pinky.direction = 2
-                    self.clyde.x_pos = 352
-                    self.clyde.y_pos = 345
-                    self.clyde.direction = 2
-                    self.eaten_ghost = [False, False, False, False]
-                    self.blinky.dead = False
-                    self.inky.dead = False
-                    self.clyde.dead = False
-                    self.pinky.dead = False
-                    self.score = 0
-                    self.lives = 3
-                    self.game_over = False
 
-                #IF GAME WON: MAIN MENU
-                if event.key == pygame.K_SPACE and self.game_won:
-                    self.running = False
-                    self.exit_callback()
+                elif key == pygame.K_SPACE:
+                    if self.game_over:
+                        self.reset_game_state(restart=True)
+                    elif self.game_won:
+                        self.running = False
+                        self.exit_callback()
 
-                #SECRET BUTTON: "W" FOR AUTO WIN
-                if event.key == pygame.K_w:
+                elif key == pygame.K_w:
                     self.force_win = True
+
+            elif event.type == pygame.KEYUP:
+                self.moving = False
+                direction_map = {
+                    pygame.K_RIGHT: 0,
+                    pygame.K_LEFT: 1,
+                    pygame.K_UP: 2,
+                    pygame.K_DOWN: 3
+                }
+                if event.key in direction_map and self.pacman.direction_command == direction_map[event.key]:
+                    self.pacman.direction_command = self.pacman.direction
+
+    def reset_game_state(self, restart=False):
+        self.powerup = False
+        self.power_counter = 0
+        self.startup_counter = 0
+        self.pacman.x = 360
+        self.pacman.y = 522
+        self.pacman.direction = 0
+        self.pacman.direction_command = 0
+
+        ghost_reset = [
+            (self.blinky, 45, 46, 0),
+            (self.inky, 352, 305, 2),
+            (self.pinky, 352, 345, 2),
+            (self.clyde, 352, 345, 2)
+        ]
+
+        for ghost, x, y, direction in ghost_reset:
+            ghost.x_pos = x
+            ghost.y_pos = y
+            ghost.direction = direction
+            ghost.dead = False
+
+        self.eaten_ghost = [False] * 4
+
+        if restart:
+            self.lives -= 1
+            if self.lives <= 0:
+                self.game_over = True
+                self.moving = False
+            else:
+                self.game_over = False
+
+        self.score = 0
+        self.lives = 3 if not restart else self.lives
+        self.game_won = False
 
     def update(self):
         if self.startup_counter < 180 and not self.game_over and not self.game_won:
