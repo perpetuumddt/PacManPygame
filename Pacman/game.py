@@ -339,181 +339,33 @@ class Game:
 
     def check_pacman_ghosts_collision(self):
         player_rect = self.pacman.get_player_rect()
-        if not self.powerup:
-            if (player_rect.colliderect(self.blinky.rect) and not self.blinky.dead) or \
-                    (player_rect.colliderect(self.inky.rect) and not self.inky.dead) or \
-                    (player_rect.colliderect(self.pinky.rect) and not self.pinky.dead) or \
-                    (player_rect.colliderect(self.clyde.rect) and not self.clyde.dead):
-                if self.lives > 0:
-                    self.lives -= 1
-                    self.startup_counter = 0
-                    self.powerup = False
-                    self.power_counter = 0
-                    self.pacman.x = 360
-                    self.pacman.y = 522
-                    self.pacman.direction = 0
-                    self.pacman.direction_command = 0
-                    self.blinky.x_pos = 45
-                    self.blinky.y_pos = 46
-                    self.blinky.direction = 0
-                    self.inky.x_pos = 352
-                    self.inky.y_pos = 305
-                    self.inky.direction = 2
-                    self.pinky.x_pos = 352
-                    self.pinky.y_pos = 345
-                    self.pinky.direction = 2
-                    self.clyde.x_pos = 352
-                    self.clyde.y_pos = 345
-                    self.clyde.direction = 2
-                    self.eaten_ghost = [False, False, False, False]
-                    self.blinky.dead = False
-                    self.inky.dead = False
-                    self.clyde.dead = False
-                    self.pinky.dead = False
-                else:
-                    self.game_over = True
-                    self.moving = False
-                    self.startup_counter = 0
-        if self.powerup and player_rect.colliderect(self.blinky.rect) and self.eaten_ghost[0] and not self.blinky.dead:
+
+        def handle_life_loss():
             if self.lives > 0:
-                self.powerup = False
-                self.power_counter = 0
-                self.lives -= 1
-                self.startup_counter = 0
-                self.pacman.x = 360
-                self.pacman.y = 522
-                self.pacman.direction = 0
-                self.pacman.direction_command = 0
-                self.blinky.x_pos = 45
-                self.blinky.y_pos = 46
-                self.blinky.direction = 0
-                self.inky.x_pos = 352
-                self.inky.y_pos = 305
-                self.inky.direction = 2
-                self.pinky.x_pos = 352
-                self.pinky.y_pos = 345
-                self.pinky.direction = 2
-                self.clyde.x_pos = 352
-                self.clyde.y_pos = 345
-                self.clyde.direction = 2
-                self.eaten_ghost = [False, False, False, False]
-                self.blinky.dead = False
-                self.inky.dead = False
-                self.clyde.dead = False
-                self.pinky.dead = False
+                self.reset_game_state(restart=True)
             else:
                 self.game_over = True
                 self.moving = False
                 self.startup_counter = 0
-        if self.powerup and player_rect.colliderect(self.inky.rect) and self.eaten_ghost[1] and not self.inky.dead:
-            if self.lives > 0:
-                self.lives -= 1
-                self.startup_counter = 0
-                self.powerup = False
-                self.power_counter = 0
-                self.pacman.x = 360
-                self.pacman.y = 522
-                self.pacman.direction = 0
-                self.pacman.direction_command = 0
-                self.blinky.x_pos = 45
-                self.blinky.y_pos = 46
-                self.blinky.direction = 0
-                self.inky.x_pos = 352
-                self.inky.y_pos = 305
-                self.inky.direction = 2
-                self.pinky.x_pos = 352
-                self.pinky.y_pos = 345
-                self.pinky.direction = 2
-                self.clyde.x_pos = 352
-                self.clyde.y_pos = 345
-                self.clyde.direction = 2
-                self.eaten_ghost = [False, False, False, False]
-                self.blinky.dead = False
-                self.inky.dead = False
-                self.clyde.dead = False
-                self.pinky.dead = False
-            else:
-                self.game_over = True
-                self.moving = False
-                self.startup_counter = 0
-        if self.powerup and player_rect.colliderect(self.pinky.rect) and self.eaten_ghost[2] and not self.pinky.dead:
-            if self.lives > 0:
-                self.lives -= 1
-                self.startup_counter = 0
-                self.powerup = False
-                self.power_counter = 0
-                self.pacman.x = 360
-                self.pacman.y = 522
-                self.pacman.direction = 0
-                self.pacman.direction_command = 0
-                self.blinky.x_pos = 45
-                self.blinky.y_pos = 46
-                self.blinky.direction = 0
-                self.inky.x_pos = 352
-                self.inky.y_pos = 305
-                self.inky.direction = 2
-                self.pinky.x_pos = 352
-                self.pinky.y_pos = 345
-                self.pinky.direction = 2
-                self.clyde.x_pos = 352
-                self.clyde.y_pos = 345
-                self.clyde.direction = 2
-                self.eaten_ghost = [False, False, False, False]
-                self.blinky.dead = False
-                self.inky.dead = False
-                self.clyde.dead = False
-                self.pinky.dead = False
-            else:
-                self.game_over = True
-                self.moving = False
-                self.startup_counter = 0
-        if self.powerup and player_rect.colliderect(self.clyde.rect) and self.eaten_ghost[3] and not self.clyde.dead:
-            if self.lives > 0:
-                self.lives -= 1
-                self.startup_counter = 0
-                self.powerup = False
-                self.power_counter = 0
-                self.pacman.x = 360
-                self.pacman.y = 522
-                self.pacman.direction = 0
-                self.pacman.direction_command = 0
-                self.blinky.x_pos = 45
-                self.blinky.y_pos = 46
-                self.blinky.direction = 0
-                self.inky.x_pos = 352
-                self.inky.y_pos = 305
-                self.inky.direction = 2
-                self.pinky.x_pos = 352
-                self.pinky.y_pos = 345
-                self.pinky.direction = 2
-                self.clyde.x_pos = 352
-                self.clyde.y_pos = 345
-                self.clyde.direction = 2
-                self.eaten_ghost = [False, False, False, False]
-                self.blinky.dead = False
-                self.inky.dead = False
-                self.clyde.dead = False
-                self.pinky.dead = False
-            else:
-                self.game_over = True
-                self.moving = False
-                self.startup_counter = 0
-        if self.powerup and player_rect.colliderect(self.blinky.rect) and not self.blinky.dead and not self.eaten_ghost[0]:
-            self.blinky.dead = True
-            self.eaten_ghost[0] = True
-            self.score += (2 ** self.eaten_ghost.count(True)) * 100
-        if self.powerup and player_rect.colliderect(self.inky.rect) and not self.inky.dead and not self.eaten_ghost[1]:
-            self.inky.dead = True
-            self.eaten_ghost[1] = True
-            self.score += (2 ** self.eaten_ghost.count(True)) * 100
-        if self.powerup and player_rect.colliderect(self.pinky.rect) and not self.pinky.dead and not self.eaten_ghost[2]:
-            self.pinky.dead = True
-            self.eaten_ghost[2] = True
-            self.score += (2 ** self.eaten_ghost.count(True)) * 100
-        if self.powerup and player_rect.colliderect(self.clyde.rect) and not self.clyde.dead and not self.eaten_ghost[3]:
-            self.clyde.dead = True
-            self.eaten_ghost[3] = True
-            self.score += (2 ** self.eaten_ghost.count(True)) * 100
+
+        ghosts = [
+            (self.blinky, 0),
+            (self.inky, 1),
+            (self.pinky, 2),
+            (self.clyde, 3)
+        ]
+
+        for ghost, index in ghosts:
+            if not self.powerup and player_rect.colliderect(ghost.rect) and not ghost.dead:
+                handle_life_loss()
+            elif self.powerup and player_rect.colliderect(ghost.rect):
+                if self.eaten_ghost[index] and not ghost.dead:
+                    handle_life_loss()
+                elif not self.eaten_ghost[index] and not ghost.dead:
+                    ghost.dead = True
+                    self.eaten_ghost[index] = True
+                    self.score += (2 ** self.eaten_ghost.count(True)) * 100
+
 
 class Pacman:
     def __init__(self, game):
