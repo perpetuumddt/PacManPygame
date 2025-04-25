@@ -8,15 +8,19 @@ class Game:
         self.current_level = current_level
         self.force_win = False
         pygame.init()
+        # Screen
         self.height = 780
         self.width = 720
         self.screen = screen
         self.exit_callback = exit_callback
-        self.clock = pygame.time.Clock()
+        # Action processing
         self.timer = pygame.time.Clock()
         self.running = False
         self.fps = 60
+        # Misc
         self.font = pygame.font.Font('freesansbold.ttf', 20)
+        self.color = 'blue'
+        self.PI = math.pi
 
         #loading levels
         from boards import board1, board2, board3
@@ -27,8 +31,6 @@ class Game:
         elif current_level == 3:
             self.level = copy.deepcopy(board3)
 
-        self.color = 'blue'
-        self.PI = math.pi
         self.score = 0
         self.powerup = False
         self.power_counter = 0
@@ -40,6 +42,7 @@ class Game:
         self.game_over = False
         self.game_won = False
 
+        # Objects
         self.pacman = Pacman(self)
         self.board = Board(self)
         self.misc = Misc(self)
