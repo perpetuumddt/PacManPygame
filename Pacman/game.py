@@ -239,83 +239,35 @@ class Game:
 
         self.misc.draw()
 
-    def get_targets(self, blink_x, blink_y, ink_x, ink_y, pink_x, pink_y, clyd_x, clyd_y):
-        if self.pacman.x < 360:
-            runaway_x = 720
-        else:
-            runaway_x = 0
-        if self.pacman.y < 371:
-            runaway_y = 780
-        else:
-            runaway_y = 0
+    def get_targets(self):
+        def in_box(x, y, w1, w2, h1, h2):
+            return w1 < x < w2 and h1 < y < h2
+
+        runaway_x = 0 if self.pacman.x >= 360 else 720
+        runaway_y = 0 if self.pacman.y >= 371 else 780
         return_target = (253, 330)
-        if self.powerup:
-            if not self.blinky.dead and not self.eaten_ghost[0]:
-                blink_target = (runaway_x, runaway_y)
-            elif not self.blinky.dead and self.eaten_ghost[0]:
-                if 280 < blink_x < 440 and 300 < blink_y < 360:
-                    blink_target = (320, 82)
+
+        def decide_target(ghost, eaten, gx, gy, alt_target):
+            if self.powerup:
+                if not ghost.dead and not eaten:
+                    return alt_target
+                elif not ghost.dead and eaten:
+                    return (320, 82) if in_box(gx, gy, 280, 440, 300, 360) else (self.pacman.x, self.pacman.y)
                 else:
-                    blink_target = (self.pacman.x, self.pacman.y)
+                    return return_target
             else:
-                blink_target = return_target
-            if not self.inky.dead and not self.eaten_ghost[1]:
-                ink_target = (runaway_x, self.pacman.y)
-            elif not self.inky.dead and self.eaten_ghost[1]:
-                if 280 < ink_x < 440 and 300 < ink_y < 360:
-                    ink_target = (320, 82)
-                else:
-                    ink_target = (self.pacman.x, self.pacman.y)
-            else:
-                ink_target = return_target
-            if not self.pinky.dead:
-                pink_target = (self.pacman.x, runaway_y)
-            elif not self.pinky.dead and self.eaten_ghost[2]:
-                if 280 < pink_x < 440 and 300 < pink_y < 360:
-                    pink_target = (320, 82)
-                else:
-                    pink_target = (self.pacman.x, self.pacman.y)
-            else:
-                pink_target = return_target
-            if not self.clyde.dead and not self.eaten_ghost[3]:
-                clyd_target = (360, 371)
-            elif not self.clyde.dead and self.eaten_ghost[3]:
-                if 280 < clyd_x < 440 and 300 < clyd_y < 460:
-                    clyd_target = (320, 82)
-                else:
-                    clyd_target = (self.pacman.x, self.pacman.y)
-            else:
-                clyd_target = return_target
-        else:
-            if not self.blinky.dead:
-                if 272 < blink_x < 448 and 280 < blink_y < 413:
-                    blink_target = (320, 82)
-                else:
-                    blink_target = (self.pacman.x, self.pacman.y)
-            else:
-                blink_target = return_target
-            if not self.inky.dead:
-                if 272 < ink_x < 448 and 280 < ink_y < 413:
-                    ink_target = (320, 82)
-                else:
-                    ink_target = (self.pacman.x, self.pacman.y)
-            else:
-                ink_target = return_target
-            if not self.pinky.dead:
-                if 272 < pink_x < 448 and 280 < pink_y < 413:
-                    pink_target = (320, 82)
-                else:
-                    pink_target = (self.pacman.x, self.pacman.y)
-            else:
-                pink_target = return_target
-            if not self.clyde.dead:
-                if 272 < clyd_x < 448 and 280 < clyd_y < 413:
-                    clyd_target = (320, 82)
-                else:
-                    clyd_target = (self.pacman.x, self.pacman.y)
-            else:
-                clyd_target = return_target
-        return [blink_target, ink_target, pink_target, clyd_target]
+                if not ghost.dead:
+                    return (320, 82) if in_box(gx, gy, 272, 448, 280, 413) else (self.pacman.x, self.pacman.y)
+                return return_target
+
+        return [
+            decide_target(self.blinky, self.eaten_ghost[0], self.blinky.x_pos, self.blinky.y_pos,
+                          (runaway_x, runaway_y)),
+            decide_target(self.inky, self.eaten_ghost[1], self.inky.x_pos, self.inky.y_pos, (runaway_x, self.pacman.y)),
+            decide_target(self.pinky, self.eaten_ghost[2], self.pinky.x_pos, self.pinky.y_pos,
+                          (self.pacman.x, runaway_y)),
+            decide_target(self.clyde, self.eaten_ghost[3], self.clyde.x_pos, self.clyde.y_pos, (360, 371))
+        ]
 
     def check_pacman_ghosts_collision(self):
         player_rect = self.pacman.get_player_rect()
