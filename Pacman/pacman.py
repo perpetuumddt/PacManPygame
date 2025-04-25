@@ -4,17 +4,17 @@ from menu import Menu
 from game import Game
 
 pygame.init()
-pygame.mixer.init()  # Инициализация аудиосистемы
+pygame.mixer.init()
 
-# Создание экрана
+# Creating screen
 screen = pygame.display.set_mode((720, 780))
 pygame.display.set_caption("Pac-Man")
 
-# Функция для смены музыки
+# Play music track
 def play_music(track):
     pygame.mixer.music.load(track)
-    pygame.mixer.music.set_volume(0.5)
-    pygame.mixer.music.play(-1)  # Бесконечное воспроизведение
+    pygame.mixer.music.set_volume(0.2)
+    pygame.mixer.music.play(-1)  # Infinite play
 
 def main():
     state = "menu"
