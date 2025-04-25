@@ -4,40 +4,43 @@ from menu import Menu
 from game import Game
 
 pygame.init()
-pygame.mixer.init()  # Инициализация аудиосистемы
+pygame.mixer.init()
 
-# Создание экрана
+# Creating screen
 screen = pygame.display.set_mode((720, 780))
 pygame.display.set_caption("Pac-Man")
 
-# Функция для смены музыки
+# Play music track
 def play_music(track):
     pygame.mixer.music.load(track)
-    pygame.mixer.music.set_volume(0.5)
-    pygame.mixer.music.play(-1)  # Бесконечное воспроизведение
+    pygame.mixer.music.set_volume(0.2)
+    pygame.mixer.music.play(-1)  # Infinite play
 
 def main():
     state = "menu"
+    game = None
 
-    menu = Menu(screen, lambda: change_state("game"))
-    game = Game(screen, lambda: change_state("menu"))
+    def start_game(level):
+        nonlocal state, game
+        game = Game(screen, lambda: change_state("menu"), current_level=level)
+        state = "game"
+        play_music("Sounds/ni_idea.wav")
 
-    # Включаем музыку для запуска игры и меню
+    menu = Menu(screen, start_game)
+
     play_music("Sounds/persevere.mp3")
 
     def change_state(new_state):
         nonlocal state
         state = new_state
-        if state == "game":
-            play_music("Sounds/ni_idea.wav")  # Музыка для самой игры
-        elif state == "menu":
-            play_music("Sounds/persevere.mp3")  # Музыка при запуске и в меню
+        if state == "menu":
+            play_music("Sounds/persevere.mp3")
 
     running = True
     while running:
         if state == "menu":
-            menu.run()  # Запуск меню
-        elif state == "game":
-            game.run_game()  # Запуск игры
+            menu.run()
+        elif state == "game" and game is not None:
+            game.run_game()
 
 main()
