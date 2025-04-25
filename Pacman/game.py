@@ -97,7 +97,10 @@ class Game:
 
                 elif key == pygame.K_SPACE:
                     if self.game_over:
-                        self.reset_game_state(restart=True)
+                        self.lives = 3
+                        self.reload_level()
+                        self.reset_game_state(reset_lives=False)
+                        self.game_over = False
                     elif self.game_won:
                         self.running = False
                         self.exit_callback()
@@ -116,7 +119,7 @@ class Game:
                 if event.key in direction_map and self.pacman.direction_command == direction_map[event.key]:
                     self.pacman.direction_command = self.pacman.direction
 
-    def reset_game_state(self, restart=False):
+    def reset_game_state(self, reset_lives=True):
         self.powerup = False
         self.power_counter = 0
         self.startup_counter = 0
@@ -140,17 +143,30 @@ class Game:
 
         self.eaten_ghost = [False] * 4
 
-        if restart:
-            self.lives -= 1
-            if self.lives <= 0:
-                self.game_over = True
-                self.moving = False
-            else:
-                self.game_over = False
+        if reset_lives:
+            self.lives = 3
 
         self.score = 0
-        self.lives = 3 if not restart else self.lives
         self.game_won = False
+        self.force_win = False
+        self.moving = False
+
+    def reload_level(self):
+        from boards import board1, board2, board3
+        if self.current_level == 1:
+            self.level = copy.deepcopy(board1)
+        elif self.current_level == 2:
+            self.level = copy.deepcopy(board2)
+        elif self.current_level == 3:
+            self.level = copy.deepcopy(board3)
+
+    def lose_life(self):
+        self.lives -= 1
+        if self.lives <= 0:
+            self.game_over = True
+            self.moving = False
+        else:
+            self.reset_game_state(reset_lives=False)
 
     def update(self):
         # Delay before game starts
@@ -272,14 +288,6 @@ class Game:
     def check_pacman_ghosts_collision(self):
         player_rect = self.pacman.get_player_rect()
 
-        def handle_life_loss():
-            if self.lives > 0:
-                self.reset_game_state(restart=True)
-            else:
-                self.game_over = True
-                self.moving = False
-                self.startup_counter = 0
-
         ghosts = [
             (self.blinky, 0),
             (self.inky, 1),
@@ -289,10 +297,10 @@ class Game:
 
         for ghost, index in ghosts:
             if not self.powerup and player_rect.colliderect(ghost.rect) and not ghost.dead:
-                handle_life_loss()
+                self.lose_life()
             elif self.powerup and player_rect.colliderect(ghost.rect):
                 if self.eaten_ghost[index] and not ghost.dead:
-                    handle_life_loss()
+                    self.lose_life()
                 elif not self.eaten_ghost[index] and not ghost.dead:
                     ghost.dead = True
                     self.eaten_ghost[index] = True
