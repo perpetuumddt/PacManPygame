@@ -17,6 +17,8 @@ class Menu:
         self.level_select_2_img = pygame.image.load("Sprites/UI/Lvl_2.png")
         self.level_select_3_img = pygame.image.load("Sprites/UI/Lvl_3.png")
 
+
+
         #transforming images scale
         #multiplying img scale by 3
         self.title_img = pygame.transform.scale(self.title_img, (570, 150))
@@ -24,6 +26,9 @@ class Menu:
         self.level_select_1_img = pygame.transform.scale(self.level_select_1_img, (228, 87))
         self.level_select_2_img = pygame.transform.scale(self.level_select_2_img, (228, 87))
         self.level_select_3_img = pygame.transform.scale(self.level_select_3_img, (228, 87))
+        #Disabled buttons
+        self.level_select_2_img_disabled = self.make_grayscale(self.level_select_2_img)
+        self.level_select_3_img_disabled = self.make_grayscale(self.level_select_3_img)
         # adjusting image coordinates
         self.title_rect = self.title_img.get_rect(center=(self.screen.get_width() // 2, 100))
         # Button coordinates

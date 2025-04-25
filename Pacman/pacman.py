@@ -18,14 +18,11 @@ def play_music(track):
 
 def main():
     state = "menu"
-    current_level = 1
     game = None
 
     def start_game(level):
-        print(f"Starting game with level: {level}")
-        nonlocal state, current_level, game
-        current_level = level
-        game = Game(screen, lambda: change_state("menu"), current_level=current_level)
+        nonlocal state, game
+        game = Game(screen, lambda: change_state("menu"), current_level=level)
         state = "game"
         play_music("Sounds/ni_idea.wav")
 

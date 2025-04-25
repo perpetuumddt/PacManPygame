@@ -5,6 +5,7 @@ from menu import Menu
 
 class Game:
     def __init__(self, screen, exit_callback, current_level=1):
+        self.current_level = current_level
         pygame.init()
         self.height = 780
         self.width = 720
@@ -162,17 +163,17 @@ class Game:
                 self.clyde.dead = False
 
             if self.powerup:
-                ghost_speeds = [1, 1, 1, 1]
+                ghost_speeds = [0.5, 0.5, 0.5, 0.5]
             else:
-                ghost_speeds = [2, 2, 2, 2]
+                ghost_speeds = [1, 1, 1, 1]
             if self.eaten_ghost[0]:
-                ghost_speeds[0] = 2
+                ghost_speeds[0] = 1
             if self.eaten_ghost[1]:
-                ghost_speeds[1] = 2
+                ghost_speeds[1] = 1
             if self.eaten_ghost[2]:
-                ghost_speeds[2] = 2
+                ghost_speeds[2] = 1
             if self.eaten_ghost[3]:
-                ghost_speeds[3] = 2
+                ghost_speeds[3] = 1
             if self.blinky.dead:
                 ghost_speeds[0] = 4
             if self.inky.dead:

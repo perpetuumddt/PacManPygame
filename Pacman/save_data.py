@@ -10,5 +10,7 @@ def load_progress():
     return {"unlocked_level": 1}
 
 def save_progress(unlocked_level):
-    with open(SAVE_FILE, "w") as f:
-        json.dump({"unlocked_level": unlocked_level}, f)
+    current = load_progress()
+    if unlocked_level > current["unlocked_level"]:
+        with open(SAVE_FILE, "w") as f:
+            json.dump({"unlocked_level": unlocked_level}, f)
