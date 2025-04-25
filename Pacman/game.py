@@ -150,102 +150,79 @@ class Game:
         self.game_won = False
 
     def update(self):
+        # Delay before game starts
         if self.startup_counter < 180 and not self.game_over and not self.game_won:
             self.moving = False
             self.startup_counter += 1
         else:
             self.moving = True
 
+        # Core movement and game logic
         if self.moving:
             self.pacman.move()
 
-            # Отримуємо цілі для привидів
-            targets = self.get_targets(self.blinky.x_pos, self.blinky.y_pos,
-                                       self.inky.x_pos, self.inky.y_pos,
-                                       self.pinky.x_pos, self.pinky.y_pos,
-                                       self.clyde.x_pos, self.clyde.y_pos)
+            # Ghost movement logic
+            targets = self.get_targets()
+            for ghost, target in zip([self.blinky, self.inky, self.pinky, self.clyde], targets):
+                ghost.target = target
 
-            # Оновлюємо цілі для кожного привида
-            self.blinky.target = targets[0]
-            self.inky.target = targets[1]
-            self.pinky.target = targets[2]
-            self.clyde.target = targets[3]
+            self.check_pacman_ghosts_collision()  # Check collisions
 
-            self.check_pacman_ghosts_collision()
+            # Revive ghosts after they returned to the box
+            for ghost in [self.blinky, self.inky, self.pinky, self.clyde]:
+                if ghost.in_box and ghost.dead:
+                    ghost.dead = False
 
-            if self.blinky.in_box and self.blinky.dead:
-                self.blinky.dead = False
-            if self.inky.in_box and self.inky.dead:
-                self.inky.dead = False
-            if self.pinky.in_box and self.pinky.dead:
-                self.pinky.dead = False
-            if self.clyde.in_box and self.clyde.dead:
-                self.clyde.dead = False
+            self.update_ghost_speeds()
+            self.update_ghost_movement()
 
-            if self.powerup:
-                ghost_speeds = [0.5, 0.5, 0.5, 0.5]
-            else:
-                ghost_speeds = [1, 1, 1, 1]
-            if self.eaten_ghost[0]:
-                ghost_speeds[0] = 1
-            if self.eaten_ghost[1]:
-                ghost_speeds[1] = 1
-            if self.eaten_ghost[2]:
-                ghost_speeds[2] = 1
-            if self.eaten_ghost[3]:
-                ghost_speeds[3] = 1
-            if self.blinky.dead:
-                ghost_speeds[0] = 4
-            if self.inky.dead:
-                ghost_speeds[1] = 4
-            if self.pinky.dead:
-                ghost_speeds[2] = 4
-            if self.clyde.dead:
-                ghost_speeds[3] = 4
-
-            self.game_won = True
-            for i in range(len(self.level)):
-                if 1 in self.level[i] or 2 in self.level[i]:
-                    self.game_won = False
-
-            self.blinky.speed = ghost_speeds[0]
-            self.inky.speed = ghost_speeds[1]
-            self.pinky.speed = ghost_speeds[2]
-            self.clyde.speed = ghost_speeds[3]
-
-            if not self.blinky.dead and not self.blinky.in_box:
-                self.blinky.move_blinky()
-            else:
-                self.blinky.move_clyde()
-            if not self.pinky.dead and not self.pinky.in_box:
-                self.pinky.move_pinky()
-            else:
-                self.pinky.move_clyde()
-            if not self.inky.dead and not self.inky.in_box:
-                self.inky.move_inky()
-            else:
-                self.inky.move_clyde()
-
-            self.clyde.move_clyde()
-
+        # Update all game objects
         self.pacman.update()
-        self.blinky.update()
-        self.inky.update()
-        self.pinky.update()
-        self.clyde.update()
+        for ghost in [self.blinky, self.inky, self.pinky, self.clyde]:
+            ghost.update()
         self.board.update()
         self.misc.update()
 
-        #saving progress
-        from save_data import save_progress
-
+        # Determine if player has won the level
+        self.game_won = True
+        for row in self.level:
+            if 1 in row or 2 in row:
+                self.game_won = False
+                break
         if self.force_win:
             self.game_won = True
-        else:
-            self.game_won = True
-            for i in range(len(self.level)):
-                if 1 in self.level[i] or 2 in self.level[i]:
-                    self.game_won = False
+
+        # Save progress if the level is completed
+        if self.game_won and self.current_level < 3:
+            from save_data import save_progress
+            save_progress(self.current_level + 1)
+
+    def update_ghost_speeds(self):
+        base_speed = 0.5 if self.powerup else 1
+        ghost_speeds = [base_speed] * 4
+
+        for i, ghost in enumerate([self.blinky, self.inky, self.pinky, self.clyde]):
+            if self.eaten_ghost[i] or not self.powerup:
+                ghost_speeds[i] = 1
+            if ghost.dead:
+                ghost_speeds[i] = 4
+
+        self.blinky.speed, self.inky.speed, self.pinky.speed, self.clyde.speed = ghost_speeds
+
+    def update_ghost_movement(self):
+        ghosts = [self.blinky, self.inky, self.pinky, self.clyde]
+        for ghost in ghosts:
+            if not ghost.dead and not ghost.in_box:
+                if ghost == self.blinky:
+                    ghost.move_blinky()
+                elif ghost == self.inky:
+                    ghost.move_inky()
+                elif ghost == self.pinky:
+                    ghost.move_pinky()
+                elif ghost == self.clyde:
+                    ghost.move_clyde()
+            else:
+                ghost.move_clyde()
 
     def draw(self):
         self.screen.fill('black')
