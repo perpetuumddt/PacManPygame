@@ -1,5 +1,10 @@
+import sys
+import os
 import pytest
 import pygame
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from game import Game
 
 #fixture creates a new instance of the game class before each test
