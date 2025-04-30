@@ -1,0 +1,12 @@
+pygame
+pygame.mixer
+pytest
+flake8
+pytest-html
+flake8-html
+numpy
+math
+json
+copy
+sys
+os
