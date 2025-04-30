@@ -1,0 +1,37 @@
+name: Tests
+
+on: [push, pull_request]  # Launch on push or pull request
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4  # Clone repository
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt  # Installing requirements
+
+    - name: Run pytest with coverage
+      run: |
+        pytest --cov=. --cov-report=xml --html=test-report.html # Testing and creating report
+
+    - name: Run flake8
+      run: |
+        flake8 --format=html --htmldir=flake8-report  # Checking style
+
+    - name: Upload test results
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: test-results
+        path: |  # Saving report
+          test-report.html
+          flake8-report/
+          coverage.xml
