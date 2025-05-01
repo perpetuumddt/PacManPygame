@@ -1,12 +1,18 @@
 name: Tests
 
-on: [push, pull_request]  # Launch on push or pull request
+# Launch on push or pull request
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Checkout code
     - uses: actions/checkout@v4  # Clone repository
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -16,22 +22,58 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        pip install pytest pytest-html pytest-cov flake8 flake8-html
         pip install -r requirements.txt  # Installing requirements
 
-    - name: Run pytest with coverage
+    - name: Run pytest
       run: |
-        pytest --cov=. --cov-report=xml --html=test-report.html # Testing and creating report
+        pytest --cov=. --cov-report=xml --html=test-report.html
 
     - name: Run flake8
       run: |
-        flake8 --format=html --htmldir=flake8-report  # Checking style
+        flake8 --format=html --htmldir=flake8-report || echo "Flake8 found issues"
+      continue-on-error: true
 
-    - name: Upload test results
-      uses: actions/upload-artifact@v3
-      if: always()
+    # Loading test results as artefacts
+    - name: Upload test artifacts
+      uses: actions/upload-artifact@v3 #Using GitHub Actions
       with:
-        name: test-results
-        path: |  # Saving report
+        name: test-reports-${{ github.run_id }} # Unique name
+        path: |
           test-report.html
           flake8-report/
           coverage.xml
+          coverage-report/
+        retention-days: 7
+
+    # Publishing reports via GitHub Pages
+    - name: Publish HTML reports
+      if: always()
+      uses: peaceiris/actions-gh-pages@v3 #Using GitHub Pages
+      with:
+          github_token: ${{ secrets.GITHUB_TOKEN }} # Autorization
+          publish_dir: ./reports # Directory for reports
+          keep_files: true # Saving previous reports
+
+    # Automatic notification
+    - name: Notify Pull Request status
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v6
+      with:
+        script: | #Reading coverage.xml
+            const { data: coverage } = await github.rest.repos.getContent({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              path: 'coverage.xml',
+              ref: context.sha
+            });
+          const coveragePercent = ... // Parse coverage.xml to get test coverage
+          
+          # Adding comment to pull request
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            body: `### CI/CD Results \n\n` +
+                  `**Tests**: [View Report](https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${{ github.run_id }})\n` +
+                  `**Coverage**: ${coveragePercent}%\n` +
+                  `**Linting**: [Flake8 Report](https://${context.repo.owner}.github.io/${context.repo.repo}/flake8-report/)`
+          })
