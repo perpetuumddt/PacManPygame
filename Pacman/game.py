@@ -310,7 +310,12 @@ class Game:
 class Pacman:
     def __init__(self, game):
         self.game = game
-        self.images = [pygame.transform.scale(pygame.image.load(f'Sprites/Entities/Character/Pacman{i}.png'), (33, 33)) for i in range(1, 5)]
+
+        import os
+        sprite_path = os.path.join(os.path.dirname(__file__), '..', 'Sprites', 'Entities', 'Character',
+                                   f'Pacman{i}.png')
+        self.images = [pygame.image.load(sprite_path) for i in range(1, 5)]
+
         self.x = 360
         self.y = 522
         self.direction = 0
