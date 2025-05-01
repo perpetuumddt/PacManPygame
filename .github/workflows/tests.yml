@@ -14,6 +14,7 @@ jobs:
     steps:
     - name: Checkout code
     - uses: actions/checkout@v4  # Clone repository
+
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
@@ -29,6 +30,13 @@ jobs:
       run: |
         pytest --cov=. --cov-report=xml --html=test-report.html
 
+    # Generate HTML coverage report
+    - name: Generate coverage report
+      run: |
+        coverage html
+        mkdir -p reports  # Створюємо папку для всіх звітів
+        mv htmlcov coverage-report  # Перейменовуємо папку зі звітом
+        mv coverage-report reports/  # Переносимо у папку reports
     - name: Run flake8
       run: |
         flake8 --format=html --htmldir=flake8-report || echo "Flake8 found issues"
@@ -48,7 +56,6 @@ jobs:
 
     # Publishing reports via GitHub Pages
     - name: Publish HTML reports
-      if: always()
       uses: peaceiris/actions-gh-pages@v3 #Using GitHub Pages
       with:
           github_token: ${{ secrets.GITHUB_TOKEN }} # Autorization
