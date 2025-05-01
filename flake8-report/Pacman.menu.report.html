@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>flake8 violations: Pacman/menu.py</title>
+      <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="styles.css">
+<script>
+function bindHandler(link) {
+   var code = link.getAttribute('data-code');
+   var key = location.pathname + '#' + code;
+
+   var ul = link.parentNode.querySelector('.details');
+   if (sessionStorage[key] != 'open') {
+      ul.style.display = 'none';
+   }
+   link.addEventListener('click', function (event) {
+      if (!ul.style.display || ul.style.display == 'none') {
+         ul.style.display = 'block';
+         sessionStorage[key] = 'open';
+      } else {
+         ul.style.display = 'none';
+         sessionStorage[key] = 'closed';
+      }
+   });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+   var links = document.querySelectorAll('#index > li > a');
+   for (var i = 0; i < links.length; i++) {
+      bindHandler(links[i]);
+   }
+});
+</script>
+   </head>
+   <body>
+      <div id="masthead" class="sev-2"></div>
+      <div id="page">
+         <p id="srclink">
+            <a title="View full annotated source"
+               href="Pacman.menu.source.html">
+               <img src="file.svg" alt="&#x2261;">
+            </a></p>
+         <h1>
+            <a href="index.html">
+               <img src="back.svg" alt="&#x2B05;">
+               Pacman/menu.py
+            </a>
+         </h1>
+
+         <ul id="index">
+         
+         <li>
+            <a data-code="E501">
+               <span class="count sev-2">
+                  21
+               </span>
+               <strong>E501:</strong> line too long (80 > 79 characters)
+               
+                  (and 11 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Line too long (80 > 79 characters):</p>
+               
+               <a href="Pacman.menu.source.html#l14">
+                  <tt><i>14</i>         <span class="bp">self</span><span class="o">.</span><span class="n">start_button_img</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;Sprites/UI/Button_Start.png&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (88 > 79 characters):</p>
+               
+               <a href="Pacman.menu.source.html#l23">
+                  <tt><i>23</i>         <span class="bp">self</span><span class="o">.</span><span class="n">start_button_img</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start_button_img</span><span class="p">,</span> <span class="p">(</span><span class="mi">228</span><span class="p">,</span> <span class="mi">87</span><span class="p">))</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (92 > 79 characters):</p>
+               
+               <a href="Pacman.menu.source.html#l24">
+                  <tt><i>24</i>         <span class="bp">self</span><span class="o">.</span><span class="n">level_select_1_img</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">level_select_1_img</span><span class="p">,</span> <span class="p">(</span><span class="mi">228</span><span class="p">,</span> <span class="mi">87</span><span class="p">))</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (92 > 79 characters):</p>
+               
+               <a href="Pacman.menu.source.html#l25">
+                  <tt><i>25</i>         <span class="bp">self</span><span class="o">.</span><span class="n">level_select_2_img</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">level_select_2_img</span><span class="p">,</span> <span class="p">(</span><span class="mi">228</span><span class="p">,</span> <span class="mi">87</span><span class="p">))</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (92 > 79 characters):</p>
+               
+               <a href="Pacman.menu.source.html#l26">
+                  <tt><i>26</i>         <span class="bp">self</span><span class="o">.</span><span class="n">level_select_3_img</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">level_select_3_img</span><span class="p">,</span> <span class="p">(</span><span class="mi">228</span><span class="p">,</span> <span class="mi">87</span><span class="p">))</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (87 > 79 characters):</p>
+               
+               <a href="Pacman.menu.source.html#l28">
+                  <tt><i>28</i>         <span class="bp">self</span><span class="o">.</span><span class="n">level_select_2_img_disabled</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">make_grayscale</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">level_select_2_img</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (87 > 79 characters):</p>
+               
+               <a href="Pacman.menu.source.html#l29">
+                  <tt><i>29</i>         <span class="bp">self</span><span class="o">.</span><span class="n">level_select_3_img_disabled</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">make_grayscale</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">level_select_3_img</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (93 > 79 characters):</p>
+               
+               <a href="Pacman.menu.source.html#l31">
+                  <tt><i>31</i>         <span class="bp">self</span><span class="o">.</span><span class="n">title_rect</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">title_img</span><span class="o">.</span><span class="n">get_rect</span><span class="p">(</span><span class="n">center</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">screen</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (82 > 79 characters):</p>
+               
+               <a href="Pacman.menu.source.html#l33">
+                  <tt><i>33</i>         <span class="bp">self</span><span class="o">.</span><span class="n">start_button_rect</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_button_img</span><span class="o">.</span><span class="n">get_rect</span><span class="p">(</span><span class="n">center</span><span class="o">=</span><span class="p">(</span><span class="mi">360</span><span class="p">,</span> <span class="mi">360</span><span class="p">))</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (86 > 79 characters):</p>
+               
+               <a href="Pacman.menu.source.html#l34">
+                  <tt><i>34</i>         <span class="bp">self</span><span class="o">.</span><span class="n">level_select_1_rect</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_select_1_img</span><span class="o">.</span><span class="n">get_rect</span><span class="p">(</span><span class="n">center</span><span class="o">=</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span> <span class="mi">500</span><span class="p">))</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (86 > 79 characters):</p>
+               
+               <a href="Pacman.menu.source.html#l35">
+                  <tt><i>35</i>         <span class="bp">self</span><span class="o">.</span><span class="n">level_select_2_rect</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_select_2_img</span><span class="o">.</span><span class="n">get_rect</span><span class="p">(</span><span class="n">center</span><span class="o">=</span><span class="p">(</span><span class="mi">360</span><span class="p">,</span> <span class="mi">500</span><span class="p">))</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (86 > 79 characters):</p>
+               
+               <a href="Pacman.menu.source.html#l36">
+                  <tt><i>36</i>         <span class="bp">self</span><span class="o">.</span><span class="n">level_select_3_rect</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_select_3_img</span><span class="o">.</span><span class="n">get_rect</span><span class="p">(</span><span class="n">center</span><span class="o">=</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span> <span class="mi">500</span><span class="p">))</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (99 > 79 characters):</p>
+               
+               <a href="Pacman.menu.source.html#l58">
+                  <tt><i>58</i>             <span class="bp">self</span><span class="o">.</span><span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start_button_img</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_button_rect</span><span class="o">.</span><span class="n">topleft</span><span class="p">)</span>  <span class="c1"># Start button</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (87 > 79 characters):</p>
+               
+               <a href="Pacman.menu.source.html#l61">
+                  <tt><i>61</i>             <span class="bp">self</span><span class="o">.</span><span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">level_select_1_img</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_select_1_rect</span><span class="o">.</span><span class="n">topleft</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (91 > 79 characters):</p>
+               
+               <a href="Pacman.menu.source.html#l63">
+                  <tt><i>63</i>                 <span class="bp">self</span><span class="o">.</span><span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">level_select_2_img</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_select_2_rect</span><span class="o">.</span><span class="n">topleft</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (100 > 79 characters):</p>
+               
+               <a href="Pacman.menu.source.html#l65">
+                  <tt><i>65</i>                 <span class="bp">self</span><span class="o">.</span><span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">level_select_2_img_disabled</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_select_2_rect</span><span class="o">.</span><span class="n">topleft</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (91 > 79 characters):</p>
+               
+               <a href="Pacman.menu.source.html#l67">
+                  <tt><i>67</i>                 <span class="bp">self</span><span class="o">.</span><span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">level_select_3_img</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_select_3_rect</span><span class="o">.</span><span class="n">topleft</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (100 > 79 characters):</p>
+               
+               <a href="Pacman.menu.source.html#l69">
+                  <tt><i>69</i>                 <span class="bp">self</span><span class="o">.</span><span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">level_select_3_img_disabled</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_select_3_rect</span><span class="o">.</span><span class="n">topleft</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (90 > 79 characters):</p>
+               
+               <a href="Pacman.menu.source.html#l82">
+                  <tt><i>82</i>                     <span class="k">if</span> <span class="n">unlocked</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_select_2_rect</span><span class="o">.</span><span class="n">collidepoint</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">pos</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (90 > 79 characters):</p>
+               
+               <a href="Pacman.menu.source.html#l85">
+                  <tt><i>85</i>                     <span class="k">if</span> <span class="n">unlocked</span> <span class="o">&gt;=</span> <span class="mi">3</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_select_3_rect</span><span class="o">.</span><span class="n">collidepoint</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">pos</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (83 > 79 characters):</p>
+               
+               <a href="Pacman.menu.source.html#l89">
+                  <tt><i>89</i>                         <span class="bp">self</span><span class="o">.</span><span class="n">start_game_callback</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">selected_level</span><span class="p">)</span>  <span class="c1"># Start game</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E265">
+               <span class="count sev-2">
+                  5
+               </span>
+               <strong>E265:</strong> block comment should start with '# '
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="Pacman.menu.source.html#l20">
+                  <tt><i>20</i>         <span class="c1">#transforming images scale</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="Pacman.menu.source.html#l21">
+                  <tt><i>21</i>         <span class="c1">#multiplying img scale by 3</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="Pacman.menu.source.html#l27">
+                  <tt><i>27</i>         <span class="c1">#Disabled buttons</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="Pacman.menu.source.html#l59">
+                  <tt><i>59</i>             <span class="c1">#Level select buttons.</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="Pacman.menu.source.html#l60">
+                  <tt><i>60</i>             <span class="c1">#Checks unlocked levels</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E302">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E302:</strong> expected 2 blank lines, found 1
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="Pacman.menu.source.html#l5">
+                  <tt><i>5</i> <span class="k">class</span><span class="w"> </span><span class="nc">Menu</span><span class="p">:</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="W292">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>W292:</strong> no newline at end of file
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="Pacman.menu.source.html#l90">
+                  <tt><i>90</i>                         <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         </ul>
+      </div>
+   </body>
+</html>

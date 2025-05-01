@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>flake8 violations: Pacman/game.py</title>
+      <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="styles.css">
+<script>
+function bindHandler(link) {
+   var code = link.getAttribute('data-code');
+   var key = location.pathname + '#' + code;
+
+   var ul = link.parentNode.querySelector('.details');
+   if (sessionStorage[key] != 'open') {
+      ul.style.display = 'none';
+   }
+   link.addEventListener('click', function (event) {
+      if (!ul.style.display || ul.style.display == 'none') {
+         ul.style.display = 'block';
+         sessionStorage[key] = 'open';
+      } else {
+         ul.style.display = 'none';
+         sessionStorage[key] = 'closed';
+      }
+   });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+   var links = document.querySelectorAll('#index > li > a');
+   for (var i = 0; i < links.length; i++) {
+      bindHandler(links[i]);
+   }
+});
+</script>
+   </head>
+   <body>
+      <div id="masthead" class="sev-1"></div>
+      <div id="page">
+         <p id="srclink">
+            <a title="View full annotated source"
+               href="Pacman.game.source.html">
+               <img src="file.svg" alt="&#x2261;">
+            </a></p>
+         <h1>
+            <a href="index.html">
+               <img src="back.svg" alt="&#x2B05;">
+               Pacman/game.py
+            </a>
+         </h1>
+
+         <ul id="index">
+         
+         <li>
+            <a data-code="F401">
+               <span class="count sev-1">
+                  1
+               </span>
+               <strong>F401:</strong> 'menu.Menu' imported but unused
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="Pacman.game.source.html#l4">
+                  <tt><i>4</i> <span class="kn">from</span><span class="w"> </span><span class="nn">menu</span><span class="w"> </span><span class="kn">import</span> <span class="n">Menu</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E501">
+               <span class="count sev-2">
+                  102
+               </span>
+               <strong>E501:</strong> line too long (200 > 79 characters)
+               
+                  (and 41 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Line too long (200 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l52">
+                  <tt><i>52</i>         <span class="bp">self</span><span class="o">.</span><span class="n">blinky</span> <span class="o">=</span> <span class="n">Ghost</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost</span><span class="o">.</span><span class="n">blinky_x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost</span><span class="o">.</span><span class="n">blinky_y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost</span><span class="o">.</span><span class="n">targets</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost</span><span class="o">.</span><span class="n">ghost_speed</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost</span><span class="o">.</span><span class="n">blinky_image</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost</span><span class="o">.</span><span class="n">blinky_direction</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost</span><span class="o">.</span><span class="n">blinky_dead</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (188 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l54">
+                  <tt><i>54</i>         <span class="bp">self</span><span class="o">.</span><span class="n">inky</span> <span class="o">=</span> <span class="n">Ghost</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost</span><span class="o">.</span><span class="n">inky_x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost</span><span class="o">.</span><span class="n">inky_y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost</span><span class="o">.</span><span class="n">targets</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost</span><span class="o">.</span><span class="n">ghost_speed</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost</span><span class="o">.</span><span class="n">inky_image</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost</span><span class="o">.</span><span class="n">inky_direction</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost</span><span class="o">.</span><span class="n">inky_dead</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (194 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l56">
+                  <tt><i>56</i>         <span class="bp">self</span><span class="o">.</span><span class="n">pinky</span> <span class="o">=</span> <span class="n">Ghost</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost</span><span class="o">.</span><span class="n">pinky_x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost</span><span class="o">.</span><span class="n">pinky_y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost</span><span class="o">.</span><span class="n">targets</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost</span><span class="o">.</span><span class="n">ghost_speed</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost</span><span class="o">.</span><span class="n">pinky_image</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost</span><span class="o">.</span><span class="n">pinky_direction</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost</span><span class="o">.</span><span class="n">pinky_dead</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (194 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l58">
+                  <tt><i>58</i>         <span class="bp">self</span><span class="o">.</span><span class="n">clyde</span> <span class="o">=</span> <span class="n">Ghost</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost</span><span class="o">.</span><span class="n">clyde_x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost</span><span class="o">.</span><span class="n">clyde_y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost</span><span class="o">.</span><span class="n">targets</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost</span><span class="o">.</span><span class="n">ghost_speed</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost</span><span class="o">.</span><span class="n">clyde_image</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost</span><span class="o">.</span><span class="n">clyde_direction</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost</span><span class="o">.</span><span class="n">clyde_dead</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (108 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l119">
+                  <tt><i>119</i>                 <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span> <span class="ow">in</span> <span class="n">direction_map</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">pacman</span><span class="o">.</span><span class="n">direction_command</span> <span class="o">==</span> <span class="n">direction_map</span><span class="p">[</span><span class="n">event</span><span class="o">.</span><span class="n">key</span><span class="p">]:</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (83 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l173">
+                  <tt><i>173</i>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">startup_counter</span> <span class="o">&lt;</span> <span class="mi">180</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">game_over</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">game_won</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (96 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l185">
+                  <tt><i>185</i>             <span class="k">for</span> <span class="n">ghost</span><span class="p">,</span> <span class="n">target</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">blinky</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">inky</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pinky</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">clyde</span><span class="p">],</span> <span class="n">targets</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (84 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l223">
+                  <tt><i>223</i>         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ghost</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">blinky</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">inky</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pinky</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">clyde</span><span class="p">]):</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (93 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l229">
+                  <tt><i>229</i>         <span class="bp">self</span><span class="o">.</span><span class="n">blinky</span><span class="o">.</span><span class="n">speed</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">inky</span><span class="o">.</span><span class="n">speed</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pinky</span><span class="o">.</span><span class="n">speed</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">clyde</span><span class="o">.</span><span class="n">speed</span> <span class="o">=</span> <span class="n">ghost_speeds</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (110 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l271">
+                  <tt><i>271</i>                     <span class="k">return</span> <span class="p">(</span><span class="mi">320</span><span class="p">,</span> <span class="mi">82</span><span class="p">)</span> <span class="k">if</span> <span class="n">in_box</span><span class="p">(</span><span class="n">gx</span><span class="p">,</span> <span class="n">gy</span><span class="p">,</span> <span class="mi">280</span><span class="p">,</span> <span class="mi">440</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">360</span><span class="p">)</span> <span class="k">else</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pacman</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pacman</span><span class="o">.</span><span class="n">y</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (110 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l276">
+                  <tt><i>276</i>                     <span class="k">return</span> <span class="p">(</span><span class="mi">320</span><span class="p">,</span> <span class="mi">82</span><span class="p">)</span> <span class="k">if</span> <span class="n">in_box</span><span class="p">(</span><span class="n">gx</span><span class="p">,</span> <span class="n">gy</span><span class="p">,</span> <span class="mi">272</span><span class="p">,</span> <span class="mi">448</span><span class="p">,</span> <span class="mi">280</span><span class="p">,</span> <span class="mi">413</span><span class="p">)</span> <span class="k">else</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pacman</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pacman</span><span class="o">.</span><span class="n">y</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (97 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l280">
+                  <tt><i>280</i>             <span class="n">decide_target</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">blinky</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">eaten_ghost</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">blinky</span><span class="o">.</span><span class="n">x_pos</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">blinky</span><span class="o">.</span><span class="n">y_pos</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (120 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l282">
+                  <tt><i>282</i>             <span class="n">decide_target</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inky</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">eaten_ghost</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">inky</span><span class="o">.</span><span class="n">x_pos</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">inky</span><span class="o">.</span><span class="n">y_pos</span><span class="p">,</span> <span class="p">(</span><span class="n">runaway_x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pacman</span><span class="o">.</span><span class="n">y</span><span class="p">)),</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (94 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l283">
+                  <tt><i>283</i>             <span class="n">decide_target</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pinky</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">eaten_ghost</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">pinky</span><span class="o">.</span><span class="n">x_pos</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pinky</span><span class="o">.</span><span class="n">y_pos</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (106 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l285">
+                  <tt><i>285</i>             <span class="n">decide_target</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">clyde</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">eaten_ghost</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">clyde</span><span class="o">.</span><span class="n">x_pos</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">clyde</span><span class="o">.</span><span class="n">y_pos</span><span class="p">,</span> <span class="p">(</span><span class="mi">360</span><span class="p">,</span> <span class="mi">371</span><span class="p">))</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (91 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l299">
+                  <tt><i>299</i>             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">powerup</span> <span class="ow">and</span> <span class="n">player_rect</span><span class="o">.</span><span class="n">colliderect</span><span class="p">(</span><span class="n">ghost</span><span class="o">.</span><span class="n">rect</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">ghost</span><span class="o">.</span><span class="n">dead</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (141 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l313">
+                  <tt><i>313</i>         <span class="bp">self</span><span class="o">.</span><span class="n">images</span> <span class="o">=</span> <span class="p">[</span><span class="n">pygame</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">pygame</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Sprites/Entities/Character/Pacman</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">.png&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">33</span><span class="p">,</span> <span class="mi">33</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)]</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (83 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l359">
+                  <tt><i>359</i>             <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">images</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">//</span> <span class="mi">5</span><span class="p">],</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">))</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (119 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l361">
+                  <tt><i>361</i>             <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">pygame</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">images</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">//</span> <span class="mi">5</span><span class="p">],</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">))</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (112 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l363">
+                  <tt><i>363</i>             <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">pygame</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">images</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">//</span> <span class="mi">5</span><span class="p">],</span> <span class="mi">90</span><span class="p">),</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">))</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (113 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l365">
+                  <tt><i>365</i>             <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">pygame</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">images</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">//</span> <span class="mi">5</span><span class="p">],</span> <span class="mi">270</span><span class="p">),</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">))</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (90 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l368">
+                  <tt><i>368</i>     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">game</span><span class="p">,</span> <span class="n">x_coord</span><span class="p">,</span> <span class="n">y_coord</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">img</span><span class="p">,</span> <span class="n">direct</span><span class="p">,</span> <span class="n">dead</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (152 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l370">
+                  <tt><i>370</i>         <span class="bp">self</span><span class="o">.</span><span class="n">blinky_image</span> <span class="o">=</span> <span class="p">[</span><span class="n">pygame</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">pygame</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Sprites/Entities/Enemies/Red/GhostRed</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">.png&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">33</span><span class="p">,</span> <span class="mi">33</span><span class="p">))</span>  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)]</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (153 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l371">
+                  <tt><i>371</i>         <span class="bp">self</span><span class="o">.</span><span class="n">pinky_image</span> <span class="o">=</span> <span class="p">[</span><span class="n">pygame</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">pygame</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Sprites/Entities/Enemies/Pink/GhostPink</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">.png&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">33</span><span class="p">,</span> <span class="mi">33</span><span class="p">))</span>  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)]</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (152 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l372">
+                  <tt><i>372</i>         <span class="bp">self</span><span class="o">.</span><span class="n">inky_image</span> <span class="o">=</span> <span class="p">[</span><span class="n">pygame</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">pygame</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Sprites/Entities/Enemies/Blue/GhostBlue</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">.png&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">33</span><span class="p">,</span> <span class="mi">33</span><span class="p">))</span>  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)]</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (157 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l373">
+                  <tt><i>373</i>         <span class="bp">self</span><span class="o">.</span><span class="n">clyde_image</span> <span class="o">=</span> <span class="p">[</span><span class="n">pygame</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">pygame</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Sprites/Entities/Enemies/Orange/GhostOrange</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">.png&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">33</span><span class="p">,</span> <span class="mi">33</span><span class="p">))</span>  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)]</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (159 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l374">
+                  <tt><i>374</i>         <span class="bp">self</span><span class="o">.</span><span class="n">spooked_image</span> <span class="o">=</span> <span class="p">[</span><span class="n">pygame</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">pygame</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Sprites/Entities/Enemies/Scared/GhostScared</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">.png&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">33</span><span class="p">,</span> <span class="mi">33</span><span class="p">))</span>  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)]</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (152 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l375">
+                  <tt><i>375</i>         <span class="bp">self</span><span class="o">.</span><span class="n">dead_image</span> <span class="o">=</span> <span class="p">[</span><span class="n">pygame</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">pygame</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Sprites/Entities/Enemies/Dead/GhostDead</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">.png&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">33</span><span class="p">,</span> <span class="mi">33</span><span class="p">))</span>  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)]</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (191 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l388">
+                  <tt><i>388</i>         <span class="bp">self</span><span class="o">.</span><span class="n">targets</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">pacman</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">pacman</span><span class="o">.</span><span class="n">y</span><span class="p">),</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">pacman</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">pacman</span><span class="o">.</span><span class="n">y</span><span class="p">),</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">pacman</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">pacman</span><span class="o">.</span><span class="n">y</span><span class="p">),</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">pacman</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">pacman</span><span class="o">.</span><span class="n">y</span><span class="p">)]</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (83 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l411">
+                  <tt><i>411</i>         <span class="bp">self</span><span class="o">.</span><span class="n">rect</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">Rect</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">center_x</span> <span class="o">-</span> <span class="mi">13</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">center_y</span> <span class="o">-</span> <span class="mi">13</span><span class="p">),</span> <span class="p">(</span><span class="mi">26</span><span class="p">,</span> <span class="mi">26</span><span class="p">))</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (129 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l431">
+                  <tt><i>431</i>         <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">powerup</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">dead</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">eaten_ghost</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">]</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">powerup</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">dead</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (105 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l434">
+                  <tt><i>434</i>                     <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">blinky_image</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">//</span> <span class="mi">5</span><span class="p">],</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_pos</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_pos</span><span class="p">))</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (103 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l436">
+                  <tt><i>436</i>                     <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inky_image</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">//</span> <span class="mi">5</span><span class="p">],</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_pos</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_pos</span><span class="p">))</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (104 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l438">
+                  <tt><i>438</i>                     <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pinky_image</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">//</span> <span class="mi">5</span><span class="p">],</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_pos</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_pos</span><span class="p">))</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (104 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l440">
+                  <tt><i>440</i>                     <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">clyde_image</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">//</span> <span class="mi">5</span><span class="p">],</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_pos</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_pos</span><span class="p">))</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (88 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l441">
+                  <tt><i>441</i>         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">powerup</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">dead</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">eaten_ghost</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">]:</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (102 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l443">
+                  <tt><i>443</i>                 <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spooked_image</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">//</span> <span class="mi">5</span><span class="p">],</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_pos</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_pos</span><span class="p">))</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (99 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l446">
+                  <tt><i>446</i>                 <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dead_image</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">//</span> <span class="mi">5</span><span class="p">],</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_pos</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_pos</span><span class="p">))</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (91 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l455">
+                  <tt><i>455</i>             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">level</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">center_y</span> <span class="o">-</span> <span class="n">num3</span><span class="p">)</span> <span class="o">//</span> <span class="n">num1</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">center_x</span> <span class="o">//</span> <span class="n">num2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">9</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (91 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l457">
+                  <tt><i>457</i>             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">level</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">center_y</span> <span class="o">//</span> <span class="n">num1</span><span class="p">][(</span><span class="bp">self</span><span class="o">.</span><span class="n">center_x</span> <span class="o">-</span> <span class="n">num3</span><span class="p">)</span> <span class="o">//</span> <span class="n">num2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">3</span> \</tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (105 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l458">
+                  <tt><i>458</i>                     <span class="ow">or</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">level</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">center_y</span> <span class="o">//</span> <span class="n">num1</span><span class="p">][(</span><span class="bp">self</span><span class="o">.</span><span class="n">center_x</span> <span class="o">-</span> <span class="n">num3</span><span class="p">)</span> <span class="o">//</span> <span class="n">num2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">9</span> <span class="ow">and</span> <span class="p">(</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (91 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l461">
+                  <tt><i>461</i>             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">level</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">center_y</span> <span class="o">//</span> <span class="n">num1</span><span class="p">][(</span><span class="bp">self</span><span class="o">.</span><span class="n">center_x</span> <span class="o">+</span> <span class="n">num3</span><span class="p">)</span> <span class="o">//</span> <span class="n">num2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">3</span> \</tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (105 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l462">
+                  <tt><i>462</i>                     <span class="ow">or</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">level</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">center_y</span> <span class="o">//</span> <span class="n">num1</span><span class="p">][(</span><span class="bp">self</span><span class="o">.</span><span class="n">center_x</span> <span class="o">+</span> <span class="n">num3</span><span class="p">)</span> <span class="o">//</span> <span class="n">num2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">9</span> <span class="ow">and</span> <span class="p">(</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (91 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l465">
+                  <tt><i>465</i>             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">level</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">center_y</span> <span class="o">+</span> <span class="n">num3</span><span class="p">)</span> <span class="o">//</span> <span class="n">num1</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">center_x</span> <span class="o">//</span> <span class="n">num2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">3</span> \</tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (105 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l466">
+                  <tt><i>466</i>                     <span class="ow">or</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">level</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">center_y</span> <span class="o">+</span> <span class="n">num3</span><span class="p">)</span> <span class="o">//</span> <span class="n">num1</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">center_x</span> <span class="o">//</span> <span class="n">num2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">9</span> <span class="ow">and</span> <span class="p">(</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (91 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l469">
+                  <tt><i>469</i>             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">level</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">center_y</span> <span class="o">-</span> <span class="n">num3</span><span class="p">)</span> <span class="o">//</span> <span class="n">num1</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">center_x</span> <span class="o">//</span> <span class="n">num2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">3</span> \</tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (105 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l470">
+                  <tt><i>470</i>                     <span class="ow">or</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">level</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">center_y</span> <span class="o">-</span> <span class="n">num3</span><span class="p">)</span> <span class="o">//</span> <span class="n">num1</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">center_x</span> <span class="o">//</span> <span class="n">num2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">9</span> <span class="ow">and</span> <span class="p">(</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (99 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l476">
+                  <tt><i>476</i>                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">level</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">center_y</span> <span class="o">+</span> <span class="n">num3</span><span class="p">)</span> <span class="o">//</span> <span class="n">num1</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">center_x</span> <span class="o">//</span> <span class="n">num2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">3</span> \</tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (113 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l477">
+                  <tt><i>477</i>                             <span class="ow">or</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">level</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">center_y</span> <span class="o">+</span> <span class="n">num3</span><span class="p">)</span> <span class="o">//</span> <span class="n">num1</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">center_x</span> <span class="o">//</span> <span class="n">num2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">9</span> <span class="ow">and</span> <span class="p">(</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (99 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l480">
+                  <tt><i>480</i>                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">level</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">center_y</span> <span class="o">-</span> <span class="n">num3</span><span class="p">)</span> <span class="o">//</span> <span class="n">num1</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">center_x</span> <span class="o">//</span> <span class="n">num2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">3</span> \</tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (113 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l481">
+                  <tt><i>481</i>                             <span class="ow">or</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">level</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">center_y</span> <span class="o">-</span> <span class="n">num3</span><span class="p">)</span> <span class="o">//</span> <span class="n">num1</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">center_x</span> <span class="o">//</span> <span class="n">num2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">9</span> <span class="ow">and</span> <span class="p">(</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (99 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l485">
+                  <tt><i>485</i>                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">level</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">center_y</span> <span class="o">//</span> <span class="n">num1</span><span class="p">][(</span><span class="bp">self</span><span class="o">.</span><span class="n">center_x</span> <span class="o">-</span> <span class="n">num2</span><span class="p">)</span> <span class="o">//</span> <span class="n">num2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">3</span> \</tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (113 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l486">
+                  <tt><i>486</i>                             <span class="ow">or</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">level</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">center_y</span> <span class="o">//</span> <span class="n">num1</span><span class="p">][(</span><span class="bp">self</span><span class="o">.</span><span class="n">center_x</span> <span class="o">-</span> <span class="n">num2</span><span class="p">)</span> <span class="o">//</span> <span class="n">num2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">9</span> <span class="ow">and</span> <span class="p">(</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (99 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l489">
+                  <tt><i>489</i>                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">level</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">center_y</span> <span class="o">//</span> <span class="n">num1</span><span class="p">][(</span><span class="bp">self</span><span class="o">.</span><span class="n">center_x</span> <span class="o">+</span> <span class="n">num2</span><span class="p">)</span> <span class="o">//</span> <span class="n">num2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">3</span> \</tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (113 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l490">
+                  <tt><i>490</i>                             <span class="ow">or</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">level</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">center_y</span> <span class="o">//</span> <span class="n">num1</span><span class="p">][(</span><span class="bp">self</span><span class="o">.</span><span class="n">center_x</span> <span class="o">+</span> <span class="n">num2</span><span class="p">)</span> <span class="o">//</span> <span class="n">num2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">9</span> <span class="ow">and</span> <span class="p">(</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (99 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l496">
+                  <tt><i>496</i>                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">level</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">center_y</span> <span class="o">+</span> <span class="n">num3</span><span class="p">)</span> <span class="o">//</span> <span class="n">num1</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">center_x</span> <span class="o">//</span> <span class="n">num2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">3</span> \</tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (113 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l497">
+                  <tt><i>497</i>                             <span class="ow">or</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">level</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">center_y</span> <span class="o">+</span> <span class="n">num3</span><span class="p">)</span> <span class="o">//</span> <span class="n">num1</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">center_x</span> <span class="o">//</span> <span class="n">num2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">9</span> <span class="ow">and</span> <span class="p">(</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (99 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l500">
+                  <tt><i>500</i>                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">level</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">center_y</span> <span class="o">-</span> <span class="n">num3</span><span class="p">)</span> <span class="o">//</span> <span class="n">num1</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">center_x</span> <span class="o">//</span> <span class="n">num2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">3</span> \</tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (113 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l501">
+                  <tt><i>501</i>                             <span class="ow">or</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">level</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">center_y</span> <span class="o">-</span> <span class="n">num3</span><span class="p">)</span> <span class="o">//</span> <span class="n">num1</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">center_x</span> <span class="o">//</span> <span class="n">num2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">9</span> <span class="ow">and</span> <span class="p">(</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (99 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l505">
+                  <tt><i>505</i>                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">level</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">center_y</span> <span class="o">//</span> <span class="n">num1</span><span class="p">][(</span><span class="bp">self</span><span class="o">.</span><span class="n">center_x</span> <span class="o">-</span> <span class="n">num3</span><span class="p">)</span> <span class="o">//</span> <span class="n">num2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">3</span> \</tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (113 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l506">
+                  <tt><i>506</i>                             <span class="ow">or</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">level</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">center_y</span> <span class="o">//</span> <span class="n">num1</span><span class="p">][(</span><span class="bp">self</span><span class="o">.</span><span class="n">center_x</span> <span class="o">-</span> <span class="n">num3</span><span class="p">)</span> <span class="o">//</span> <span class="n">num2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">9</span> <span class="ow">and</span> <span class="p">(</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (99 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l509">
+                  <tt><i>509</i>                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">level</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">center_y</span> <span class="o">//</span> <span class="n">num1</span><span class="p">][(</span><span class="bp">self</span><span class="o">.</span><span class="n">center_x</span> <span class="o">+</span> <span class="n">num3</span><span class="p">)</span> <span class="o">//</span> <span class="n">num2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">3</span> \</tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (113 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l510">
+                  <tt><i>510</i>                             <span class="ow">or</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">level</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">center_y</span> <span class="o">//</span> <span class="n">num1</span><span class="p">][(</span><span class="bp">self</span><span class="o">.</span><span class="n">center_x</span> <span class="o">+</span> <span class="n">num3</span><span class="p">)</span> <span class="o">//</span> <span class="n">num2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">9</span> <span class="ow">and</span> <span class="p">(</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (92 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l665">
+                  <tt><i>665</i>         <span class="c1"># blinky is going to turn whenever colliding with walls, otherwise continue straight</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (92 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l772">
+                  <tt><i>772</i>         <span class="c1"># inky turns up or down at any point to pursue, but left and right only on collision</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (102 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l895">
+                  <tt><i>895</i>         <span class="c1"># pinky is going to turn left or right whenever advantageous, but only up or down on collision</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (116 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l1024">
+                  <tt><i>1024</i>         <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">score</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">powerup</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">power_counter</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">eaten_ghost</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_collisions</span><span class="p">()</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (120 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l1032">
+                  <tt><i>1032</i>                     <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">screen</span><span class="p">,</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">j</span> <span class="o">*</span> <span class="n">num2</span> <span class="o">+</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">num2</span><span class="p">),</span> <span class="n">i</span> <span class="o">*</span> <span class="n">num1</span> <span class="o">+</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">num1</span><span class="p">)),</span> <span class="mi">3</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (128 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l1034">
+                  <tt><i>1034</i>                     <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">screen</span><span class="p">,</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">155</span><span class="p">),</span> <span class="p">(</span><span class="n">j</span> <span class="o">*</span> <span class="n">num2</span> <span class="o">+</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">num2</span><span class="p">),</span> <span class="n">i</span> <span class="o">*</span> <span class="n">num1</span> <span class="o">+</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">num1</span><span class="p">)),</span> <span class="mi">6</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (108 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l1036">
+                  <tt><i>1036</i>                     <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">screen</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">color</span><span class="p">,</span> <span class="p">(</span><span class="n">j</span> <span class="o">*</span> <span class="n">num2</span> <span class="o">+</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">num2</span><span class="p">),</span> <span class="n">i</span> <span class="o">*</span> <span class="n">num1</span><span class="p">),</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (83 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l1037">
+                  <tt><i>1037</i>                                      <span class="p">(</span><span class="n">j</span> <span class="o">*</span> <span class="n">num2</span> <span class="o">+</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">num2</span><span class="p">),</span> <span class="n">i</span> <span class="o">*</span> <span class="n">num1</span> <span class="o">+</span> <span class="n">num1</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (108 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l1039">
+                  <tt><i>1039</i>                     <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">screen</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">color</span><span class="p">,</span> <span class="p">(</span><span class="n">j</span> <span class="o">*</span> <span class="n">num2</span><span class="p">,</span> <span class="n">i</span> <span class="o">*</span> <span class="n">num1</span> <span class="o">+</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">num1</span><span class="p">)),</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (83 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l1040">
+                  <tt><i>1040</i>                                      <span class="p">(</span><span class="n">j</span> <span class="o">*</span> <span class="n">num2</span> <span class="o">+</span> <span class="n">num2</span><span class="p">,</span> <span class="n">i</span> <span class="o">*</span> <span class="n">num1</span> <span class="o">+</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">num1</span><span class="p">)),</span> <span class="mi">3</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (142 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l1042">
+                  <tt><i>1042</i>                     <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">arc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">screen</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">color</span><span class="p">,</span> <span class="p">[(</span><span class="n">j</span> <span class="o">*</span> <span class="n">num2</span> <span class="o">-</span> <span class="p">(</span><span class="n">num2</span> <span class="o">*</span> <span class="mf">0.4</span><span class="p">))</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="n">num1</span> <span class="o">+</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">num1</span><span class="p">)),</span> <span class="n">num2</span><span class="p">,</span> <span class="n">num1</span><span class="p">],</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (138 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l1045">
+                  <tt><i>1045</i>                     <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">arc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">screen</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">color</span><span class="p">,</span> <span class="p">[(</span><span class="n">j</span> <span class="o">*</span> <span class="n">num2</span> <span class="o">+</span> <span class="p">(</span><span class="n">num2</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">)),</span> <span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="n">num1</span> <span class="o">+</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">num1</span><span class="p">)),</span> <span class="n">num2</span><span class="p">,</span> <span class="n">num1</span><span class="p">],</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (138 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l1048">
+                  <tt><i>1048</i>                     <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">arc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">screen</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">color</span><span class="p">,</span> <span class="p">[(</span><span class="n">j</span> <span class="o">*</span> <span class="n">num2</span> <span class="o">+</span> <span class="p">(</span><span class="n">num2</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">)),</span> <span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="n">num1</span> <span class="o">-</span> <span class="p">(</span><span class="mf">0.4</span> <span class="o">*</span> <span class="n">num1</span><span class="p">)),</span> <span class="n">num2</span><span class="p">,</span> <span class="n">num1</span><span class="p">],</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (143 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l1051">
+                  <tt><i>1051</i>                     <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">arc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">screen</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">color</span><span class="p">,</span> <span class="p">[(</span><span class="n">j</span> <span class="o">*</span> <span class="n">num2</span> <span class="o">-</span> <span class="p">(</span><span class="n">num2</span> <span class="o">*</span> <span class="mf">0.35</span><span class="p">))</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="n">num1</span> <span class="o">-</span> <span class="p">(</span><span class="mf">0.4</span> <span class="o">*</span> <span class="n">num1</span><span class="p">)),</span> <span class="n">num2</span><span class="p">,</span> <span class="n">num1</span><span class="p">],</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (100 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l1054">
+                  <tt><i>1054</i>                     <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">screen</span><span class="p">,</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">j</span> <span class="o">*</span> <span class="n">num2</span><span class="p">,</span> <span class="n">i</span> <span class="o">*</span> <span class="n">num1</span> <span class="o">+</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">num1</span><span class="p">)),</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (83 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l1055">
+                  <tt><i>1055</i>                                      <span class="p">(</span><span class="n">j</span> <span class="o">*</span> <span class="n">num2</span> <span class="o">+</span> <span class="n">num2</span><span class="p">,</span> <span class="n">i</span> <span class="o">*</span> <span class="n">num1</span> <span class="o">+</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">num1</span><span class="p">)),</span> <span class="mi">3</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (97 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l1073">
+                  <tt><i>1073</i>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">score</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">powerup</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">power_counter</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">eaten_ghost</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (82 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l1083">
+                  <tt><i>1083</i>                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">level</span><span class="p">[</span><span class="n">centery</span> <span class="o">//</span> <span class="n">num1</span><span class="p">][(</span><span class="n">centerx</span> <span class="o">-</span> <span class="n">num3</span><span class="p">)</span> <span class="o">//</span> <span class="n">num2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (82 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l1086">
+                  <tt><i>1086</i>                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">level</span><span class="p">[</span><span class="n">centery</span> <span class="o">//</span> <span class="n">num1</span><span class="p">][(</span><span class="n">centerx</span> <span class="o">-</span> <span class="n">num3</span><span class="p">)</span> <span class="o">//</span> <span class="n">num2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (82 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l1089">
+                  <tt><i>1089</i>                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">level</span><span class="p">[(</span><span class="n">centery</span> <span class="o">+</span> <span class="n">num3</span><span class="p">)</span> <span class="o">//</span> <span class="n">num1</span><span class="p">][</span><span class="n">centerx</span> <span class="o">//</span> <span class="n">num2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (82 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l1092">
+                  <tt><i>1092</i>                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">level</span><span class="p">[(</span><span class="n">centery</span> <span class="o">-</span> <span class="n">num3</span><span class="p">)</span> <span class="o">//</span> <span class="n">num1</span><span class="p">][</span><span class="n">centerx</span> <span class="o">//</span> <span class="n">num2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (82 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l1095">
+                  <tt><i>1095</i>             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">pacman</span><span class="o">.</span><span class="n">direction</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">pacman</span><span class="o">.</span><span class="n">direction</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (86 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l1097">
+                  <tt><i>1097</i>                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">level</span><span class="p">[(</span><span class="n">centery</span> <span class="o">+</span> <span class="n">num3</span><span class="p">)</span> <span class="o">//</span> <span class="n">num1</span><span class="p">][</span><span class="n">centerx</span> <span class="o">//</span> <span class="n">num2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (86 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l1099">
+                  <tt><i>1099</i>                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">level</span><span class="p">[(</span><span class="n">centery</span> <span class="o">-</span> <span class="n">num3</span><span class="p">)</span> <span class="o">//</span> <span class="n">num1</span><span class="p">][</span><span class="n">centerx</span> <span class="o">//</span> <span class="n">num2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (86 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l1102">
+                  <tt><i>1102</i>                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">level</span><span class="p">[</span><span class="n">centery</span> <span class="o">//</span> <span class="n">num1</span><span class="p">][(</span><span class="n">centerx</span> <span class="o">-</span> <span class="n">num2</span><span class="p">)</span> <span class="o">//</span> <span class="n">num2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (86 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l1104">
+                  <tt><i>1104</i>                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">level</span><span class="p">[</span><span class="n">centery</span> <span class="o">//</span> <span class="n">num1</span><span class="p">][(</span><span class="n">centerx</span> <span class="o">+</span> <span class="n">num2</span><span class="p">)</span> <span class="o">//</span> <span class="n">num2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (82 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l1107">
+                  <tt><i>1107</i>             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">pacman</span><span class="o">.</span><span class="n">direction</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">pacman</span><span class="o">.</span><span class="n">direction</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (86 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l1109">
+                  <tt><i>1109</i>                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">level</span><span class="p">[(</span><span class="n">centery</span> <span class="o">+</span> <span class="n">num1</span><span class="p">)</span> <span class="o">//</span> <span class="n">num1</span><span class="p">][</span><span class="n">centerx</span> <span class="o">//</span> <span class="n">num2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (86 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l1111">
+                  <tt><i>1111</i>                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">level</span><span class="p">[(</span><span class="n">centery</span> <span class="o">-</span> <span class="n">num1</span><span class="p">)</span> <span class="o">//</span> <span class="n">num1</span><span class="p">][</span><span class="n">centerx</span> <span class="o">//</span> <span class="n">num2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (86 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l1114">
+                  <tt><i>1114</i>                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">level</span><span class="p">[</span><span class="n">centery</span> <span class="o">//</span> <span class="n">num1</span><span class="p">][(</span><span class="n">centerx</span> <span class="o">-</span> <span class="n">num3</span><span class="p">)</span> <span class="o">//</span> <span class="n">num2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (86 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l1116">
+                  <tt><i>1116</i>                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">level</span><span class="p">[</span><span class="n">centery</span> <span class="o">//</span> <span class="n">num1</span><span class="p">][(</span><span class="n">centerx</span> <span class="o">+</span> <span class="n">num3</span><span class="p">)</span> <span class="o">//</span> <span class="n">num2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (86 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l1136">
+                  <tt><i>1136</i>         <span class="n">score_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Score: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">score</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;white&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (116 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l1141">
+                  <tt><i>1141</i>             <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">pygame</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">pacman</span><span class="o">.</span><span class="n">images</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">)),</span> <span class="p">(</span><span class="mi">500</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">735</span><span class="p">))</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (83 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l1143">
+                  <tt><i>1143</i>             <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">rect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">screen</span><span class="p">,</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="mi">300</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (87 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l1144">
+                  <tt><i>1144</i>             <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">rect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">screen</span><span class="p">,</span> <span class="s1">&#39;dark gray&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">70</span><span class="p">,</span> <span class="mi">220</span><span class="p">,</span> <span class="mi">560</span><span class="p">,</span> <span class="mi">260</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (98 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l1145">
+                  <tt><i>1145</i>             <span class="n">gameover_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s1">&#39;Game over! Space bar to restart!&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (83 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l1148">
+                  <tt><i>1148</i>             <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">rect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">screen</span><span class="p">,</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="mi">300</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (87 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l1149">
+                  <tt><i>1149</i>             <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">rect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">screen</span><span class="p">,</span> <span class="s1">&#39;dark gray&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">70</span><span class="p">,</span> <span class="mi">220</span><span class="p">,</span> <span class="mi">560</span><span class="p">,</span> <span class="mi">260</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (100 > 79 characters):</p>
+               
+               <a href="Pacman.game.source.html#l1150">
+                  <tt><i>1150</i>             <span class="n">gameover_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s1">&#39;Victory! Space bar to main menu!&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E272">
+               <span class="count sev-2">
+                  6
+               </span>
+               <strong>E272:</strong> multiple spaces before keyword
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="Pacman.game.source.html#l370">
+                  <tt><i>370</i>         <span class="bp">self</span><span class="o">.</span><span class="n">blinky_image</span> <span class="o">=</span> <span class="p">[</span><span class="n">pygame</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">pygame</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Sprites/Entities/Enemies/Red/GhostRed</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">.png&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">33</span><span class="p">,</span> <span class="mi">33</span><span class="p">))</span>  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="Pacman.game.source.html#l371">
+                  <tt><i>371</i>         <span class="bp">self</span><span class="o">.</span><span class="n">pinky_image</span> <span class="o">=</span> <span class="p">[</span><span class="n">pygame</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">pygame</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Sprites/Entities/Enemies/Pink/GhostPink</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">.png&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">33</span><span class="p">,</span> <span class="mi">33</span><span class="p">))</span>  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="Pacman.game.source.html#l372">
+                  <tt><i>372</i>         <span class="bp">self</span><span class="o">.</span><span class="n">inky_image</span> <span class="o">=</span> <span class="p">[</span><span class="n">pygame</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">pygame</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Sprites/Entities/Enemies/Blue/GhostBlue</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">.png&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">33</span><span class="p">,</span> <span class="mi">33</span><span class="p">))</span>  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="Pacman.game.source.html#l373">
+                  <tt><i>373</i>         <span class="bp">self</span><span class="o">.</span><span class="n">clyde_image</span> <span class="o">=</span> <span class="p">[</span><span class="n">pygame</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">pygame</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Sprites/Entities/Enemies/Orange/GhostOrange</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">.png&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">33</span><span class="p">,</span> <span class="mi">33</span><span class="p">))</span>  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="Pacman.game.source.html#l374">
+                  <tt><i>374</i>         <span class="bp">self</span><span class="o">.</span><span class="n">spooked_image</span> <span class="o">=</span> <span class="p">[</span><span class="n">pygame</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">pygame</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Sprites/Entities/Enemies/Scared/GhostScared</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">.png&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">33</span><span class="p">,</span> <span class="mi">33</span><span class="p">))</span>  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="Pacman.game.source.html#l375">
+                  <tt><i>375</i>         <span class="bp">self</span><span class="o">.</span><span class="n">dead_image</span> <span class="o">=</span> <span class="p">[</span><span class="n">pygame</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">pygame</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Sprites/Entities/Enemies/Dead/GhostDead</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">.png&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">33</span><span class="p">,</span> <span class="mi">33</span><span class="p">))</span>  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)]</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E128">
+               <span class="count sev-2">
+                  4
+               </span>
+               <strong>E128:</strong> continuation line under-indented for visual indent
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="Pacman.game.source.html#l53">
+                  <tt><i>53</i>                        <span class="bp">self</span><span class="o">.</span><span class="n">ghost</span><span class="o">.</span><span class="n">blinky_box</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="Pacman.game.source.html#l55">
+                  <tt><i>55</i>                      <span class="bp">self</span><span class="o">.</span><span class="n">ghost</span><span class="o">.</span><span class="n">inky_box</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="Pacman.game.source.html#l57">
+                  <tt><i>57</i>                       <span class="bp">self</span><span class="o">.</span><span class="n">ghost</span><span class="o">.</span><span class="n">pinky_box</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="Pacman.game.source.html#l59">
+                  <tt><i>59</i>                       <span class="bp">self</span><span class="o">.</span><span class="n">ghost</span><span class="o">.</span><span class="n">clyde_box</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E302">
+               <span class="count sev-2">
+                  4
+               </span>
+               <strong>E302:</strong> expected 2 blank lines, found 1
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="Pacman.game.source.html#l6">
+                  <tt><i>6</i> <span class="k">class</span><span class="w"> </span><span class="nc">Game</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="Pacman.game.source.html#l367">
+                  <tt><i>367</i> <span class="k">class</span><span class="w"> </span><span class="nc">Ghost</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="Pacman.game.source.html#l1019">
+                  <tt><i>1019</i> <span class="k">class</span><span class="w"> </span><span class="nc">Board</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="Pacman.game.source.html#l1123">
+                  <tt><i>1123</i> <span class="k">class</span><span class="w"> </span><span class="nc">Misc</span><span class="p">:</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E303">
+               <span class="count sev-2">
+                  4
+               </span>
+               <strong>E303:</strong> too many blank lines (2)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="Pacman.game.source.html#l52">
+                  <tt><i>52</i>         <span class="bp">self</span><span class="o">.</span><span class="n">blinky</span> <span class="o">=</span> <span class="n">Ghost</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost</span><span class="o">.</span><span class="n">blinky_x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost</span><span class="o">.</span><span class="n">blinky_y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost</span><span class="o">.</span><span class="n">targets</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost</span><span class="o">.</span><span class="n">ghost_speed</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost</span><span class="o">.</span><span class="n">blinky_image</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost</span><span class="o">.</span><span class="n">blinky_direction</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost</span><span class="o">.</span><span class="n">blinky_dead</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="Pacman.game.source.html#l414">
+                  <tt><i>414</i>     <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="Pacman.game.source.html#l449">
+                  <tt><i>449</i>     <span class="k">def</span><span class="w"> </span><span class="nf">check_collisions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="Pacman.game.source.html#l523">
+                  <tt><i>523</i>     <span class="k">def</span><span class="w"> </span><span class="nf">move_clyde</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E127">
+               <span class="count sev-2">
+                  2
+               </span>
+               <strong>E127:</strong> continuation line over-indented for visual indent
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="Pacman.game.source.html#l1046">
+                  <tt><i>1046</i>                                      <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">PI</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">PI</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="Pacman.game.source.html#l1052">
+                  <tt><i>1052</i>                                      <span class="mi">3</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">PI</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">PI</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E265">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E265:</strong> block comment should start with '# '
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="Pacman.game.source.html#l25">
+                  <tt><i>25</i>         <span class="c1">#loading levels</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="W292">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>W292:</strong> no newline at end of file
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="Pacman.game.source.html#l1151">
+                  <tt><i>1151</i>             <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">gameover_text</span><span class="p">,</span> <span class="p">(</span><span class="mi">120</span><span class="p">,</span> <span class="mi">300</span><span class="p">))</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         </ul>
+      </div>
+   </body>
+</html>
