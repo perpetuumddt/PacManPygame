@@ -54,35 +54,3 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }} # Autorization
           publish_dir: ./reports # Directory for reports
           keep_files: true # Saving previous reports
-
-    # Automatic notification
-    - name: Notify PR status
-      if: github.event_name == 'pull_request'
-      uses: actions/github-script@v6
-      with:
-        script: |
-          try {
-            // Getting coverage.xml
-            const { data: coverage } = await github.rest.repos.getContent({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              path: 'coverage.xml',
-              ref: context.sha
-            });
-
-            // Parsing coverage persentage
-            const coverageData = Buffer.from(coverage.content, 'base64').toString();
-            const lineRate = coverageData.match(/line-rate="([\d.]+)"/)[1];
-            const coveragePercent = Math.round(parseFloat(lineRate) * 100);
-
-            // Creating comment
-            await github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              body: `### CI/CD Results ${coveragePercent >= 80 ? 'Good coverage (>80%)' : 'Bad coverage (<80%)'}\n\n` +
-                    `**Tests**: [View Report](${process.env.GITHUB_SERVER_URL}/${context.repo.owner}/${context.repo.repo}/actions/runs/${process.env.GITHUB_RUN_ID})\n` +
-                    `**Coverage**: ${coveragePercent}% ${coveragePercent >= 80 ? 'Success(>80%)' : 'Failure (<80%)'}\n` +
-                    `**Linting**: [Flake8 Report](https://${context.repo.owner}.github.io/${context.repo.repo}/flake8-report/)`
-            });
-          } catch (error) {
-            console.error('Failed to create PR comment:', error);
-          }
