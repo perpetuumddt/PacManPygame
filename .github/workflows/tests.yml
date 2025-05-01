@@ -12,45 +12,56 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-    - uses: actions/checkout@v4  # Clone repository
+      # Checkout code
+      - name: Checkout repository
+        uses: actions/checkout@v4  # Clone repository
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.12'
+      # Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install pytest pytest-html pytest-cov flake8 flake8-html
-        pip install -r requirements.txt  # Installing requirements
+      # Install dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest pytest-html pytest-cov flake8 flake8-html coverage
+          pip install -r requirements.txt  # Installing requirements
 
-    - name: Run pytest
-      run: |
-        pytest --cov=. --cov-report=xml --html=test-report.html
+      # Run tests and generate reports
+      - name: Run tests and generate reports
+        run: |
+          # Run pytest with coverage
+          pytest --cov=. --cov-report=xml --html=test-report.html
+          
+          # Generate HTML coverage report
+          coverage html
+          mkdir -p reports
+          mv htmlcov reports/coverage-report
+          mv test-report.html reports/
+          
+          # Run flake8
+          mkdir -p reports/flake8-report
+          flake8 --format=html --htmldir=reports/flake8-report || echo "Flake8 found issues"
 
-    - name: Run flake8
-      run: |
-        flake8 --format=html --htmldir=flake8-report || echo "Flake8 found issues"
-      continue-on-error: true
+      # Upload test artifacts
+      - name: Upload test artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-reports-${{ github.run_id }}
+          path: |
+            reports/test-report.html
+            reports/flake8-report/
+            coverage.xml
+            reports/coverage-report/
+          retention-days: 7
 
-    # Loading test results as artefacts
-    - name: Upload test artifacts
-      uses: actions/upload-artifact@v3 #Using GitHub Actions
-      with:
-        name: test-reports-${{ github.run_id }} # Unique name
-        path: |
-          test-report.html
-          flake8-report/
-          coverage.xml
-          coverage-report/
-        retention-days: 7
-
-    # Publishing reports via GitHub Pages
-    - name: Publish HTML reports
-      uses: peaceiris/actions-gh-pages@v3 #Using GitHub Pages
-      with:
-          github_token: ${{ secrets.GITHUB_TOKEN }} # Autorization
-          publish_dir: ./reports # Directory for reports
-          keep_files: true # Saving previous reports
+      # Publish reports to GitHub Pages
+      - name: Publish HTML reports
+        if: always()
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./reports
+          keep_files: true
