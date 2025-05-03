@@ -7,7 +7,7 @@ from unittest.mock import patch
 # Add project root to sys.path so Python can find game.py
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from game import Game
+from game import Game, Pacman
 
 @pytest.fixture
 def game_instance():
@@ -16,6 +16,10 @@ def game_instance():
     # Mock pygame.image.load to return a dummy surface instead of loading real files
     with patch('pygame.image.load', return_value=pygame.Surface((33, 33))):
         return Game(screen, exit_callback=lambda: None, current_level=1)
+
+@pytest.fixture
+def pacman_instance(game_instance):
+    return game_instance.pacman
 
 # Test: Initial values should be set properly
 def test_game_initialization(game_instance):
