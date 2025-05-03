@@ -56,3 +56,17 @@ def test_pacman_update(pacman_instance, direction_command, turns_allowed, expect
     pacman_instance.turns_allowed = turns_allowed
     pacman_instance.update()
     assert pacman_instance.direction == expected_direction
+
+# Test: Pacman move method
+@pytest.mark.parametrize("direction, turns_allowed, expected_x, expected_y", [
+    (0, [True, False, False, False], 362, 522),  # Move right
+    (1, [False, True, False, False], 358, 522),  # Move left
+    (2, [False, False, True, False], 360, 520),  # Move up
+    (3, [False, False, False, True], 360, 524),  # Move down
+])
+def test_pacman_move(pacman_instance, direction, turns_allowed, expected_x, expected_y):
+    pacman_instance.direction = direction
+    pacman_instance.turns_allowed = turns_allowed
+    pacman_instance.move()
+    assert pacman_instance.x == expected_x
+    assert pacman_instance.y == expected_y
