@@ -93,3 +93,12 @@ def test_pacman_get_player_rect(pacman_instance):
     assert rect.y == 150 + 17 - 16
     assert rect.width == 32
     assert rect.height == 32
+
+# Test: Board check_position method
+@pytest.mark.parametrize("centerx, centery, expected_turns", [
+    (116, 117, [False, False, False, False]),  # No turns allowed
+    (376, 539, [True, True, False, False]),      # All turns allowed
+])
+def test_board_check_position(board_instance, centerx, centery, expected_turns):
+    turns = board_instance.check_position(centerx, centery)
+    assert turns == expected_turns
