@@ -102,3 +102,15 @@ def test_pacman_get_player_rect(pacman_instance):
 def test_board_check_position(board_instance, centerx, centery, expected_turns):
     turns = board_instance.check_position(centerx, centery)
     assert turns == expected_turns
+
+# Test: Board check_collisions method
+def test_board_check_collisions(board_instance, game_instance):
+    game_instance.level = [[0] * 30 for _ in range(32)]
+    game_instance.level[3][3] = 1  # Place a pellet
+    game_instance.pacman.x, game_instance.pacman.y = 66, 68  # Near the pellet
+    score, powerup, power_counter, eaten_ghost = board_instance.check_collisions()
+    assert score == 10
+    assert game_instance.level[3][3] == 0
+    assert not powerup
+    assert power_counter == 0
+    assert eaten_ghost == [False, False, False, False]
