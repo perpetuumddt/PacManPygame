@@ -70,3 +70,16 @@ def test_pacman_move(pacman_instance, direction, turns_allowed, expected_x, expe
     pacman_instance.move()
     assert pacman_instance.x == expected_x
     assert pacman_instance.y == expected_y
+
+# Test: Pacman screen wrapping
+def test_pacman_screen_wrap(pacman_instance):
+    pacman_instance.x = 691
+    pacman_instance.direction = 0  # Move right
+    pacman_instance.turns_allowed = [True, True, True, True]
+    pacman_instance.move()
+    assert pacman_instance.x == -35
+
+    pacman_instance.x = -38
+    pacman_instance.direction = 1  # Move left
+    pacman_instance.move()
+    assert pacman_instance.x == 691
