@@ -248,10 +248,10 @@
                class="code sev- "><tt><i>50</i>     <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="mi">1</span><span class="p">),</span>  <span class="c1"># Can turn left</span></tt>
             </div>
             <div id="l51"
-               class="code sev- "><tt><i>51</i>     <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="mi">0</span><span class="p">),</span>  <span class="c1"># Cant turn up</span></tt>
+               class="code sev- "><tt><i>51</i>     <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="mi">0</span><span class="p">),</span>  <span class="c1"># Can`t turn up</span></tt>
             </div>
             <div id="l52"
-               class="code sev- "><tt><i>52</i>     <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="mi">0</span><span class="p">),</span>  <span class="c1"># Cant turn down</span></tt>
+               class="code sev- "><tt><i>52</i>     <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="mi">0</span><span class="p">),</span>  <span class="c1"># Can`t turn down</span></tt>
             </div>
             <div id="l53"
                class="code sev- "><tt><i>53</i> <span class="p">])</span></tt>
@@ -440,7 +440,7 @@
                class="code sev- "><tt><i>96</i>     <span class="p">(</span><span class="mi">116</span><span class="p">,</span> <span class="mi">117</span><span class="p">,</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">]),</span>  <span class="c1"># No turns allowed</span></tt>
             </div>
             <div id="l97"
-               class="code sev- "><tt><i>97</i>     <span class="p">(</span><span class="mi">376</span><span class="p">,</span> <span class="mi">539</span><span class="p">,</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">]),</span>      <span class="c1"># All turns allowed</span></tt>
+               class="code sev- "><tt><i>97</i>     <span class="p">(</span><span class="mi">376</span><span class="p">,</span> <span class="mi">539</span><span class="p">,</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">]),</span>      <span class="c1"># Turns allowed left and right</span></tt>
             </div>
             <div id="l98"
                class="code sev- "><tt><i>98</i> <span class="p">])</span></tt>
@@ -485,10 +485,19 @@
                class="code sev- "><tt><i>105</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">30</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">32</span><span class="p">)]</span></tt>
             </div>
             <div id="l106"
-               class="code sev- "><tt><i>106</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">level</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># Place a pellet</span></tt>
+               class="code sev- "><tt><i>106</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">level</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># Place a dot</span></tt>
             </div>
             <div id="l107"
-               class="code sev- "><tt><i>107</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">pacman</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">pacman</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">66</span><span class="p">,</span> <span class="mi">68</span>  <span class="c1"># Near the pellet</span></tt>
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E501
+                     </span>
+                     Line too long (86 > 79 characters)</li>
+               
+               </ul><tt><i>107</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">pacman</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">pacman</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">66</span><span class="p">,</span> <span class="mi">68</span>  <span class="c1"># Place pacman on the dot</span></tt>
             </div>
             <div id="l108"
                class="code sev-2  le">
