@@ -33,7 +33,7 @@ window.addEventListener('DOMContentLoaded', function () {
 </script>
    </head>
    <body>
-      <div id="masthead" class="sev-2"></div>
+      <div id="masthead" class="sev-1"></div>
       <div id="page">
          <p id="srclink">
             <a title="View full annotated source"
@@ -50,9 +50,38 @@ window.addEventListener('DOMContentLoaded', function () {
          <ul id="index">
          
          <li>
+            <a data-code="F401">
+               <span class="count sev-1">
+                  2
+               </span>
+               <strong>F401:</strong> 'game.Pacman' imported but unused
+               
+                  (and 1 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>'game.Board' imported but unused:</p>
+               
+               <a href="Pacman.tests.test_game.source.html#l10">
+                  <tt><i>10</i> <span class="kn">from</span><span class="w"> </span><span class="nn">game</span><span class="w"> </span><span class="kn">import</span> <span class="n">Game</span><span class="p">,</span> <span class="n">Pacman</span><span class="p">,</span> <span class="n">Board</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'game.Pacman' imported but unused:</p>
+               
+               <a href="Pacman.tests.test_game.source.html#l10">
+                  <tt><i>10</i> <span class="kn">from</span><span class="w"> </span><span class="nn">game</span><span class="w"> </span><span class="kn">import</span> <span class="n">Game</span><span class="p">,</span> <span class="n">Pacman</span><span class="p">,</span> <span class="n">Board</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
             <a data-code="E302">
                <span class="count sev-2">
-                  3
+                  10
                </span>
                <strong>E302:</strong> expected 2 blank lines, found 1
                
@@ -65,13 +94,105 @@ window.addEventListener('DOMContentLoaded', function () {
                </a>
             </li><li>
                
-               <a href="Pacman.tests.test_game.source.html#l21">
-                  <tt><i>21</i> <span class="k">def</span><span class="w"> </span><span class="nf">test_game_initialization</span><span class="p">(</span><span class="n">game_instance</span><span class="p">):</span></tt>
+               <a href="Pacman.tests.test_game.source.html#l20">
+                  <tt><i>20</i> <span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span></tt>
                </a>
             </li><li>
                
-               <a href="Pacman.tests.test_game.source.html#l27">
-                  <tt><i>27</i> <span class="k">def</span><span class="w"> </span><span class="nf">test_reset_game_state</span><span class="p">(</span><span class="n">game_instance</span><span class="p">):</span></tt>
+               <a href="Pacman.tests.test_game.source.html#l24">
+                  <tt><i>24</i> <span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="Pacman.tests.test_game.source.html#l36">
+                  <tt><i>36</i> <span class="k">def</span><span class="w"> </span><span class="nf">test_reset_game_state</span><span class="p">(</span><span class="n">game_instance</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="Pacman.tests.test_game.source.html#l48">
+                  <tt><i>48</i> <span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;direction_command, turns_allowed, expected_direction&quot;</span><span class="p">,</span> <span class="p">[</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="Pacman.tests.test_game.source.html#l61">
+                  <tt><i>61</i> <span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;direction, turns_allowed, expected_x, expected_y&quot;</span><span class="p">,</span> <span class="p">[</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="Pacman.tests.test_game.source.html#l75">
+                  <tt><i>75</i> <span class="k">def</span><span class="w"> </span><span class="nf">test_pacman_screen_wrap</span><span class="p">(</span><span class="n">pacman_instance</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="Pacman.tests.test_game.source.html#l85">
+                  <tt><i>85</i> <span class="k">def</span><span class="w"> </span><span class="nf">test_pacman_get_player_rect</span><span class="p">(</span><span class="n">pacman_instance</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="Pacman.tests.test_game.source.html#l95">
+                  <tt><i>95</i> <span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;centerx, centery, expected_turns&quot;</span><span class="p">,</span> <span class="p">[</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="Pacman.tests.test_game.source.html#l104">
+                  <tt><i>104</i> <span class="k">def</span><span class="w"> </span><span class="nf">test_board_check_collisions</span><span class="p">(</span><span class="n">board_instance</span><span class="p">,</span> <span class="n">game_instance</span><span class="p">):</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E501">
+               <span class="count sev-2">
+                  6
+               </span>
+               <strong>E501:</strong> line too long (84 > 79 characters)
+               
+                  (and 4 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Line too long (84 > 79 characters):</p>
+               
+               <a href="Pacman.tests.test_game.source.html#l16">
+                  <tt><i>16</i>     <span class="c1"># Mock pygame.image.load to return a dummy surface instead of loading real files</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (82 > 79 characters):</p>
+               
+               <a href="Pacman.tests.test_game.source.html#l48">
+                  <tt><i>48</i> <span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;direction_command, turns_allowed, expected_direction&quot;</span><span class="p">,</span> <span class="p">[</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (94 > 79 characters):</p>
+               
+               <a href="Pacman.tests.test_game.source.html#l54">
+                  <tt><i>54</i> <span class="k">def</span><span class="w"> </span><span class="nf">test_pacman_update</span><span class="p">(</span><span class="n">pacman_instance</span><span class="p">,</span> <span class="n">direction_command</span><span class="p">,</span> <span class="n">turns_allowed</span><span class="p">,</span> <span class="n">expected_direction</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (88 > 79 characters):</p>
+               
+               <a href="Pacman.tests.test_game.source.html#l67">
+                  <tt><i>67</i> <span class="k">def</span><span class="w"> </span><span class="nf">test_pacman_move</span><span class="p">(</span><span class="n">pacman_instance</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">turns_allowed</span><span class="p">,</span> <span class="n">expected_x</span><span class="p">,</span> <span class="n">expected_y</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (80 > 79 characters):</p>
+               
+               <a href="Pacman.tests.test_game.source.html#l99">
+                  <tt><i>99</i> <span class="k">def</span><span class="w"> </span><span class="nf">test_board_check_position</span><span class="p">(</span><span class="n">board_instance</span><span class="p">,</span> <span class="n">centerx</span><span class="p">,</span> <span class="n">centery</span><span class="p">,</span> <span class="n">expected_turns</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (82 > 79 characters):</p>
+               
+               <a href="Pacman.tests.test_game.source.html#l108">
+                  <tt><i>108</i>     <span class="n">score</span><span class="p">,</span> <span class="n">powerup</span><span class="p">,</span> <span class="n">power_counter</span><span class="p">,</span> <span class="n">eaten_ghost</span> <span class="o">=</span> <span class="n">board_instance</span><span class="o">.</span><span class="n">check_collisions</span><span class="p">()</span></tt>
                </a>
             </li>
             </ul>
@@ -89,25 +210,7 @@ window.addEventListener('DOMContentLoaded', function () {
             <li>
                
                <a href="Pacman.tests.test_game.source.html#l10">
-                  <tt><i>10</i> <span class="kn">from</span><span class="w"> </span><span class="nn">game</span><span class="w"> </span><span class="kn">import</span> <span class="n">Game</span></tt>
-               </a>
-            </li>
-            </ul>
-         </li>
-         
-         <li>
-            <a data-code="E501">
-               <span class="count sev-2">
-                  1
-               </span>
-               <strong>E501:</strong> line too long (84 > 79 characters)
-               
-            </a>
-            <ul class="details">
-            <li>
-               
-               <a href="Pacman.tests.test_game.source.html#l16">
-                  <tt><i>16</i>     <span class="c1"># Mock pygame.image.load to return a dummy surface instead of loading real files</span></tt>
+                  <tt><i>10</i> <span class="kn">from</span><span class="w"> </span><span class="nn">game</span><span class="w"> </span><span class="kn">import</span> <span class="n">Game</span><span class="p">,</span> <span class="n">Pacman</span><span class="p">,</span> <span class="n">Board</span></tt>
                </a>
             </li>
             </ul>
