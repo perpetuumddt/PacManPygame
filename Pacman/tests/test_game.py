@@ -83,3 +83,13 @@ def test_pacman_screen_wrap(pacman_instance):
     pacman_instance.direction = 1  # Move left
     pacman_instance.move()
     assert pacman_instance.x == 691
+
+# Test: Pacman get_player_rect method
+def test_pacman_get_player_rect(pacman_instance):
+    pacman_instance.x = 100
+    pacman_instance.y = 150
+    rect = pacman_instance.get_player_rect()
+    assert rect.x == 100 + 16 - 16
+    assert rect.y == 150 + 17 - 16
+    assert rect.width == 32
+    assert rect.height == 32
