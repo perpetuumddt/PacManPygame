@@ -7,7 +7,7 @@ from unittest.mock import patch
 # Add project root to sys.path so Python can find game.py
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from game import Game, Pacman
+from game import Game, Pacman, Board
 
 @pytest.fixture
 def game_instance():
@@ -20,6 +20,11 @@ def game_instance():
 @pytest.fixture
 def pacman_instance(game_instance):
     return game_instance.pacman
+
+@pytest.fixture
+def board_instance(game_instance):
+    return game_instance.board
+
 
 # Test: Initial values should be set properly
 def test_game_initialization(game_instance):
@@ -38,3 +43,16 @@ def test_reset_game_state(game_instance):
     assert game_instance.lives == 3
     assert game_instance.score == 0
     assert not game_instance.powerup
+
+# Test: Pacman update method
+@pytest.mark.parametrize("direction_command, turns_allowed, expected_direction", [
+    (0, [True, False, False, False], 0),  # Can turn right
+    (1, [False, True, False, False], 1),  # Can turn left
+    (2, [True, False, False, False], 0),  # Cant turn up
+    (3, [False, False, False, False], 0),  # Cant turn down
+])
+def test_pacman_update(pacman_instance, direction_command, turns_allowed, expected_direction):
+    pacman_instance.direction_command = direction_command
+    pacman_instance.turns_allowed = turns_allowed
+    pacman_instance.update()
+    assert pacman_instance.direction == expected_direction
