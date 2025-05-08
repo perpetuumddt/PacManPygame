@@ -203,3 +203,15 @@ def test_ghost_move_clyde_no_turns(clyde_instance, game_instance):
     initial_x = clyde_instance.x_pos
     clyde_instance.move_clyde()
     assert clyde_instance.x_pos > initial_x
+
+def test_ghost_move_blinky_no_turns(blinky_instance, game_instance):
+    game_instance.level = [[0] * 30 for _ in range(32)]
+    blinky_instance.x_pos = 100
+    blinky_instance.y_pos = 100
+    blinky_instance.direction = 0
+    blinky_instance.target = (200, 100)
+    blinky_instance.speed = 1
+    blinky_instance.check_collisions = lambda: ([True, False, False, False], False) # Mock no turns except right
+    initial_x = blinky_instance.x_pos
+    blinky_instance.move_blinky()
+    assert blinky_instance.x_pos > initial_x
