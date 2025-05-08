@@ -239,3 +239,16 @@ def test_ghost_move_pinky_no_turns(pinky_instance, game_instance):
     initial_x = pinky_instance.x_pos
     pinky_instance.move_pinky()
     assert pinky_instance.x_pos > initial_x
+
+def test_update_ghost_speeds_powerup(game_instance):
+    game_instance.powerup = True
+    game_instance.eaten_ghost = [False, False, False, False]
+    game_instance.blinky.dead = False
+    game_instance.inky.dead = False
+    game_instance.pinky.dead = False
+    game_instance.clyde.dead = False
+    game_instance.update_ghost_speeds()
+    assert game_instance.blinky.speed == 0.5
+    assert game_instance.inky.speed == 0.5
+    assert game_instance.pinky.speed == 0.5
+    assert game_instance.clyde.speed == 0.5
