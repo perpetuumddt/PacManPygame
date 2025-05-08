@@ -141,3 +141,14 @@ def test_ghost_initialization(blinky_instance):
     assert not blinky_instance.in_box
     assert blinky_instance.id == 0
     assert isinstance(blinky_instance.rect, pygame.Rect)
+
+def test_ghost_update(blinky_instance):
+    initial_x = blinky_instance.x_pos
+    initial_y = blinky_instance.y_pos
+    blinky_instance.x_pos += 5
+    blinky_instance.y_pos += 5
+    blinky_instance.update()
+    assert blinky_instance.center_x == blinky_instance.x_pos + 16
+    assert blinky_instance.center_y == blinky_instance.y_pos + 17
+    assert blinky_instance.rect.topleft == (
+    blinky_instance.center_x - 13, blinky_instance.center_y - 13)  # Check rect update
