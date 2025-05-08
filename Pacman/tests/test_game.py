@@ -215,3 +215,15 @@ def test_ghost_move_blinky_no_turns(blinky_instance, game_instance):
     initial_x = blinky_instance.x_pos
     blinky_instance.move_blinky()
     assert blinky_instance.x_pos > initial_x
+
+def test_ghost_move_inky_no_turns(inky_instance, game_instance):
+    game_instance.level = [[0] * 30 for _ in range(32)]
+    inky_instance.x_pos = 100
+    inky_instance.y_pos = 100
+    inky_instance.direction = 0
+    inky_instance.target = (200, 100)
+    inky_instance.speed = 1
+    inky_instance.check_collisions = lambda: ([True, False, False, False], False) # Mock no turns except right
+    initial_x = inky_instance.x_pos
+    inky_instance.move_inky()
+    assert inky_instance.x_pos > initial_x
