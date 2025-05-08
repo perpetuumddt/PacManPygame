@@ -15,7 +15,13 @@ def game_instance():
 
     # Mock pygame.image.load to return a dummy surface instead of loading real files
     with patch('pygame.image.load', return_value=pygame.Surface((33, 33))):
-        return Game(screen, exit_callback=lambda: None, current_level=1)
+        game = Game(screen, exit_callback=lambda: None, current_level=1)
+        # Ensure ghosts are initialized after mocking image load
+        game.blinky = Ghost(game, 45, 46, (0, 0), 1, None, 0, False, False, 0)
+        game.inky = Ghost(game, 352, 305, (0, 0), 1, None, 2, False, False, 1)
+        game.pinky = Ghost(game, 352, 345, (0, 0), 1, None, 2, False, False, 2)
+        game.clyde = Ghost(game, 352, 345, (0, 0), 1, None, 2, False, False, 3)
+        return game
 
 @pytest.fixture
 def pacman_instance(game_instance):
