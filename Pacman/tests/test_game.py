@@ -7,7 +7,7 @@ from unittest.mock import patch
 # Add project root to sys.path so Python can find game.py
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from game import Game, Pacman, Board
+from game import Game, Pacman, Board, Ghost
 
 @pytest.fixture
 def game_instance():
