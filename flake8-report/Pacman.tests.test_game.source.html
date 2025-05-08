@@ -65,7 +65,7 @@
                      </span>
                      Module level import not at top of file</li>
                
-               </ul><tt><i>10</i> <span class="kn">from</span><span class="w"> </span><span class="nn">game</span><span class="w"> </span><span class="kn">import</span> <span class="n">Game</span><span class="p">,</span> <span class="n">Pacman</span><span class="p">,</span> <span class="n">Board</span></tt>
+               </ul><tt><i>10</i> <span class="kn">from</span><span class="w"> </span><span class="nn">game</span><span class="w"> </span><span class="kn">import</span> <span class="n">Game</span><span class="p">,</span> <span class="n">Pacman</span><span class="p">,</span> <span class="n">Board</span><span class="p">,</span> <span class="n">Ghost</span></tt>
             </div>
             <div id="l11"
                class="code sev- "><tt><i>11</i> &nbsp;</tt>
@@ -107,78 +107,30 @@
                class="code sev- "><tt><i>17</i>     <span class="k">with</span> <span class="n">patch</span><span class="p">(</span><span class="s1">&#39;pygame.image.load&#39;</span><span class="p">,</span> <span class="n">return_value</span><span class="o">=</span><span class="n">pygame</span><span class="o">.</span><span class="n">Surface</span><span class="p">((</span><span class="mi">33</span><span class="p">,</span> <span class="mi">33</span><span class="p">))):</span></tt>
             </div>
             <div id="l18"
-               class="code sev- "><tt><i>18</i>         <span class="k">return</span> <span class="n">Game</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">exit_callback</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="n">current_level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></tt>
+               class="code sev- "><tt><i>18</i>         <span class="n">game</span> <span class="o">=</span> <span class="n">Game</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">exit_callback</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="n">current_level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></tt>
             </div>
             <div id="l19"
-               class="code sev- "><tt><i>19</i> &nbsp;</tt>
+               class="code sev- "><tt><i>19</i>         <span class="c1"># Ensure ghosts are initialized after mocking image load</span></tt>
             </div>
             <div id="l20"
-               class="code sev-2  le">
-               <ul class="violations">
-               
-                  <li>
-                     <span class="count sev-2">
-                        E302
-                     </span>
-                     Expected 2 blank lines, found 1</li>
-               
-               </ul><tt><i>20</i> <span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span></tt>
+               class="code sev- "><tt><i>20</i>         <span class="n">game</span><span class="o">.</span><span class="n">blinky</span> <span class="o">=</span> <span class="n">Ghost</span><span class="p">(</span><span class="n">game</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">46</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span></tt>
             </div>
             <div id="l21"
-               class="code sev- "><tt><i>21</i> <span class="k">def</span><span class="w"> </span><span class="nf">pacman_instance</span><span class="p">(</span><span class="n">game_instance</span><span class="p">):</span></tt>
+               class="code sev- "><tt><i>21</i>         <span class="n">game</span><span class="o">.</span><span class="n">inky</span> <span class="o">=</span> <span class="n">Ghost</span><span class="p">(</span><span class="n">game</span><span class="p">,</span> <span class="mi">352</span><span class="p">,</span> <span class="mi">305</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span></tt>
             </div>
             <div id="l22"
-               class="code sev- "><tt><i>22</i>     <span class="k">return</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">pacman</span></tt>
+               class="code sev- "><tt><i>22</i>         <span class="n">game</span><span class="o">.</span><span class="n">pinky</span> <span class="o">=</span> <span class="n">Ghost</span><span class="p">(</span><span class="n">game</span><span class="p">,</span> <span class="mi">352</span><span class="p">,</span> <span class="mi">345</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span></tt>
             </div>
             <div id="l23"
-               class="code sev- "><tt><i>23</i> &nbsp;</tt>
+               class="code sev- "><tt><i>23</i>         <span class="n">game</span><span class="o">.</span><span class="n">clyde</span> <span class="o">=</span> <span class="n">Ghost</span><span class="p">(</span><span class="n">game</span><span class="p">,</span> <span class="mi">352</span><span class="p">,</span> <span class="mi">345</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span></tt>
             </div>
             <div id="l24"
-               class="code sev-2  le">
-               <ul class="violations">
-               
-                  <li>
-                     <span class="count sev-2">
-                        E302
-                     </span>
-                     Expected 2 blank lines, found 1</li>
-               
-               </ul><tt><i>24</i> <span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span></tt>
+               class="code sev- "><tt><i>24</i>         <span class="k">return</span> <span class="n">game</span></tt>
             </div>
             <div id="l25"
-               class="code sev- "><tt><i>25</i> <span class="k">def</span><span class="w"> </span><span class="nf">board_instance</span><span class="p">(</span><span class="n">game_instance</span><span class="p">):</span></tt>
+               class="code sev- "><tt><i>25</i> &nbsp;</tt>
             </div>
             <div id="l26"
-               class="code sev- "><tt><i>26</i>     <span class="k">return</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">board</span></tt>
-            </div>
-            <div id="l27"
-               class="code sev- "><tt><i>27</i> &nbsp;</tt>
-            </div>
-            <div id="l28"
-               class="code sev- "><tt><i>28</i> &nbsp;</tt>
-            </div>
-            <div id="l29"
-               class="code sev- "><tt><i>29</i> <span class="c1"># Test: Initial values should be set properly</span></tt>
-            </div>
-            <div id="l30"
-               class="code sev- "><tt><i>30</i> <span class="k">def</span><span class="w"> </span><span class="nf">test_game_initialization</span><span class="p">(</span><span class="n">game_instance</span><span class="p">):</span></tt>
-            </div>
-            <div id="l31"
-               class="code sev- "><tt><i>31</i>     <span class="k">assert</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">lives</span> <span class="o">==</span> <span class="mi">3</span></tt>
-            </div>
-            <div id="l32"
-               class="code sev- "><tt><i>32</i>     <span class="k">assert</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">score</span> <span class="o">==</span> <span class="mi">0</span></tt>
-            </div>
-            <div id="l33"
-               class="code sev- "><tt><i>33</i>     <span class="k">assert</span> <span class="ow">not</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">powerup</span></tt>
-            </div>
-            <div id="l34"
-               class="code sev- "><tt><i>34</i> &nbsp;</tt>
-            </div>
-            <div id="l35"
-               class="code sev- "><tt><i>35</i> <span class="c1"># Test: Resetting game should restore initial state</span></tt>
-            </div>
-            <div id="l36"
                class="code sev-2  le">
                <ul class="violations">
                
@@ -188,42 +140,198 @@
                      </span>
                      Expected 2 blank lines, found 1</li>
                
-               </ul><tt><i>36</i> <span class="k">def</span><span class="w"> </span><span class="nf">test_reset_game_state</span><span class="p">(</span><span class="n">game_instance</span><span class="p">):</span></tt>
+               </ul><tt><i>26</i> <span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span></tt>
+            </div>
+            <div id="l27"
+               class="code sev- "><tt><i>27</i> <span class="k">def</span><span class="w"> </span><span class="nf">pacman_instance</span><span class="p">(</span><span class="n">game_instance</span><span class="p">):</span></tt>
+            </div>
+            <div id="l28"
+               class="code sev- "><tt><i>28</i>     <span class="k">return</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">pacman</span></tt>
+            </div>
+            <div id="l29"
+               class="code sev- "><tt><i>29</i> &nbsp;</tt>
+            </div>
+            <div id="l30"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E302
+                     </span>
+                     Expected 2 blank lines, found 1</li>
+               
+               </ul><tt><i>30</i> <span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span></tt>
+            </div>
+            <div id="l31"
+               class="code sev- "><tt><i>31</i> <span class="k">def</span><span class="w"> </span><span class="nf">board_instance</span><span class="p">(</span><span class="n">game_instance</span><span class="p">):</span></tt>
+            </div>
+            <div id="l32"
+               class="code sev- "><tt><i>32</i>     <span class="k">return</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">board</span></tt>
+            </div>
+            <div id="l33"
+               class="code sev- "><tt><i>33</i> &nbsp;</tt>
+            </div>
+            <div id="l34"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E302
+                     </span>
+                     Expected 2 blank lines, found 1</li>
+               
+               </ul><tt><i>34</i> <span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span></tt>
+            </div>
+            <div id="l35"
+               class="code sev- "><tt><i>35</i> <span class="k">def</span><span class="w"> </span><span class="nf">blinky_instance</span><span class="p">(</span><span class="n">game_instance</span><span class="p">):</span></tt>
+            </div>
+            <div id="l36"
+               class="code sev- "><tt><i>36</i>     <span class="k">return</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">blinky</span></tt>
             </div>
             <div id="l37"
-               class="code sev- "><tt><i>37</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">lives</span> <span class="o">=</span> <span class="mi">1</span></tt>
+               class="code sev- "><tt><i>37</i> &nbsp;</tt>
             </div>
             <div id="l38"
-               class="code sev- "><tt><i>38</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">score</span> <span class="o">=</span> <span class="mi">100</span></tt>
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E302
+                     </span>
+                     Expected 2 blank lines, found 1</li>
+               
+               </ul><tt><i>38</i> <span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span></tt>
             </div>
             <div id="l39"
-               class="code sev- "><tt><i>39</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">powerup</span> <span class="o">=</span> <span class="kc">True</span></tt>
+               class="code sev- "><tt><i>39</i> <span class="k">def</span><span class="w"> </span><span class="nf">inky_instance</span><span class="p">(</span><span class="n">game_instance</span><span class="p">):</span></tt>
             </div>
             <div id="l40"
-               class="code sev- "><tt><i>40</i> &nbsp;</tt>
+               class="code sev- "><tt><i>40</i>     <span class="k">return</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">inky</span></tt>
             </div>
             <div id="l41"
-               class="code sev- "><tt><i>41</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">reset_game_state</span><span class="p">()</span></tt>
+               class="code sev- "><tt><i>41</i> &nbsp;</tt>
             </div>
             <div id="l42"
-               class="code sev- "><tt><i>42</i> &nbsp;</tt>
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E302
+                     </span>
+                     Expected 2 blank lines, found 1</li>
+               
+               </ul><tt><i>42</i> <span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span></tt>
             </div>
             <div id="l43"
-               class="code sev- "><tt><i>43</i>     <span class="k">assert</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">lives</span> <span class="o">==</span> <span class="mi">3</span></tt>
+               class="code sev- "><tt><i>43</i> <span class="k">def</span><span class="w"> </span><span class="nf">pinky_instance</span><span class="p">(</span><span class="n">game_instance</span><span class="p">):</span></tt>
             </div>
             <div id="l44"
-               class="code sev- "><tt><i>44</i>     <span class="k">assert</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">score</span> <span class="o">==</span> <span class="mi">0</span></tt>
+               class="code sev- "><tt><i>44</i>     <span class="k">return</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">pinky</span></tt>
             </div>
             <div id="l45"
-               class="code sev- "><tt><i>45</i>     <span class="k">assert</span> <span class="ow">not</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">powerup</span></tt>
+               class="code sev- "><tt><i>45</i> &nbsp;</tt>
             </div>
             <div id="l46"
-               class="code sev- "><tt><i>46</i> &nbsp;</tt>
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E302
+                     </span>
+                     Expected 2 blank lines, found 1</li>
+               
+               </ul><tt><i>46</i> <span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span></tt>
             </div>
             <div id="l47"
-               class="code sev- "><tt><i>47</i> <span class="c1"># Test: Pacman update method</span></tt>
+               class="code sev- "><tt><i>47</i> <span class="k">def</span><span class="w"> </span><span class="nf">clyde_instance</span><span class="p">(</span><span class="n">game_instance</span><span class="p">):</span></tt>
             </div>
             <div id="l48"
+               class="code sev- "><tt><i>48</i>     <span class="k">return</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">clyde</span></tt>
+            </div>
+            <div id="l49"
+               class="code sev- "><tt><i>49</i> &nbsp;</tt>
+            </div>
+            <div id="l50"
+               class="code sev- "><tt><i>50</i> <span class="c1"># Test: Initial values should be set properly</span></tt>
+            </div>
+            <div id="l51"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E302
+                     </span>
+                     Expected 2 blank lines, found 1</li>
+               
+               </ul><tt><i>51</i> <span class="k">def</span><span class="w"> </span><span class="nf">test_game_initialization</span><span class="p">(</span><span class="n">game_instance</span><span class="p">):</span></tt>
+            </div>
+            <div id="l52"
+               class="code sev- "><tt><i>52</i>     <span class="k">assert</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">lives</span> <span class="o">==</span> <span class="mi">3</span></tt>
+            </div>
+            <div id="l53"
+               class="code sev- "><tt><i>53</i>     <span class="k">assert</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">score</span> <span class="o">==</span> <span class="mi">0</span></tt>
+            </div>
+            <div id="l54"
+               class="code sev- "><tt><i>54</i>     <span class="k">assert</span> <span class="ow">not</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">powerup</span></tt>
+            </div>
+            <div id="l55"
+               class="code sev- "><tt><i>55</i> &nbsp;</tt>
+            </div>
+            <div id="l56"
+               class="code sev- "><tt><i>56</i> <span class="c1"># Test: Resetting game should restore initial state</span></tt>
+            </div>
+            <div id="l57"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E302
+                     </span>
+                     Expected 2 blank lines, found 1</li>
+               
+               </ul><tt><i>57</i> <span class="k">def</span><span class="w"> </span><span class="nf">test_reset_game_state</span><span class="p">(</span><span class="n">game_instance</span><span class="p">):</span></tt>
+            </div>
+            <div id="l58"
+               class="code sev- "><tt><i>58</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">lives</span> <span class="o">=</span> <span class="mi">1</span></tt>
+            </div>
+            <div id="l59"
+               class="code sev- "><tt><i>59</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">score</span> <span class="o">=</span> <span class="mi">100</span></tt>
+            </div>
+            <div id="l60"
+               class="code sev- "><tt><i>60</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">powerup</span> <span class="o">=</span> <span class="kc">True</span></tt>
+            </div>
+            <div id="l61"
+               class="code sev- "><tt><i>61</i> &nbsp;</tt>
+            </div>
+            <div id="l62"
+               class="code sev- "><tt><i>62</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">reset_game_state</span><span class="p">()</span></tt>
+            </div>
+            <div id="l63"
+               class="code sev- "><tt><i>63</i> &nbsp;</tt>
+            </div>
+            <div id="l64"
+               class="code sev- "><tt><i>64</i>     <span class="k">assert</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">lives</span> <span class="o">==</span> <span class="mi">3</span></tt>
+            </div>
+            <div id="l65"
+               class="code sev- "><tt><i>65</i>     <span class="k">assert</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">score</span> <span class="o">==</span> <span class="mi">0</span></tt>
+            </div>
+            <div id="l66"
+               class="code sev- "><tt><i>66</i>     <span class="k">assert</span> <span class="ow">not</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">powerup</span></tt>
+            </div>
+            <div id="l67"
+               class="code sev- "><tt><i>67</i> &nbsp;</tt>
+            </div>
+            <div id="l68"
+               class="code sev- "><tt><i>68</i> <span class="c1"># Test: Pacman update method</span></tt>
+            </div>
+            <div id="l69"
                class="code sev-2  le">
                <ul class="violations">
                
@@ -239,24 +347,24 @@
                      </span>
                      Line too long (82 > 79 characters)</li>
                
-               </ul><tt><i>48</i> <span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;direction_command, turns_allowed, expected_direction&quot;</span><span class="p">,</span> <span class="p">[</span></tt>
+               </ul><tt><i>69</i> <span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;direction_command, turns_allowed, expected_direction&quot;</span><span class="p">,</span> <span class="p">[</span></tt>
             </div>
-            <div id="l49"
-               class="code sev- "><tt><i>49</i>     <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="mi">0</span><span class="p">),</span>  <span class="c1"># Can turn right</span></tt>
+            <div id="l70"
+               class="code sev- "><tt><i>70</i>     <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="mi">0</span><span class="p">),</span>  <span class="c1"># Can turn right</span></tt>
             </div>
-            <div id="l50"
-               class="code sev- "><tt><i>50</i>     <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="mi">1</span><span class="p">),</span>  <span class="c1"># Can turn left</span></tt>
+            <div id="l71"
+               class="code sev- "><tt><i>71</i>     <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="mi">1</span><span class="p">),</span>  <span class="c1"># Can turn left</span></tt>
             </div>
-            <div id="l51"
-               class="code sev- "><tt><i>51</i>     <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="mi">0</span><span class="p">),</span>  <span class="c1"># Can`t turn up</span></tt>
+            <div id="l72"
+               class="code sev- "><tt><i>72</i>     <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="mi">0</span><span class="p">),</span>  <span class="c1"># Can`t turn up</span></tt>
             </div>
-            <div id="l52"
-               class="code sev- "><tt><i>52</i>     <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="mi">0</span><span class="p">),</span>  <span class="c1"># Can`t turn down</span></tt>
+            <div id="l73"
+               class="code sev- "><tt><i>73</i>     <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="mi">0</span><span class="p">),</span>  <span class="c1"># Can`t turn down</span></tt>
             </div>
-            <div id="l53"
-               class="code sev- "><tt><i>53</i> <span class="p">])</span></tt>
+            <div id="l74"
+               class="code sev- "><tt><i>74</i> <span class="p">])</span></tt>
             </div>
-            <div id="l54"
+            <div id="l75"
                class="code sev-2  le">
                <ul class="violations">
                
@@ -266,27 +374,27 @@
                      </span>
                      Line too long (94 > 79 characters)</li>
                
-               </ul><tt><i>54</i> <span class="k">def</span><span class="w"> </span><span class="nf">test_pacman_update</span><span class="p">(</span><span class="n">pacman_instance</span><span class="p">,</span> <span class="n">direction_command</span><span class="p">,</span> <span class="n">turns_allowed</span><span class="p">,</span> <span class="n">expected_direction</span><span class="p">):</span></tt>
+               </ul><tt><i>75</i> <span class="k">def</span><span class="w"> </span><span class="nf">test_pacman_update</span><span class="p">(</span><span class="n">pacman_instance</span><span class="p">,</span> <span class="n">direction_command</span><span class="p">,</span> <span class="n">turns_allowed</span><span class="p">,</span> <span class="n">expected_direction</span><span class="p">):</span></tt>
             </div>
-            <div id="l55"
-               class="code sev- "><tt><i>55</i>     <span class="n">pacman_instance</span><span class="o">.</span><span class="n">direction_command</span> <span class="o">=</span> <span class="n">direction_command</span></tt>
+            <div id="l76"
+               class="code sev- "><tt><i>76</i>     <span class="n">pacman_instance</span><span class="o">.</span><span class="n">direction_command</span> <span class="o">=</span> <span class="n">direction_command</span></tt>
             </div>
-            <div id="l56"
-               class="code sev- "><tt><i>56</i>     <span class="n">pacman_instance</span><span class="o">.</span><span class="n">turns_allowed</span> <span class="o">=</span> <span class="n">turns_allowed</span></tt>
+            <div id="l77"
+               class="code sev- "><tt><i>77</i>     <span class="n">pacman_instance</span><span class="o">.</span><span class="n">turns_allowed</span> <span class="o">=</span> <span class="n">turns_allowed</span></tt>
             </div>
-            <div id="l57"
-               class="code sev- "><tt><i>57</i>     <span class="n">pacman_instance</span><span class="o">.</span><span class="n">update</span><span class="p">()</span></tt>
+            <div id="l78"
+               class="code sev- "><tt><i>78</i>     <span class="n">pacman_instance</span><span class="o">.</span><span class="n">update</span><span class="p">()</span></tt>
             </div>
-            <div id="l58"
-               class="code sev- "><tt><i>58</i>     <span class="k">assert</span> <span class="n">pacman_instance</span><span class="o">.</span><span class="n">direction</span> <span class="o">==</span> <span class="n">expected_direction</span></tt>
+            <div id="l79"
+               class="code sev- "><tt><i>79</i>     <span class="k">assert</span> <span class="n">pacman_instance</span><span class="o">.</span><span class="n">direction</span> <span class="o">==</span> <span class="n">expected_direction</span></tt>
             </div>
-            <div id="l59"
-               class="code sev- "><tt><i>59</i> &nbsp;</tt>
+            <div id="l80"
+               class="code sev- "><tt><i>80</i> &nbsp;</tt>
             </div>
-            <div id="l60"
-               class="code sev- "><tt><i>60</i> <span class="c1"># Test: Pacman move method</span></tt>
+            <div id="l81"
+               class="code sev- "><tt><i>81</i> <span class="c1"># Test: Pacman move method</span></tt>
             </div>
-            <div id="l61"
+            <div id="l82"
                class="code sev-2  le">
                <ul class="violations">
                
@@ -296,24 +404,24 @@
                      </span>
                      Expected 2 blank lines, found 1</li>
                
-               </ul><tt><i>61</i> <span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;direction, turns_allowed, expected_x, expected_y&quot;</span><span class="p">,</span> <span class="p">[</span></tt>
+               </ul><tt><i>82</i> <span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;direction, turns_allowed, expected_x, expected_y&quot;</span><span class="p">,</span> <span class="p">[</span></tt>
             </div>
-            <div id="l62"
-               class="code sev- "><tt><i>62</i>     <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="mi">362</span><span class="p">,</span> <span class="mi">522</span><span class="p">),</span>  <span class="c1"># Move right</span></tt>
+            <div id="l83"
+               class="code sev- "><tt><i>83</i>     <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="mi">362</span><span class="p">,</span> <span class="mi">522</span><span class="p">),</span>  <span class="c1"># Move right</span></tt>
             </div>
-            <div id="l63"
-               class="code sev- "><tt><i>63</i>     <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="mi">358</span><span class="p">,</span> <span class="mi">522</span><span class="p">),</span>  <span class="c1"># Move left</span></tt>
+            <div id="l84"
+               class="code sev- "><tt><i>84</i>     <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="mi">358</span><span class="p">,</span> <span class="mi">522</span><span class="p">),</span>  <span class="c1"># Move left</span></tt>
             </div>
-            <div id="l64"
-               class="code sev- "><tt><i>64</i>     <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="mi">360</span><span class="p">,</span> <span class="mi">520</span><span class="p">),</span>  <span class="c1"># Move up</span></tt>
+            <div id="l85"
+               class="code sev- "><tt><i>85</i>     <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="mi">360</span><span class="p">,</span> <span class="mi">520</span><span class="p">),</span>  <span class="c1"># Move up</span></tt>
             </div>
-            <div id="l65"
-               class="code sev- "><tt><i>65</i>     <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span> <span class="mi">360</span><span class="p">,</span> <span class="mi">524</span><span class="p">),</span>  <span class="c1"># Move down</span></tt>
+            <div id="l86"
+               class="code sev- "><tt><i>86</i>     <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span> <span class="mi">360</span><span class="p">,</span> <span class="mi">524</span><span class="p">),</span>  <span class="c1"># Move down</span></tt>
             </div>
-            <div id="l66"
-               class="code sev- "><tt><i>66</i> <span class="p">])</span></tt>
+            <div id="l87"
+               class="code sev- "><tt><i>87</i> <span class="p">])</span></tt>
             </div>
-            <div id="l67"
+            <div id="l88"
                class="code sev-2  le">
                <ul class="violations">
                
@@ -323,108 +431,30 @@
                      </span>
                      Line too long (88 > 79 characters)</li>
                
-               </ul><tt><i>67</i> <span class="k">def</span><span class="w"> </span><span class="nf">test_pacman_move</span><span class="p">(</span><span class="n">pacman_instance</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">turns_allowed</span><span class="p">,</span> <span class="n">expected_x</span><span class="p">,</span> <span class="n">expected_y</span><span class="p">):</span></tt>
-            </div>
-            <div id="l68"
-               class="code sev- "><tt><i>68</i>     <span class="n">pacman_instance</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="n">direction</span></tt>
-            </div>
-            <div id="l69"
-               class="code sev- "><tt><i>69</i>     <span class="n">pacman_instance</span><span class="o">.</span><span class="n">turns_allowed</span> <span class="o">=</span> <span class="n">turns_allowed</span></tt>
-            </div>
-            <div id="l70"
-               class="code sev- "><tt><i>70</i>     <span class="n">pacman_instance</span><span class="o">.</span><span class="n">move</span><span class="p">()</span></tt>
-            </div>
-            <div id="l71"
-               class="code sev- "><tt><i>71</i>     <span class="k">assert</span> <span class="n">pacman_instance</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="n">expected_x</span></tt>
-            </div>
-            <div id="l72"
-               class="code sev- "><tt><i>72</i>     <span class="k">assert</span> <span class="n">pacman_instance</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="n">expected_y</span></tt>
-            </div>
-            <div id="l73"
-               class="code sev- "><tt><i>73</i> &nbsp;</tt>
-            </div>
-            <div id="l74"
-               class="code sev- "><tt><i>74</i> <span class="c1"># Test: Pacman screen wrapping</span></tt>
-            </div>
-            <div id="l75"
-               class="code sev-2  le">
-               <ul class="violations">
-               
-                  <li>
-                     <span class="count sev-2">
-                        E302
-                     </span>
-                     Expected 2 blank lines, found 1</li>
-               
-               </ul><tt><i>75</i> <span class="k">def</span><span class="w"> </span><span class="nf">test_pacman_screen_wrap</span><span class="p">(</span><span class="n">pacman_instance</span><span class="p">):</span></tt>
-            </div>
-            <div id="l76"
-               class="code sev- "><tt><i>76</i>     <span class="n">pacman_instance</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">692</span></tt>
-            </div>
-            <div id="l77"
-               class="code sev- "><tt><i>77</i>     <span class="n">pacman_instance</span><span class="o">.</span><span class="n">move</span><span class="p">()</span></tt>
-            </div>
-            <div id="l78"
-               class="code sev- "><tt><i>78</i>     <span class="k">assert</span> <span class="n">pacman_instance</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="o">-</span><span class="mi">35</span></tt>
-            </div>
-            <div id="l79"
-               class="code sev- "><tt><i>79</i> &nbsp;</tt>
-            </div>
-            <div id="l80"
-               class="code sev- "><tt><i>80</i>     <span class="n">pacman_instance</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="o">-</span><span class="mi">39</span></tt>
-            </div>
-            <div id="l81"
-               class="code sev- "><tt><i>81</i>     <span class="n">pacman_instance</span><span class="o">.</span><span class="n">move</span><span class="p">()</span></tt>
-            </div>
-            <div id="l82"
-               class="code sev- "><tt><i>82</i>     <span class="k">assert</span> <span class="n">pacman_instance</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="mi">691</span></tt>
-            </div>
-            <div id="l83"
-               class="code sev- "><tt><i>83</i> &nbsp;</tt>
-            </div>
-            <div id="l84"
-               class="code sev- "><tt><i>84</i> <span class="c1"># Test: Pacman get_player_rect method</span></tt>
-            </div>
-            <div id="l85"
-               class="code sev-2  le">
-               <ul class="violations">
-               
-                  <li>
-                     <span class="count sev-2">
-                        E302
-                     </span>
-                     Expected 2 blank lines, found 1</li>
-               
-               </ul><tt><i>85</i> <span class="k">def</span><span class="w"> </span><span class="nf">test_pacman_get_player_rect</span><span class="p">(</span><span class="n">pacman_instance</span><span class="p">):</span></tt>
-            </div>
-            <div id="l86"
-               class="code sev- "><tt><i>86</i>     <span class="n">pacman_instance</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">100</span></tt>
-            </div>
-            <div id="l87"
-               class="code sev- "><tt><i>87</i>     <span class="n">pacman_instance</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">150</span></tt>
-            </div>
-            <div id="l88"
-               class="code sev- "><tt><i>88</i>     <span class="n">rect</span> <span class="o">=</span> <span class="n">pacman_instance</span><span class="o">.</span><span class="n">get_player_rect</span><span class="p">()</span></tt>
+               </ul><tt><i>88</i> <span class="k">def</span><span class="w"> </span><span class="nf">test_pacman_move</span><span class="p">(</span><span class="n">pacman_instance</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">turns_allowed</span><span class="p">,</span> <span class="n">expected_x</span><span class="p">,</span> <span class="n">expected_y</span><span class="p">):</span></tt>
             </div>
             <div id="l89"
-               class="code sev- "><tt><i>89</i>     <span class="k">assert</span> <span class="n">rect</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="mi">100</span> <span class="o">+</span> <span class="mi">16</span> <span class="o">-</span> <span class="mi">16</span></tt>
+               class="code sev- "><tt><i>89</i>     <span class="n">pacman_instance</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="n">direction</span></tt>
             </div>
             <div id="l90"
-               class="code sev- "><tt><i>90</i>     <span class="k">assert</span> <span class="n">rect</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="mi">150</span> <span class="o">+</span> <span class="mi">17</span> <span class="o">-</span> <span class="mi">16</span></tt>
+               class="code sev- "><tt><i>90</i>     <span class="n">pacman_instance</span><span class="o">.</span><span class="n">turns_allowed</span> <span class="o">=</span> <span class="n">turns_allowed</span></tt>
             </div>
             <div id="l91"
-               class="code sev- "><tt><i>91</i>     <span class="k">assert</span> <span class="n">rect</span><span class="o">.</span><span class="n">width</span> <span class="o">==</span> <span class="mi">32</span></tt>
+               class="code sev- "><tt><i>91</i>     <span class="n">pacman_instance</span><span class="o">.</span><span class="n">move</span><span class="p">()</span></tt>
             </div>
             <div id="l92"
-               class="code sev- "><tt><i>92</i>     <span class="k">assert</span> <span class="n">rect</span><span class="o">.</span><span class="n">height</span> <span class="o">==</span> <span class="mi">32</span></tt>
+               class="code sev- "><tt><i>92</i>     <span class="k">assert</span> <span class="n">pacman_instance</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="n">expected_x</span></tt>
             </div>
             <div id="l93"
-               class="code sev- "><tt><i>93</i> &nbsp;</tt>
+               class="code sev- "><tt><i>93</i>     <span class="k">assert</span> <span class="n">pacman_instance</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="n">expected_y</span></tt>
             </div>
             <div id="l94"
-               class="code sev- "><tt><i>94</i> <span class="c1"># Test: Board check_position method</span></tt>
+               class="code sev- "><tt><i>94</i> &nbsp;</tt>
             </div>
             <div id="l95"
+               class="code sev- "><tt><i>95</i> <span class="c1"># Test: Pacman screen wrapping</span></tt>
+            </div>
+            <div id="l96"
                class="code sev-2  le">
                <ul class="violations">
                
@@ -434,18 +464,96 @@
                      </span>
                      Expected 2 blank lines, found 1</li>
                
-               </ul><tt><i>95</i> <span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;centerx, centery, expected_turns&quot;</span><span class="p">,</span> <span class="p">[</span></tt>
-            </div>
-            <div id="l96"
-               class="code sev- "><tt><i>96</i>     <span class="p">(</span><span class="mi">116</span><span class="p">,</span> <span class="mi">117</span><span class="p">,</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">]),</span>  <span class="c1"># No turns allowed</span></tt>
+               </ul><tt><i>96</i> <span class="k">def</span><span class="w"> </span><span class="nf">test_pacman_screen_wrap</span><span class="p">(</span><span class="n">pacman_instance</span><span class="p">):</span></tt>
             </div>
             <div id="l97"
-               class="code sev- "><tt><i>97</i>     <span class="p">(</span><span class="mi">376</span><span class="p">,</span> <span class="mi">539</span><span class="p">,</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">]),</span>      <span class="c1"># Turns allowed left and right</span></tt>
+               class="code sev- "><tt><i>97</i>     <span class="n">pacman_instance</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">692</span></tt>
             </div>
             <div id="l98"
-               class="code sev- "><tt><i>98</i> <span class="p">])</span></tt>
+               class="code sev- "><tt><i>98</i>     <span class="n">pacman_instance</span><span class="o">.</span><span class="n">move</span><span class="p">()</span></tt>
             </div>
             <div id="l99"
+               class="code sev- "><tt><i>99</i>     <span class="k">assert</span> <span class="n">pacman_instance</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="o">-</span><span class="mi">35</span></tt>
+            </div>
+            <div id="l100"
+               class="code sev- "><tt><i>100</i> &nbsp;</tt>
+            </div>
+            <div id="l101"
+               class="code sev- "><tt><i>101</i>     <span class="n">pacman_instance</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="o">-</span><span class="mi">39</span></tt>
+            </div>
+            <div id="l102"
+               class="code sev- "><tt><i>102</i>     <span class="n">pacman_instance</span><span class="o">.</span><span class="n">move</span><span class="p">()</span></tt>
+            </div>
+            <div id="l103"
+               class="code sev- "><tt><i>103</i>     <span class="k">assert</span> <span class="n">pacman_instance</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="mi">691</span></tt>
+            </div>
+            <div id="l104"
+               class="code sev- "><tt><i>104</i> &nbsp;</tt>
+            </div>
+            <div id="l105"
+               class="code sev- "><tt><i>105</i> <span class="c1"># Test: Pacman get_player_rect method</span></tt>
+            </div>
+            <div id="l106"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E302
+                     </span>
+                     Expected 2 blank lines, found 1</li>
+               
+               </ul><tt><i>106</i> <span class="k">def</span><span class="w"> </span><span class="nf">test_pacman_get_player_rect</span><span class="p">(</span><span class="n">pacman_instance</span><span class="p">):</span></tt>
+            </div>
+            <div id="l107"
+               class="code sev- "><tt><i>107</i>     <span class="n">pacman_instance</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">100</span></tt>
+            </div>
+            <div id="l108"
+               class="code sev- "><tt><i>108</i>     <span class="n">pacman_instance</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">150</span></tt>
+            </div>
+            <div id="l109"
+               class="code sev- "><tt><i>109</i>     <span class="n">rect</span> <span class="o">=</span> <span class="n">pacman_instance</span><span class="o">.</span><span class="n">get_player_rect</span><span class="p">()</span></tt>
+            </div>
+            <div id="l110"
+               class="code sev- "><tt><i>110</i>     <span class="k">assert</span> <span class="n">rect</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="mi">100</span> <span class="o">+</span> <span class="mi">16</span> <span class="o">-</span> <span class="mi">16</span></tt>
+            </div>
+            <div id="l111"
+               class="code sev- "><tt><i>111</i>     <span class="k">assert</span> <span class="n">rect</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="mi">150</span> <span class="o">+</span> <span class="mi">17</span> <span class="o">-</span> <span class="mi">16</span></tt>
+            </div>
+            <div id="l112"
+               class="code sev- "><tt><i>112</i>     <span class="k">assert</span> <span class="n">rect</span><span class="o">.</span><span class="n">width</span> <span class="o">==</span> <span class="mi">32</span></tt>
+            </div>
+            <div id="l113"
+               class="code sev- "><tt><i>113</i>     <span class="k">assert</span> <span class="n">rect</span><span class="o">.</span><span class="n">height</span> <span class="o">==</span> <span class="mi">32</span></tt>
+            </div>
+            <div id="l114"
+               class="code sev- "><tt><i>114</i> &nbsp;</tt>
+            </div>
+            <div id="l115"
+               class="code sev- "><tt><i>115</i> <span class="c1"># Test: Board check_position method</span></tt>
+            </div>
+            <div id="l116"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E302
+                     </span>
+                     Expected 2 blank lines, found 1</li>
+               
+               </ul><tt><i>116</i> <span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;centerx, centery, expected_turns&quot;</span><span class="p">,</span> <span class="p">[</span></tt>
+            </div>
+            <div id="l117"
+               class="code sev- "><tt><i>117</i>     <span class="p">(</span><span class="mi">116</span><span class="p">,</span> <span class="mi">117</span><span class="p">,</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">]),</span>  <span class="c1"># No turns allowed</span></tt>
+            </div>
+            <div id="l118"
+               class="code sev- "><tt><i>118</i>     <span class="p">(</span><span class="mi">376</span><span class="p">,</span> <span class="mi">539</span><span class="p">,</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">]),</span>      <span class="c1"># Turns allowed left and right</span></tt>
+            </div>
+            <div id="l119"
+               class="code sev- "><tt><i>119</i> <span class="p">])</span></tt>
+            </div>
+            <div id="l120"
                class="code sev-2  le">
                <ul class="violations">
                
@@ -455,21 +563,21 @@
                      </span>
                      Line too long (80 > 79 characters)</li>
                
-               </ul><tt><i>99</i> <span class="k">def</span><span class="w"> </span><span class="nf">test_board_check_position</span><span class="p">(</span><span class="n">board_instance</span><span class="p">,</span> <span class="n">centerx</span><span class="p">,</span> <span class="n">centery</span><span class="p">,</span> <span class="n">expected_turns</span><span class="p">):</span></tt>
+               </ul><tt><i>120</i> <span class="k">def</span><span class="w"> </span><span class="nf">test_board_check_position</span><span class="p">(</span><span class="n">board_instance</span><span class="p">,</span> <span class="n">centerx</span><span class="p">,</span> <span class="n">centery</span><span class="p">,</span> <span class="n">expected_turns</span><span class="p">):</span></tt>
             </div>
-            <div id="l100"
-               class="code sev- "><tt><i>100</i>     <span class="n">turns</span> <span class="o">=</span> <span class="n">board_instance</span><span class="o">.</span><span class="n">check_position</span><span class="p">(</span><span class="n">centerx</span><span class="p">,</span> <span class="n">centery</span><span class="p">)</span></tt>
+            <div id="l121"
+               class="code sev- "><tt><i>121</i>     <span class="n">turns</span> <span class="o">=</span> <span class="n">board_instance</span><span class="o">.</span><span class="n">check_position</span><span class="p">(</span><span class="n">centerx</span><span class="p">,</span> <span class="n">centery</span><span class="p">)</span></tt>
             </div>
-            <div id="l101"
-               class="code sev- "><tt><i>101</i>     <span class="k">assert</span> <span class="n">turns</span> <span class="o">==</span> <span class="n">expected_turns</span></tt>
+            <div id="l122"
+               class="code sev- "><tt><i>122</i>     <span class="k">assert</span> <span class="n">turns</span> <span class="o">==</span> <span class="n">expected_turns</span></tt>
             </div>
-            <div id="l102"
-               class="code sev- "><tt><i>102</i> &nbsp;</tt>
+            <div id="l123"
+               class="code sev- "><tt><i>123</i> &nbsp;</tt>
             </div>
-            <div id="l103"
-               class="code sev- "><tt><i>103</i> <span class="c1"># Test: Board check_collisions method</span></tt>
+            <div id="l124"
+               class="code sev- "><tt><i>124</i> <span class="c1"># Test: Board check_collisions method</span></tt>
             </div>
-            <div id="l104"
+            <div id="l125"
                class="code sev-2  le">
                <ul class="violations">
                
@@ -479,15 +587,15 @@
                      </span>
                      Expected 2 blank lines, found 1</li>
                
-               </ul><tt><i>104</i> <span class="k">def</span><span class="w"> </span><span class="nf">test_board_check_collisions</span><span class="p">(</span><span class="n">board_instance</span><span class="p">,</span> <span class="n">game_instance</span><span class="p">):</span></tt>
+               </ul><tt><i>125</i> <span class="k">def</span><span class="w"> </span><span class="nf">test_board_check_collisions</span><span class="p">(</span><span class="n">board_instance</span><span class="p">,</span> <span class="n">game_instance</span><span class="p">):</span></tt>
             </div>
-            <div id="l105"
-               class="code sev- "><tt><i>105</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">30</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">32</span><span class="p">)]</span></tt>
+            <div id="l126"
+               class="code sev- "><tt><i>126</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">30</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">32</span><span class="p">)]</span></tt>
             </div>
-            <div id="l106"
-               class="code sev- "><tt><i>106</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">level</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># Place a dot</span></tt>
+            <div id="l127"
+               class="code sev- "><tt><i>127</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">level</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># Place a dot</span></tt>
             </div>
-            <div id="l107"
+            <div id="l128"
                class="code sev-2  le">
                <ul class="violations">
                
@@ -497,9 +605,9 @@
                      </span>
                      Line too long (86 > 79 characters)</li>
                
-               </ul><tt><i>107</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">pacman</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">pacman</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">66</span><span class="p">,</span> <span class="mi">68</span>  <span class="c1"># Place pacman on the dot</span></tt>
+               </ul><tt><i>128</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">pacman</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">pacman</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">66</span><span class="p">,</span> <span class="mi">68</span>  <span class="c1"># Place pacman on the dot</span></tt>
             </div>
-            <div id="l108"
+            <div id="l129"
                class="code sev-2  le">
                <ul class="violations">
                
@@ -509,22 +617,709 @@
                      </span>
                      Line too long (82 > 79 characters)</li>
                
-               </ul><tt><i>108</i>     <span class="n">score</span><span class="p">,</span> <span class="n">powerup</span><span class="p">,</span> <span class="n">power_counter</span><span class="p">,</span> <span class="n">eaten_ghost</span> <span class="o">=</span> <span class="n">board_instance</span><span class="o">.</span><span class="n">check_collisions</span><span class="p">()</span></tt>
+               </ul><tt><i>129</i>     <span class="n">score</span><span class="p">,</span> <span class="n">powerup</span><span class="p">,</span> <span class="n">power_counter</span><span class="p">,</span> <span class="n">eaten_ghost</span> <span class="o">=</span> <span class="n">board_instance</span><span class="o">.</span><span class="n">check_collisions</span><span class="p">()</span></tt>
             </div>
-            <div id="l109"
-               class="code sev- "><tt><i>109</i>     <span class="k">assert</span> <span class="n">score</span> <span class="o">==</span> <span class="mi">10</span></tt>
+            <div id="l130"
+               class="code sev- "><tt><i>130</i>     <span class="k">assert</span> <span class="n">score</span> <span class="o">==</span> <span class="mi">10</span></tt>
             </div>
-            <div id="l110"
-               class="code sev- "><tt><i>110</i>     <span class="k">assert</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">level</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span></tt>
+            <div id="l131"
+               class="code sev- "><tt><i>131</i>     <span class="k">assert</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">level</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span></tt>
             </div>
-            <div id="l111"
-               class="code sev- "><tt><i>111</i>     <span class="k">assert</span> <span class="ow">not</span> <span class="n">powerup</span></tt>
+            <div id="l132"
+               class="code sev- "><tt><i>132</i>     <span class="k">assert</span> <span class="ow">not</span> <span class="n">powerup</span></tt>
             </div>
-            <div id="l112"
-               class="code sev- "><tt><i>112</i>     <span class="k">assert</span> <span class="n">power_counter</span> <span class="o">==</span> <span class="mi">0</span></tt>
+            <div id="l133"
+               class="code sev- "><tt><i>133</i>     <span class="k">assert</span> <span class="n">power_counter</span> <span class="o">==</span> <span class="mi">0</span></tt>
             </div>
-            <div id="l113"
-               class="code sev- "><tt><i>113</i>     <span class="k">assert</span> <span class="n">eaten_ghost</span> <span class="o">==</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">]</span></tt>
+            <div id="l134"
+               class="code sev- "><tt><i>134</i>     <span class="k">assert</span> <span class="n">eaten_ghost</span> <span class="o">==</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">]</span></tt>
+            </div>
+            <div id="l135"
+               class="code sev- "><tt><i>135</i> &nbsp;</tt>
+            </div>
+            <div id="l136"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E302
+                     </span>
+                     Expected 2 blank lines, found 1</li>
+               
+               </ul><tt><i>136</i> <span class="k">def</span><span class="w"> </span><span class="nf">test_ghost_initialization</span><span class="p">(</span><span class="n">blinky_instance</span><span class="p">):</span></tt>
+            </div>
+            <div id="l137"
+               class="code sev- "><tt><i>137</i>     <span class="k">assert</span> <span class="n">blinky_instance</span><span class="o">.</span><span class="n">x_pos</span> <span class="o">==</span> <span class="mi">45</span></tt>
+            </div>
+            <div id="l138"
+               class="code sev- "><tt><i>138</i>     <span class="k">assert</span> <span class="n">blinky_instance</span><span class="o">.</span><span class="n">y_pos</span> <span class="o">==</span> <span class="mi">46</span></tt>
+            </div>
+            <div id="l139"
+               class="code sev- "><tt><i>139</i>     <span class="k">assert</span> <span class="n">blinky_instance</span><span class="o">.</span><span class="n">speed</span> <span class="o">==</span> <span class="mi">1</span></tt>
+            </div>
+            <div id="l140"
+               class="code sev- "><tt><i>140</i>     <span class="k">assert</span> <span class="ow">not</span> <span class="n">blinky_instance</span><span class="o">.</span><span class="n">dead</span></tt>
+            </div>
+            <div id="l141"
+               class="code sev- "><tt><i>141</i>     <span class="k">assert</span> <span class="ow">not</span> <span class="n">blinky_instance</span><span class="o">.</span><span class="n">in_box</span></tt>
+            </div>
+            <div id="l142"
+               class="code sev- "><tt><i>142</i>     <span class="k">assert</span> <span class="n">blinky_instance</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="mi">0</span></tt>
+            </div>
+            <div id="l143"
+               class="code sev- "><tt><i>143</i>     <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">blinky_instance</span><span class="o">.</span><span class="n">rect</span><span class="p">,</span> <span class="n">pygame</span><span class="o">.</span><span class="n">Rect</span><span class="p">)</span></tt>
+            </div>
+            <div id="l144"
+               class="code sev- "><tt><i>144</i> &nbsp;</tt>
+            </div>
+            <div id="l145"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E302
+                     </span>
+                     Expected 2 blank lines, found 1</li>
+               
+               </ul><tt><i>145</i> <span class="k">def</span><span class="w"> </span><span class="nf">test_ghost_update</span><span class="p">(</span><span class="n">blinky_instance</span><span class="p">):</span></tt>
+            </div>
+            <div id="l146"
+               class="code sev-1  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-1">
+                        F841
+                     </span>
+                     Local variable 'initial_x' is assigned to but never used</li>
+               
+               </ul><tt><i>146</i>     <span class="n">initial_x</span> <span class="o">=</span> <span class="n">blinky_instance</span><span class="o">.</span><span class="n">x_pos</span></tt>
+            </div>
+            <div id="l147"
+               class="code sev-1  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-1">
+                        F841
+                     </span>
+                     Local variable 'initial_y' is assigned to but never used</li>
+               
+               </ul><tt><i>147</i>     <span class="n">initial_y</span> <span class="o">=</span> <span class="n">blinky_instance</span><span class="o">.</span><span class="n">y_pos</span></tt>
+            </div>
+            <div id="l148"
+               class="code sev- "><tt><i>148</i>     <span class="n">blinky_instance</span><span class="o">.</span><span class="n">x_pos</span> <span class="o">+=</span> <span class="mi">5</span></tt>
+            </div>
+            <div id="l149"
+               class="code sev- "><tt><i>149</i>     <span class="n">blinky_instance</span><span class="o">.</span><span class="n">y_pos</span> <span class="o">+=</span> <span class="mi">5</span></tt>
+            </div>
+            <div id="l150"
+               class="code sev- "><tt><i>150</i>     <span class="n">blinky_instance</span><span class="o">.</span><span class="n">update</span><span class="p">()</span></tt>
+            </div>
+            <div id="l151"
+               class="code sev- "><tt><i>151</i>     <span class="k">assert</span> <span class="n">blinky_instance</span><span class="o">.</span><span class="n">center_x</span> <span class="o">==</span> <span class="n">blinky_instance</span><span class="o">.</span><span class="n">x_pos</span> <span class="o">+</span> <span class="mi">16</span></tt>
+            </div>
+            <div id="l152"
+               class="code sev- "><tt><i>152</i>     <span class="k">assert</span> <span class="n">blinky_instance</span><span class="o">.</span><span class="n">center_y</span> <span class="o">==</span> <span class="n">blinky_instance</span><span class="o">.</span><span class="n">y_pos</span> <span class="o">+</span> <span class="mi">17</span></tt>
+            </div>
+            <div id="l153"
+               class="code sev- "><tt><i>153</i>     <span class="k">assert</span> <span class="n">blinky_instance</span><span class="o">.</span><span class="n">rect</span><span class="o">.</span><span class="n">topleft</span> <span class="o">==</span> <span class="p">(</span></tt>
+            </div>
+            <div id="l154"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E122
+                     </span>
+                     Continuation line missing indentation or outdented</li>
+               
+                  <li>
+                     <span class="count sev-2">
+                        E501
+                     </span>
+                     Line too long (86 > 79 characters)</li>
+               
+               </ul><tt><i>154</i>     <span class="n">blinky_instance</span><span class="o">.</span><span class="n">center_x</span> <span class="o">-</span> <span class="mi">13</span><span class="p">,</span> <span class="n">blinky_instance</span><span class="o">.</span><span class="n">center_y</span> <span class="o">-</span> <span class="mi">13</span><span class="p">)</span>  <span class="c1"># Check rect update</span></tt>
+            </div>
+            <div id="l155"
+               class="code sev- "><tt><i>155</i> &nbsp;</tt>
+            </div>
+            <div id="l156"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E302
+                     </span>
+                     Expected 2 blank lines, found 1</li>
+               
+               </ul><tt><i>156</i> <span class="k">def</span><span class="w"> </span><span class="nf">test_ghost_check_collisions_wall</span><span class="p">(</span><span class="n">blinky_instance</span><span class="p">,</span> <span class="n">game_instance</span><span class="p">):</span></tt>
+            </div>
+            <div id="l157"
+               class="code sev- "><tt><i>157</i>     <span class="c1"># Mock level to have a wall to the right</span></tt>
+            </div>
+            <div id="l158"
+               class="code sev- "><tt><i>158</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">30</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">32</span><span class="p">)]</span></tt>
+            </div>
+            <div id="l159"
+               class="code sev- "><tt><i>159</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">level</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>  <span class="c1"># Vertical wall</span></tt>
+            </div>
+            <div id="l160"
+               class="code sev- "><tt><i>160</i>     <span class="n">blinky_instance</span><span class="o">.</span><span class="n">x_pos</span> <span class="o">=</span> <span class="mi">58</span></tt>
+            </div>
+            <div id="l161"
+               class="code sev- "><tt><i>161</i>     <span class="n">blinky_instance</span><span class="o">.</span><span class="n">y_pos</span> <span class="o">=</span> <span class="mi">49</span></tt>
+            </div>
+            <div id="l162"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E261
+                     </span>
+                     At least two spaces before inline comment</li>
+               
+               </ul><tt><i>162</i>     <span class="n">blinky_instance</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># Moving right</span></tt>
+            </div>
+            <div id="l163"
+               class="code sev- "><tt><i>163</i>     <span class="n">turns</span><span class="p">,</span> <span class="n">in_box</span> <span class="o">=</span> <span class="n">blinky_instance</span><span class="o">.</span><span class="n">check_collisions</span><span class="p">()</span></tt>
+            </div>
+            <div id="l164"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E261
+                     </span>
+                     At least two spaces before inline comment</li>
+               
+               </ul><tt><i>164</i>     <span class="k">assert</span> <span class="n">turns</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># Cannot turn right</span></tt>
+            </div>
+            <div id="l165"
+               class="code sev- "><tt><i>165</i> &nbsp;</tt>
+            </div>
+            <div id="l166"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E302
+                     </span>
+                     Expected 2 blank lines, found 1</li>
+               
+               </ul><tt><i>166</i> <span class="k">def</span><span class="w"> </span><span class="nf">test_ghost_check_collisions_in_box</span><span class="p">(</span><span class="n">blinky_instance</span><span class="p">,</span> <span class="n">game_instance</span><span class="p">):</span></tt>
+            </div>
+            <div id="l167"
+               class="code sev- "><tt><i>167</i>     <span class="n">blinky_instance</span><span class="o">.</span><span class="n">x_pos</span> <span class="o">=</span> <span class="mi">300</span></tt>
+            </div>
+            <div id="l168"
+               class="code sev- "><tt><i>168</i>     <span class="n">blinky_instance</span><span class="o">.</span><span class="n">y_pos</span> <span class="o">=</span> <span class="mi">320</span></tt>
+            </div>
+            <div id="l169"
+               class="code sev- "><tt><i>169</i>     <span class="n">turns</span><span class="p">,</span> <span class="n">in_box</span> <span class="o">=</span> <span class="n">blinky_instance</span><span class="o">.</span><span class="n">check_collisions</span><span class="p">()</span></tt>
+            </div>
+            <div id="l170"
+               class="code sev- "><tt><i>170</i>     <span class="k">assert</span> <span class="n">in_box</span></tt>
+            </div>
+            <div id="l171"
+               class="code sev- "><tt><i>171</i> &nbsp;</tt>
+            </div>
+            <div id="l172"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E302
+                     </span>
+                     Expected 2 blank lines, found 1</li>
+               
+                  <li>
+                     <span class="count sev-2">
+                        E501
+                     </span>
+                     Line too long (176 > 79 characters)</li>
+               
+               </ul><tt><i>172</i> <span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;powerup, pacman_collided, ghost_dead, eaten_ghost_state, lives_before, score_before, lives_after, score_after, ghost_dead_after, eaten_ghost_after&quot;</span><span class="p">,</span> <span class="p">[</span></tt>
+            </div>
+            <div id="l173"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E501
+                     </span>
+                     Line too long (103 > 79 characters)</li>
+               
+               </ul><tt><i>173</i>     <span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">]),</span></tt>
+            </div>
+            <div id="l174"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E501
+                     </span>
+                     Line too long (103 > 79 characters)</li>
+               
+               </ul><tt><i>174</i>     <span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">]),</span></tt>
+            </div>
+            <div id="l175"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E501
+                     </span>
+                     Line too long (101 > 79 characters)</li>
+               
+               </ul><tt><i>175</i>     <span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]),</span></tt>
+            </div>
+            <div id="l176"
+               class="code sev- "><tt><i>176</i> <span class="p">])</span></tt>
+            </div>
+            <div id="l177"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E501
+                     </span>
+                     Line too long (241 > 79 characters)</li>
+               
+               </ul><tt><i>177</i> <span class="k">def</span><span class="w"> </span><span class="nf">test_game_check_pacman_ghosts_collision</span><span class="p">(</span><span class="n">game_instance</span><span class="p">,</span> <span class="n">pacman_instance</span><span class="p">,</span> <span class="n">blinky_instance</span><span class="p">,</span> <span class="n">powerup</span><span class="p">,</span> <span class="n">pacman_collided</span><span class="p">,</span> <span class="n">ghost_dead</span><span class="p">,</span> <span class="n">eaten_ghost_state</span><span class="p">,</span> <span class="n">lives_before</span><span class="p">,</span> <span class="n">score_before</span><span class="p">,</span> <span class="n">lives_after</span><span class="p">,</span> <span class="n">score_after</span><span class="p">,</span> <span class="n">ghost_dead_after</span><span class="p">,</span> <span class="n">eaten_ghost_after</span><span class="p">):</span></tt>
+            </div>
+            <div id="l178"
+               class="code sev- "><tt><i>178</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">powerup</span> <span class="o">=</span> <span class="n">powerup</span></tt>
+            </div>
+            <div id="l179"
+               class="code sev- "><tt><i>179</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">lives</span> <span class="o">=</span> <span class="n">lives_before</span></tt>
+            </div>
+            <div id="l180"
+               class="code sev- "><tt><i>180</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">score</span> <span class="o">=</span> <span class="n">score_before</span></tt>
+            </div>
+            <div id="l181"
+               class="code sev- "><tt><i>181</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">eaten_ghost</span> <span class="o">=</span> <span class="n">eaten_ghost_state</span></tt>
+            </div>
+            <div id="l182"
+               class="code sev- "><tt><i>182</i>     <span class="n">blinky_instance</span><span class="o">.</span><span class="n">dead</span> <span class="o">=</span> <span class="n">ghost_dead</span></tt>
+            </div>
+            <div id="l183"
+               class="code sev- "><tt><i>183</i> &nbsp;</tt>
+            </div>
+            <div id="l184"
+               class="code sev- "><tt><i>184</i>     <span class="k">if</span> <span class="n">pacman_collided</span><span class="p">:</span></tt>
+            </div>
+            <div id="l185"
+               class="code sev- "><tt><i>185</i>         <span class="n">pacman_instance</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">blinky_instance</span><span class="o">.</span><span class="n">x_pos</span></tt>
+            </div>
+            <div id="l186"
+               class="code sev- "><tt><i>186</i>         <span class="n">pacman_instance</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">blinky_instance</span><span class="o">.</span><span class="n">y_pos</span></tt>
+            </div>
+            <div id="l187"
+               class="code sev- "><tt><i>187</i> &nbsp;</tt>
+            </div>
+            <div id="l188"
+               class="code sev- "><tt><i>188</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">check_pacman_ghosts_collision</span><span class="p">()</span></tt>
+            </div>
+            <div id="l189"
+               class="code sev- "><tt><i>189</i> &nbsp;</tt>
+            </div>
+            <div id="l190"
+               class="code sev- "><tt><i>190</i>     <span class="k">assert</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">lives</span> <span class="o">==</span> <span class="n">lives_after</span></tt>
+            </div>
+            <div id="l191"
+               class="code sev- "><tt><i>191</i>     <span class="k">assert</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">score</span> <span class="o">==</span> <span class="n">score_after</span></tt>
+            </div>
+            <div id="l192"
+               class="code sev- "><tt><i>192</i>     <span class="k">assert</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">blinky</span><span class="o">.</span><span class="n">dead</span> <span class="o">==</span> <span class="n">ghost_dead_after</span></tt>
+            </div>
+            <div id="l193"
+               class="code sev- "><tt><i>193</i>     <span class="k">assert</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">eaten_ghost</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">eaten_ghost_after</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></tt>
+            </div>
+            <div id="l194"
+               class="code sev- "><tt><i>194</i> &nbsp;</tt>
+            </div>
+            <div id="l195"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E302
+                     </span>
+                     Expected 2 blank lines, found 1</li>
+               
+               </ul><tt><i>195</i> <span class="k">def</span><span class="w"> </span><span class="nf">test_ghost_move_clyde_no_turns</span><span class="p">(</span><span class="n">clyde_instance</span><span class="p">,</span> <span class="n">game_instance</span><span class="p">):</span></tt>
+            </div>
+            <div id="l196"
+               class="code sev- "><tt><i>196</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">30</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">32</span><span class="p">)]</span></tt>
+            </div>
+            <div id="l197"
+               class="code sev- "><tt><i>197</i>     <span class="n">clyde_instance</span><span class="o">.</span><span class="n">x_pos</span> <span class="o">=</span> <span class="mi">100</span></tt>
+            </div>
+            <div id="l198"
+               class="code sev- "><tt><i>198</i>     <span class="n">clyde_instance</span><span class="o">.</span><span class="n">y_pos</span> <span class="o">=</span> <span class="mi">100</span></tt>
+            </div>
+            <div id="l199"
+               class="code sev- "><tt><i>199</i>     <span class="n">clyde_instance</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="mi">0</span></tt>
+            </div>
+            <div id="l200"
+               class="code sev- "><tt><i>200</i>     <span class="n">clyde_instance</span><span class="o">.</span><span class="n">target</span> <span class="o">=</span> <span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span></tt>
+            </div>
+            <div id="l201"
+               class="code sev- "><tt><i>201</i>     <span class="n">clyde_instance</span><span class="o">.</span><span class="n">speed</span> <span class="o">=</span> <span class="mi">1</span></tt>
+            </div>
+            <div id="l202"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E501
+                     </span>
+                     Line too long (111 > 79 characters)</li>
+               
+                  <li>
+                     <span class="count sev-2">
+                        E261
+                     </span>
+                     At least two spaces before inline comment</li>
+               
+               </ul><tt><i>202</i>     <span class="n">clyde_instance</span><span class="o">.</span><span class="n">check_collisions</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="kc">False</span><span class="p">)</span> <span class="c1"># Mock no turns except right</span></tt>
+            </div>
+            <div id="l203"
+               class="code sev- "><tt><i>203</i>     <span class="n">initial_x</span> <span class="o">=</span> <span class="n">clyde_instance</span><span class="o">.</span><span class="n">x_pos</span></tt>
+            </div>
+            <div id="l204"
+               class="code sev- "><tt><i>204</i>     <span class="n">clyde_instance</span><span class="o">.</span><span class="n">move_clyde</span><span class="p">()</span></tt>
+            </div>
+            <div id="l205"
+               class="code sev- "><tt><i>205</i>     <span class="k">assert</span> <span class="n">clyde_instance</span><span class="o">.</span><span class="n">x_pos</span> <span class="o">&gt;</span> <span class="n">initial_x</span></tt>
+            </div>
+            <div id="l206"
+               class="code sev- "><tt><i>206</i> &nbsp;</tt>
+            </div>
+            <div id="l207"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E302
+                     </span>
+                     Expected 2 blank lines, found 1</li>
+               
+               </ul><tt><i>207</i> <span class="k">def</span><span class="w"> </span><span class="nf">test_ghost_move_blinky_no_turns</span><span class="p">(</span><span class="n">blinky_instance</span><span class="p">,</span> <span class="n">game_instance</span><span class="p">):</span></tt>
+            </div>
+            <div id="l208"
+               class="code sev- "><tt><i>208</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">30</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">32</span><span class="p">)]</span></tt>
+            </div>
+            <div id="l209"
+               class="code sev- "><tt><i>209</i>     <span class="n">blinky_instance</span><span class="o">.</span><span class="n">x_pos</span> <span class="o">=</span> <span class="mi">100</span></tt>
+            </div>
+            <div id="l210"
+               class="code sev- "><tt><i>210</i>     <span class="n">blinky_instance</span><span class="o">.</span><span class="n">y_pos</span> <span class="o">=</span> <span class="mi">100</span></tt>
+            </div>
+            <div id="l211"
+               class="code sev- "><tt><i>211</i>     <span class="n">blinky_instance</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="mi">0</span></tt>
+            </div>
+            <div id="l212"
+               class="code sev- "><tt><i>212</i>     <span class="n">blinky_instance</span><span class="o">.</span><span class="n">target</span> <span class="o">=</span> <span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span></tt>
+            </div>
+            <div id="l213"
+               class="code sev- "><tt><i>213</i>     <span class="n">blinky_instance</span><span class="o">.</span><span class="n">speed</span> <span class="o">=</span> <span class="mi">1</span></tt>
+            </div>
+            <div id="l214"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E501
+                     </span>
+                     Line too long (112 > 79 characters)</li>
+               
+                  <li>
+                     <span class="count sev-2">
+                        E261
+                     </span>
+                     At least two spaces before inline comment</li>
+               
+               </ul><tt><i>214</i>     <span class="n">blinky_instance</span><span class="o">.</span><span class="n">check_collisions</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="kc">False</span><span class="p">)</span> <span class="c1"># Mock no turns except right</span></tt>
+            </div>
+            <div id="l215"
+               class="code sev- "><tt><i>215</i>     <span class="n">initial_x</span> <span class="o">=</span> <span class="n">blinky_instance</span><span class="o">.</span><span class="n">x_pos</span></tt>
+            </div>
+            <div id="l216"
+               class="code sev- "><tt><i>216</i>     <span class="n">blinky_instance</span><span class="o">.</span><span class="n">move_blinky</span><span class="p">()</span></tt>
+            </div>
+            <div id="l217"
+               class="code sev- "><tt><i>217</i>     <span class="k">assert</span> <span class="n">blinky_instance</span><span class="o">.</span><span class="n">x_pos</span> <span class="o">&gt;</span> <span class="n">initial_x</span></tt>
+            </div>
+            <div id="l218"
+               class="code sev- "><tt><i>218</i> &nbsp;</tt>
+            </div>
+            <div id="l219"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E302
+                     </span>
+                     Expected 2 blank lines, found 1</li>
+               
+               </ul><tt><i>219</i> <span class="k">def</span><span class="w"> </span><span class="nf">test_ghost_move_inky_no_turns</span><span class="p">(</span><span class="n">inky_instance</span><span class="p">,</span> <span class="n">game_instance</span><span class="p">):</span></tt>
+            </div>
+            <div id="l220"
+               class="code sev- "><tt><i>220</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">30</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">32</span><span class="p">)]</span></tt>
+            </div>
+            <div id="l221"
+               class="code sev- "><tt><i>221</i>     <span class="n">inky_instance</span><span class="o">.</span><span class="n">x_pos</span> <span class="o">=</span> <span class="mi">100</span></tt>
+            </div>
+            <div id="l222"
+               class="code sev- "><tt><i>222</i>     <span class="n">inky_instance</span><span class="o">.</span><span class="n">y_pos</span> <span class="o">=</span> <span class="mi">100</span></tt>
+            </div>
+            <div id="l223"
+               class="code sev- "><tt><i>223</i>     <span class="n">inky_instance</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="mi">0</span></tt>
+            </div>
+            <div id="l224"
+               class="code sev- "><tt><i>224</i>     <span class="n">inky_instance</span><span class="o">.</span><span class="n">target</span> <span class="o">=</span> <span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span></tt>
+            </div>
+            <div id="l225"
+               class="code sev- "><tt><i>225</i>     <span class="n">inky_instance</span><span class="o">.</span><span class="n">speed</span> <span class="o">=</span> <span class="mi">1</span></tt>
+            </div>
+            <div id="l226"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E501
+                     </span>
+                     Line too long (110 > 79 characters)</li>
+               
+                  <li>
+                     <span class="count sev-2">
+                        E261
+                     </span>
+                     At least two spaces before inline comment</li>
+               
+               </ul><tt><i>226</i>     <span class="n">inky_instance</span><span class="o">.</span><span class="n">check_collisions</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="kc">False</span><span class="p">)</span> <span class="c1"># Mock no turns except right</span></tt>
+            </div>
+            <div id="l227"
+               class="code sev- "><tt><i>227</i>     <span class="n">initial_x</span> <span class="o">=</span> <span class="n">inky_instance</span><span class="o">.</span><span class="n">x_pos</span></tt>
+            </div>
+            <div id="l228"
+               class="code sev- "><tt><i>228</i>     <span class="n">inky_instance</span><span class="o">.</span><span class="n">move_inky</span><span class="p">()</span></tt>
+            </div>
+            <div id="l229"
+               class="code sev- "><tt><i>229</i>     <span class="k">assert</span> <span class="n">inky_instance</span><span class="o">.</span><span class="n">x_pos</span> <span class="o">&gt;</span> <span class="n">initial_x</span></tt>
+            </div>
+            <div id="l230"
+               class="code sev- "><tt><i>230</i> &nbsp;</tt>
+            </div>
+            <div id="l231"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E302
+                     </span>
+                     Expected 2 blank lines, found 1</li>
+               
+               </ul><tt><i>231</i> <span class="k">def</span><span class="w"> </span><span class="nf">test_ghost_move_pinky_no_turns</span><span class="p">(</span><span class="n">pinky_instance</span><span class="p">,</span> <span class="n">game_instance</span><span class="p">):</span></tt>
+            </div>
+            <div id="l232"
+               class="code sev- "><tt><i>232</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">30</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">32</span><span class="p">)]</span></tt>
+            </div>
+            <div id="l233"
+               class="code sev- "><tt><i>233</i>     <span class="n">pinky_instance</span><span class="o">.</span><span class="n">x_pos</span> <span class="o">=</span> <span class="mi">100</span></tt>
+            </div>
+            <div id="l234"
+               class="code sev- "><tt><i>234</i>     <span class="n">pinky_instance</span><span class="o">.</span><span class="n">y_pos</span> <span class="o">=</span> <span class="mi">100</span></tt>
+            </div>
+            <div id="l235"
+               class="code sev- "><tt><i>235</i>     <span class="n">pinky_instance</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="mi">0</span></tt>
+            </div>
+            <div id="l236"
+               class="code sev- "><tt><i>236</i>     <span class="n">pinky_instance</span><span class="o">.</span><span class="n">target</span> <span class="o">=</span> <span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span></tt>
+            </div>
+            <div id="l237"
+               class="code sev- "><tt><i>237</i>     <span class="n">pinky_instance</span><span class="o">.</span><span class="n">speed</span> <span class="o">=</span> <span class="mi">1</span></tt>
+            </div>
+            <div id="l238"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E501
+                     </span>
+                     Line too long (111 > 79 characters)</li>
+               
+                  <li>
+                     <span class="count sev-2">
+                        E261
+                     </span>
+                     At least two spaces before inline comment</li>
+               
+               </ul><tt><i>238</i>     <span class="n">pinky_instance</span><span class="o">.</span><span class="n">check_collisions</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="kc">False</span><span class="p">)</span> <span class="c1"># Mock no turns except right</span></tt>
+            </div>
+            <div id="l239"
+               class="code sev- "><tt><i>239</i>     <span class="n">initial_x</span> <span class="o">=</span> <span class="n">pinky_instance</span><span class="o">.</span><span class="n">x_pos</span></tt>
+            </div>
+            <div id="l240"
+               class="code sev- "><tt><i>240</i>     <span class="n">pinky_instance</span><span class="o">.</span><span class="n">move_pinky</span><span class="p">()</span></tt>
+            </div>
+            <div id="l241"
+               class="code sev- "><tt><i>241</i>     <span class="k">assert</span> <span class="n">pinky_instance</span><span class="o">.</span><span class="n">x_pos</span> <span class="o">&gt;</span> <span class="n">initial_x</span></tt>
+            </div>
+            <div id="l242"
+               class="code sev- "><tt><i>242</i> &nbsp;</tt>
+            </div>
+            <div id="l243"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E302
+                     </span>
+                     Expected 2 blank lines, found 1</li>
+               
+               </ul><tt><i>243</i> <span class="k">def</span><span class="w"> </span><span class="nf">test_update_ghost_speeds_powerup</span><span class="p">(</span><span class="n">game_instance</span><span class="p">):</span></tt>
+            </div>
+            <div id="l244"
+               class="code sev- "><tt><i>244</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">powerup</span> <span class="o">=</span> <span class="kc">True</span></tt>
+            </div>
+            <div id="l245"
+               class="code sev- "><tt><i>245</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">eaten_ghost</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">]</span></tt>
+            </div>
+            <div id="l246"
+               class="code sev- "><tt><i>246</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">blinky</span><span class="o">.</span><span class="n">dead</span> <span class="o">=</span> <span class="kc">False</span></tt>
+            </div>
+            <div id="l247"
+               class="code sev- "><tt><i>247</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">inky</span><span class="o">.</span><span class="n">dead</span> <span class="o">=</span> <span class="kc">False</span></tt>
+            </div>
+            <div id="l248"
+               class="code sev- "><tt><i>248</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">pinky</span><span class="o">.</span><span class="n">dead</span> <span class="o">=</span> <span class="kc">False</span></tt>
+            </div>
+            <div id="l249"
+               class="code sev- "><tt><i>249</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">clyde</span><span class="o">.</span><span class="n">dead</span> <span class="o">=</span> <span class="kc">False</span></tt>
+            </div>
+            <div id="l250"
+               class="code sev- "><tt><i>250</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">update_ghost_speeds</span><span class="p">()</span></tt>
+            </div>
+            <div id="l251"
+               class="code sev- "><tt><i>251</i>     <span class="k">assert</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">blinky</span><span class="o">.</span><span class="n">speed</span> <span class="o">==</span> <span class="mf">0.5</span></tt>
+            </div>
+            <div id="l252"
+               class="code sev- "><tt><i>252</i>     <span class="k">assert</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">inky</span><span class="o">.</span><span class="n">speed</span> <span class="o">==</span> <span class="mf">0.5</span></tt>
+            </div>
+            <div id="l253"
+               class="code sev- "><tt><i>253</i>     <span class="k">assert</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">pinky</span><span class="o">.</span><span class="n">speed</span> <span class="o">==</span> <span class="mf">0.5</span></tt>
+            </div>
+            <div id="l254"
+               class="code sev- "><tt><i>254</i>     <span class="k">assert</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">clyde</span><span class="o">.</span><span class="n">speed</span> <span class="o">==</span> <span class="mf">0.5</span></tt>
+            </div>
+            <div id="l255"
+               class="code sev- "><tt><i>255</i> &nbsp;</tt>
+            </div>
+            <div id="l256"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E302
+                     </span>
+                     Expected 2 blank lines, found 1</li>
+               
+               </ul><tt><i>256</i> <span class="k">def</span><span class="w"> </span><span class="nf">test_update_ghost_speeds_eaten</span><span class="p">(</span><span class="n">game_instance</span><span class="p">):</span></tt>
+            </div>
+            <div id="l257"
+               class="code sev- "><tt><i>257</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">powerup</span> <span class="o">=</span> <span class="kc">True</span></tt>
+            </div>
+            <div id="l258"
+               class="code sev- "><tt><i>258</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">eaten_ghost</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">]</span></tt>
+            </div>
+            <div id="l259"
+               class="code sev- "><tt><i>259</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">update_ghost_speeds</span><span class="p">()</span></tt>
+            </div>
+            <div id="l260"
+               class="code sev- "><tt><i>260</i>     <span class="k">assert</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">blinky</span><span class="o">.</span><span class="n">speed</span> <span class="o">==</span> <span class="mi">1</span></tt>
+            </div>
+            <div id="l261"
+               class="code sev- "><tt><i>261</i>     <span class="k">assert</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">inky</span><span class="o">.</span><span class="n">speed</span> <span class="o">==</span> <span class="mf">0.5</span></tt>
+            </div>
+            <div id="l262"
+               class="code sev- "><tt><i>262</i>     <span class="k">assert</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">pinky</span><span class="o">.</span><span class="n">speed</span> <span class="o">==</span> <span class="mf">0.5</span></tt>
+            </div>
+            <div id="l263"
+               class="code sev- "><tt><i>263</i>     <span class="k">assert</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">clyde</span><span class="o">.</span><span class="n">speed</span> <span class="o">==</span> <span class="mf">0.5</span></tt>
+            </div>
+            <div id="l264"
+               class="code sev- "><tt><i>264</i> &nbsp;</tt>
+            </div>
+            <div id="l265"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E302
+                     </span>
+                     Expected 2 blank lines, found 1</li>
+               
+               </ul><tt><i>265</i> <span class="k">def</span><span class="w"> </span><span class="nf">test_update_ghost_speeds_dead</span><span class="p">(</span><span class="n">game_instance</span><span class="p">):</span></tt>
+            </div>
+            <div id="l266"
+               class="code sev- "><tt><i>266</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">powerup</span> <span class="o">=</span> <span class="kc">False</span></tt>
+            </div>
+            <div id="l267"
+               class="code sev- "><tt><i>267</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">eaten_ghost</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">]</span></tt>
+            </div>
+            <div id="l268"
+               class="code sev- "><tt><i>268</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">blinky</span><span class="o">.</span><span class="n">dead</span> <span class="o">=</span> <span class="kc">True</span></tt>
+            </div>
+            <div id="l269"
+               class="code sev- "><tt><i>269</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">update_ghost_speeds</span><span class="p">()</span></tt>
+            </div>
+            <div id="l270"
+               class="code sev- "><tt><i>270</i>     <span class="k">assert</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">blinky</span><span class="o">.</span><span class="n">speed</span> <span class="o">==</span> <span class="mi">4</span></tt>
+            </div>
+            <div id="l271"
+               class="code sev- "><tt><i>271</i>     <span class="k">assert</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">inky</span><span class="o">.</span><span class="n">speed</span> <span class="o">==</span> <span class="mi">1</span></tt>
+            </div>
+            <div id="l272"
+               class="code sev- "><tt><i>272</i>     <span class="k">assert</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">pinky</span><span class="o">.</span><span class="n">speed</span> <span class="o">==</span> <span class="mi">1</span></tt>
+            </div>
+            <div id="l273"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        W292
+                     </span>
+                     No newline at end of file</li>
+               
+               </ul><tt><i>273</i>     <span class="k">assert</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">clyde</span><span class="o">.</span><span class="n">speed</span> <span class="o">==</span> <span class="mi">1</span></tt>
             </div>
             
          </div>
