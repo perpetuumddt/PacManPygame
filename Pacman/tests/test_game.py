@@ -31,6 +31,21 @@ def pacman_instance(game_instance):
 def board_instance(game_instance):
     return game_instance.board
 
+@pytest.fixture
+def blinky_instance(game_instance):
+    return game_instance.blinky
+
+@pytest.fixture
+def inky_instance(game_instance):
+    return game_instance.inky
+
+@pytest.fixture
+def pinky_instance(game_instance):
+    return game_instance.pinky
+
+@pytest.fixture
+def clyde_instance(game_instance):
+    return game_instance.clyde
 
 # Test: Initial values should be set properly
 def test_game_initialization(game_instance):
