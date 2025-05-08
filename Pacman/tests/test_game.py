@@ -227,3 +227,15 @@ def test_ghost_move_inky_no_turns(inky_instance, game_instance):
     initial_x = inky_instance.x_pos
     inky_instance.move_inky()
     assert inky_instance.x_pos > initial_x
+
+def test_ghost_move_pinky_no_turns(pinky_instance, game_instance):
+    game_instance.level = [[0] * 30 for _ in range(32)]
+    pinky_instance.x_pos = 100
+    pinky_instance.y_pos = 100
+    pinky_instance.direction = 0
+    pinky_instance.target = (200, 100)
+    pinky_instance.speed = 1
+    pinky_instance.check_collisions = lambda: ([True, False, False, False], False) # Mock no turns except right
+    initial_x = pinky_instance.x_pos
+    pinky_instance.move_pinky()
+    assert pinky_instance.x_pos > initial_x
