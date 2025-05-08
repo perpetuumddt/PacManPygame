@@ -69,8 +69,8 @@ def test_reset_game_state(game_instance):
 @pytest.mark.parametrize("direction_command, turns_allowed, expected_direction", [
     (0, [True, False, False, False], 0),  # Can turn right
     (1, [False, True, False, False], 1),  # Can turn left
-    (2, [True, False, False, False], 0),  # Cant turn up
-    (3, [False, False, False, False], 0),  # Cant turn down
+    (2, [True, False, False, False], 0),  # Can`t turn up
+    (3, [False, False, False, False], 0),  # Can`t turn down
 ])
 def test_pacman_update(pacman_instance, direction_command, turns_allowed, expected_direction):
     pacman_instance.direction_command = direction_command
@@ -115,7 +115,7 @@ def test_pacman_get_player_rect(pacman_instance):
 # Test: Board check_position method
 @pytest.mark.parametrize("centerx, centery, expected_turns", [
     (116, 117, [False, False, False, False]),  # No turns allowed
-    (376, 539, [True, True, False, False]),      # All turns allowed
+    (376, 539, [True, True, False, False]),      # Turns allowed left and right
 ])
 def test_board_check_position(board_instance, centerx, centery, expected_turns):
     turns = board_instance.check_position(centerx, centery)
@@ -124,8 +124,8 @@ def test_board_check_position(board_instance, centerx, centery, expected_turns):
 # Test: Board check_collisions method
 def test_board_check_collisions(board_instance, game_instance):
     game_instance.level = [[0] * 30 for _ in range(32)]
-    game_instance.level[3][3] = 1  # Place a pellet
-    game_instance.pacman.x, game_instance.pacman.y = 66, 68  # Near the pellet
+    game_instance.level[3][3] = 1  # Place a dot
+    game_instance.pacman.x, game_instance.pacman.y = 66, 68  # Place pacman on the dot
     score, powerup, power_counter, eaten_ghost = board_instance.check_collisions()
     assert score == 10
     assert game_instance.level[3][3] == 0
@@ -170,9 +170,9 @@ def test_ghost_check_collisions_in_box(blinky_instance, game_instance):
     assert in_box
 
 @pytest.mark.parametrize("powerup, pacman_collided, ghost_dead, eaten_ghost_state, lives_before, score_before, lives_after, score_after, ghost_dead_after, eaten_ghost_after", [
-    (True, True, False, [False, False, False, False], 3, 0, 3, 200, True, [True, False, False, False]),  # Powerup, collide, eat first ghost
-    (True, True, True, [True, False, False, False], 3, 200, 3, 200, True, [True, False, False, False]),  # Powerup, collide with dead ghost, no effect
-    (True, True, False, [True, True, False, False], 3, 200, 2, 0, False, [False, True, True, False]),  # Powerup, collide, eat third ghost
+    (True, True, False, [False, False, False, False], 3, 0, 3, 200, True, [True, False, False, False]),
+    (True, True, True, [True, False, False, False], 3, 200, 3, 200, True, [True, False, False, False]),
+    (True, True, False, [True, True, False, False], 3, 200, 2, 0, False, [False, True, True, False]),
 ])
 def test_game_check_pacman_ghosts_collision(game_instance, pacman_instance, blinky_instance, powerup, pacman_collided, ghost_dead, eaten_ghost_state, lives_before, score_before, lives_after, score_after, ghost_dead_after, eaten_ghost_after):
     game_instance.powerup = powerup
