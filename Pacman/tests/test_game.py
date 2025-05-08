@@ -271,3 +271,9 @@ def test_update_ghost_speeds_dead(game_instance):
     assert game_instance.inky.speed == 1
     assert game_instance.pinky.speed == 1
     assert game_instance.clyde.speed == 1
+
+def test_game_lose_life(game_instance):
+    game_instance.lives = 2
+    game_instance.lose_life()
+    assert game_instance.lives == 1
+    assert not game_instance.game_over
