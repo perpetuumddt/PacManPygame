@@ -168,3 +168,26 @@ def test_ghost_check_collisions_in_box(blinky_instance, game_instance):
     blinky_instance.y_pos = 320
     turns, in_box = blinky_instance.check_collisions()
     assert in_box
+
+@pytest.mark.parametrize("powerup, pacman_collided, ghost_dead, eaten_ghost_state, lives_before, score_before, lives_after, score_after, ghost_dead_after, eaten_ghost_after", [
+    (True, True, False, [False, False, False, False], 3, 0, 3, 200, True, [True, False, False, False]),  # Powerup, collide, eat first ghost
+    (True, True, True, [True, False, False, False], 3, 200, 3, 200, True, [True, False, False, False]),  # Powerup, collide with dead ghost, no effect
+    (True, True, False, [True, True, False, False], 3, 200, 2, 0, False, [False, True, True, False]),  # Powerup, collide, eat third ghost
+])
+def test_game_check_pacman_ghosts_collision(game_instance, pacman_instance, blinky_instance, powerup, pacman_collided, ghost_dead, eaten_ghost_state, lives_before, score_before, lives_after, score_after, ghost_dead_after, eaten_ghost_after):
+    game_instance.powerup = powerup
+    game_instance.lives = lives_before
+    game_instance.score = score_before
+    game_instance.eaten_ghost = eaten_ghost_state
+    blinky_instance.dead = ghost_dead
+
+    if pacman_collided:
+        pacman_instance.x = blinky_instance.x_pos
+        pacman_instance.y = blinky_instance.y_pos
+
+    game_instance.check_pacman_ghosts_collision()
+
+    assert game_instance.lives == lives_after
+    assert game_instance.score == score_after
+    assert game_instance.blinky.dead == ghost_dead_after
+    assert game_instance.eaten_ghost[0] == eaten_ghost_after[0]
