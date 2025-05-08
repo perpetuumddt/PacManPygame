@@ -191,3 +191,15 @@ def test_game_check_pacman_ghosts_collision(game_instance, pacman_instance, blin
     assert game_instance.score == score_after
     assert game_instance.blinky.dead == ghost_dead_after
     assert game_instance.eaten_ghost[0] == eaten_ghost_after[0]
+
+def test_ghost_move_clyde_no_turns(clyde_instance, game_instance):
+    game_instance.level = [[0] * 30 for _ in range(32)]
+    clyde_instance.x_pos = 100
+    clyde_instance.y_pos = 100
+    clyde_instance.direction = 0
+    clyde_instance.target = (200, 100)
+    clyde_instance.speed = 1
+    clyde_instance.check_collisions = lambda: ([True, False, False, False], False) # Mock no turns except right
+    initial_x = clyde_instance.x_pos
+    clyde_instance.move_clyde()
+    assert clyde_instance.x_pos > initial_x
