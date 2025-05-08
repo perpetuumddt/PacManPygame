@@ -152,3 +152,13 @@ def test_ghost_update(blinky_instance):
     assert blinky_instance.center_y == blinky_instance.y_pos + 17
     assert blinky_instance.rect.topleft == (
     blinky_instance.center_x - 13, blinky_instance.center_y - 13)  # Check rect update
+
+def test_ghost_check_collisions_wall(blinky_instance, game_instance):
+    # Mock level to have a wall to the right
+    game_instance.level = [[0] * 30 for _ in range(32)]
+    game_instance.level[1][2] = 3  # Vertical wall
+    blinky_instance.x_pos = 58
+    blinky_instance.y_pos = 49
+    blinky_instance.direction = 0 # Moving right
+    turns, in_box = blinky_instance.check_collisions()
+    assert turns[0] # Cannot turn right
