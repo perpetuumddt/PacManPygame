@@ -261,3 +261,13 @@ def test_update_ghost_speeds_eaten(game_instance):
     assert game_instance.inky.speed == 0.5
     assert game_instance.pinky.speed == 0.5
     assert game_instance.clyde.speed == 0.5
+
+def test_update_ghost_speeds_dead(game_instance):
+    game_instance.powerup = False
+    game_instance.eaten_ghost = [False, False, False, False]
+    game_instance.blinky.dead = True
+    game_instance.update_ghost_speeds()
+    assert game_instance.blinky.speed == 4
+    assert game_instance.inky.speed == 1
+    assert game_instance.pinky.speed == 1
+    assert game_instance.clyde.speed == 1
