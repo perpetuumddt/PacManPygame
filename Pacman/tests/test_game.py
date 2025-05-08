@@ -162,3 +162,9 @@ def test_ghost_check_collisions_wall(blinky_instance, game_instance):
     blinky_instance.direction = 0 # Moving right
     turns, in_box = blinky_instance.check_collisions()
     assert turns[0] # Cannot turn right
+
+def test_ghost_check_collisions_in_box(blinky_instance, game_instance):
+    blinky_instance.x_pos = 300
+    blinky_instance.y_pos = 320
+    turns, in_box = blinky_instance.check_collisions()
+    assert in_box
