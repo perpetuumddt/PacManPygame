@@ -132,3 +132,12 @@ def test_board_check_collisions(board_instance, game_instance):
     assert not powerup
     assert power_counter == 0
     assert eaten_ghost == [False, False, False, False]
+
+def test_ghost_initialization(blinky_instance):
+    assert blinky_instance.x_pos == 45
+    assert blinky_instance.y_pos == 46
+    assert blinky_instance.speed == 1
+    assert not blinky_instance.dead
+    assert not blinky_instance.in_box
+    assert blinky_instance.id == 0
+    assert isinstance(blinky_instance.rect, pygame.Rect)
