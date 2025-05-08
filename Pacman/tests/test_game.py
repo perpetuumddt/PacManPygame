@@ -277,3 +277,9 @@ def test_game_lose_life(game_instance):
     game_instance.lose_life()
     assert game_instance.lives == 1
     assert not game_instance.game_over
+
+def test_game_lose_life_game_over(game_instance):
+    game_instance.lives = 1
+    game_instance.lose_life()
+    assert game_instance.lives == 0
+    assert game_instance.game_over
