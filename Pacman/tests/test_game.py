@@ -283,3 +283,8 @@ def test_game_lose_life_game_over(game_instance):
     game_instance.lose_life()
     assert game_instance.lives == 0
     assert game_instance.game_over
+
+def test_game_force_win(game_instance):
+    game_instance.force_win = True
+    game_instance.update()
+    assert game_instance.game_won
