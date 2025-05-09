@@ -1310,16 +1310,85 @@
                class="code sev- "><tt><i>272</i>     <span class="k">assert</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">pinky</span><span class="o">.</span><span class="n">speed</span> <span class="o">==</span> <span class="mi">1</span></tt>
             </div>
             <div id="l273"
+               class="code sev- "><tt><i>273</i>     <span class="k">assert</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">clyde</span><span class="o">.</span><span class="n">speed</span> <span class="o">==</span> <span class="mi">1</span></tt>
+            </div>
+            <div id="l274"
+               class="code sev- "><tt><i>274</i> &nbsp;</tt>
+            </div>
+            <div id="l275"
                class="code sev-2  le">
                <ul class="violations">
                
                   <li>
                      <span class="count sev-2">
-                        W292
+                        E302
                      </span>
-                     No newline at end of file</li>
+                     Expected 2 blank lines, found 1</li>
                
-               </ul><tt><i>273</i>     <span class="k">assert</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">clyde</span><span class="o">.</span><span class="n">speed</span> <span class="o">==</span> <span class="mi">1</span></tt>
+               </ul><tt><i>275</i> <span class="k">def</span><span class="w"> </span><span class="nf">test_game_lose_life</span><span class="p">(</span><span class="n">game_instance</span><span class="p">):</span></tt>
+            </div>
+            <div id="l276"
+               class="code sev- "><tt><i>276</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">lives</span> <span class="o">=</span> <span class="mi">2</span></tt>
+            </div>
+            <div id="l277"
+               class="code sev- "><tt><i>277</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">lose_life</span><span class="p">()</span></tt>
+            </div>
+            <div id="l278"
+               class="code sev- "><tt><i>278</i>     <span class="k">assert</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">lives</span> <span class="o">==</span> <span class="mi">1</span></tt>
+            </div>
+            <div id="l279"
+               class="code sev- "><tt><i>279</i>     <span class="k">assert</span> <span class="ow">not</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">game_over</span></tt>
+            </div>
+            <div id="l280"
+               class="code sev- "><tt><i>280</i> &nbsp;</tt>
+            </div>
+            <div id="l281"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E302
+                     </span>
+                     Expected 2 blank lines, found 1</li>
+               
+               </ul><tt><i>281</i> <span class="k">def</span><span class="w"> </span><span class="nf">test_game_lose_life_game_over</span><span class="p">(</span><span class="n">game_instance</span><span class="p">):</span></tt>
+            </div>
+            <div id="l282"
+               class="code sev- "><tt><i>282</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">lives</span> <span class="o">=</span> <span class="mi">1</span></tt>
+            </div>
+            <div id="l283"
+               class="code sev- "><tt><i>283</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">lose_life</span><span class="p">()</span></tt>
+            </div>
+            <div id="l284"
+               class="code sev- "><tt><i>284</i>     <span class="k">assert</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">lives</span> <span class="o">==</span> <span class="mi">0</span></tt>
+            </div>
+            <div id="l285"
+               class="code sev- "><tt><i>285</i>     <span class="k">assert</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">game_over</span></tt>
+            </div>
+            <div id="l286"
+               class="code sev- "><tt><i>286</i> &nbsp;</tt>
+            </div>
+            <div id="l287"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E302
+                     </span>
+                     Expected 2 blank lines, found 1</li>
+               
+               </ul><tt><i>287</i> <span class="k">def</span><span class="w"> </span><span class="nf">test_game_force_win</span><span class="p">(</span><span class="n">game_instance</span><span class="p">):</span></tt>
+            </div>
+            <div id="l288"
+               class="code sev- "><tt><i>288</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">force_win</span> <span class="o">=</span> <span class="kc">True</span></tt>
+            </div>
+            <div id="l289"
+               class="code sev- "><tt><i>289</i>     <span class="n">game_instance</span><span class="o">.</span><span class="n">update</span><span class="p">()</span></tt>
+            </div>
+            <div id="l290"
+               class="code sev- "><tt><i>290</i>     <span class="k">assert</span> <span class="n">game_instance</span><span class="o">.</span><span class="n">game_won</span></tt>
             </div>
             
          </div>
